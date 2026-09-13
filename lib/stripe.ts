@@ -11,7 +11,10 @@ export function getStripe(): Stripe {
         "STRIPE_SECRET_KEY manquant dans les variables d'environnement."
       );
     }
-    stripeInstance = new Stripe(secretKey);
+    stripeInstance = new Stripe(secretKey, {
+      httpClient: Stripe.createFetchHttpClient(),
+      timeout: 20000,
+    });
   }
   return stripeInstance;
 }
