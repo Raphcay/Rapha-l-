@@ -33,7 +33,7 @@ export default async function QuestionnairePage() {
         </p>
       </div>
 
-      <section className="rounded-lg border border-ligne bg-white p-6">
+      <section className="rounded-lg border border-ligne bg-surface p-6">
         <h2 className="font-serif text-lg font-semibold text-encre">
           Prix de départ
         </h2>
@@ -50,7 +50,7 @@ export default async function QuestionnairePage() {
               name="basePriceMin"
               min={0}
               defaultValue={user.basePriceMin}
-              className="mt-1 w-32 rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+              className="mt-1 w-32 rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
             />
           </div>
           <div>
@@ -62,7 +62,7 @@ export default async function QuestionnairePage() {
               name="basePriceMax"
               min={0}
               defaultValue={user.basePriceMax}
-              className="mt-1 w-32 rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+              className="mt-1 w-32 rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
             />
           </div>
           <button
@@ -80,7 +80,7 @@ export default async function QuestionnairePage() {
         </h2>
 
         {questions.length === 0 && (
-          <div className="rounded-lg border border-dashed border-ligne bg-white p-8 text-center text-ardoise">
+          <div className="rounded-lg border border-dashed border-ligne bg-surface p-8 text-center text-ardoise">
             Aucune question pour l&apos;instant. Ajoute la première ci-dessous
             — par exemple « Quel type d&apos;équipement ? » ou « Quelle
             surface disponible ? ».
@@ -90,7 +90,7 @@ export default async function QuestionnairePage() {
         {questions.map((question) => (
           <div
             key={question.id}
-            className="rounded-lg border border-ligne bg-white p-6"
+            className="rounded-lg border border-ligne bg-surface p-6"
           >
             <div className="flex flex-wrap items-center gap-3">
               <form
@@ -102,7 +102,7 @@ export default async function QuestionnairePage() {
                   type="text"
                   name="label"
                   defaultValue={question.label}
-                  className="flex-1 rounded-md border border-ligne bg-white px-3 py-2 font-medium text-encre outline-none focus:border-corail"
+                  className="flex-1 rounded-md border border-ligne bg-surface px-3 py-2 font-medium text-encre outline-none focus:border-corail"
                 />
                 <button
                   type="submit"
@@ -115,7 +115,7 @@ export default async function QuestionnairePage() {
                 <input type="hidden" name="questionId" value={question.id} />
                 <button
                   type="submit"
-                  className="text-sm font-medium text-ardoise hover:text-red-600"
+                  className="text-sm font-medium text-ardoise hover:text-red-400"
                 >
                   Supprimer
                 </button>
@@ -140,7 +140,7 @@ export default async function QuestionnairePage() {
                     <input type="hidden" name="optionId" value={option.id} />
                     <button
                       type="submit"
-                      className="text-xs font-medium text-ardoise hover:text-red-600"
+                      className="text-xs font-medium text-ardoise hover:text-red-400"
                     >
                       Retirer
                     </button>
@@ -163,7 +163,7 @@ export default async function QuestionnairePage() {
                   name="label"
                   required
                   placeholder="Ex. Salle de sport complète"
-                  className="mt-1 w-56 rounded-md border border-ligne bg-white px-3 py-2 text-sm text-encre outline-none focus:border-corail"
+                  className="mt-1 w-56 rounded-md border border-ligne bg-surface px-3 py-2 text-sm text-encre outline-none focus:border-corail"
                 />
               </div>
               <div>
@@ -174,7 +174,7 @@ export default async function QuestionnairePage() {
                   type="number"
                   name="priceDeltaMin"
                   defaultValue={0}
-                  className="mt-1 w-28 rounded-md border border-ligne bg-white px-3 py-2 text-sm text-encre outline-none focus:border-corail"
+                  className="mt-1 w-28 rounded-md border border-ligne bg-surface px-3 py-2 text-sm text-encre outline-none focus:border-corail"
                 />
               </div>
               <div>
@@ -185,7 +185,7 @@ export default async function QuestionnairePage() {
                   type="number"
                   name="priceDeltaMax"
                   defaultValue={0}
-                  className="mt-1 w-28 rounded-md border border-ligne bg-white px-3 py-2 text-sm text-encre outline-none focus:border-corail"
+                  className="mt-1 w-28 rounded-md border border-ligne bg-surface px-3 py-2 text-sm text-encre outline-none focus:border-corail"
                 />
               </div>
               <button
@@ -200,7 +200,7 @@ export default async function QuestionnairePage() {
 
         <form
           action={addQuestionAction}
-          className="flex items-end gap-2 rounded-lg border border-dashed border-ligne bg-white p-6"
+          className="flex items-end gap-2 rounded-lg border border-dashed border-ligne bg-surface p-6"
         >
           <div className="flex-1">
             <label className="block text-xs font-medium text-ardoise">
@@ -211,7 +211,7 @@ export default async function QuestionnairePage() {
               name="label"
               required
               placeholder="Ex. Quelle surface disponible ?"
-              className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+              className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
             />
           </div>
           <button

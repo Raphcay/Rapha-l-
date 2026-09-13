@@ -15,10 +15,10 @@ export default async function AppLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-ligne bg-white">
+      <header className="border-b border-ligne bg-surface">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Link href="/tableau-de-bord" className="font-serif text-lg font-semibold text-encre">
-            Estimation
+            Sprix
           </Link>
           <nav className="flex items-center gap-6 text-sm font-medium text-ardoise">
             <Link href="/tableau-de-bord" className="hover:text-encre">

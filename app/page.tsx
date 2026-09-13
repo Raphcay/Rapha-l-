@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <div className="flex-1">
+    <div className="flex-1 overflow-hidden">
       <header className="border-b border-ligne">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-          <span className="font-serif text-xl font-semibold">Estimation</span>
+          <span className="font-serif text-xl font-semibold">Sprix</span>
           <nav className="flex items-center gap-6">
             <Link
               href="/connexion"
@@ -15,7 +15,7 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/inscription"
-              className="rounded-md bg-corail px-4 py-2 text-sm font-semibold text-ivoire hover:bg-corail-dark"
+              className="rounded-md bg-corail px-4 py-2 text-sm font-semibold text-ivoire shadow-[0_0_24px_-6px_var(--color-corail)] hover:bg-corail-dark"
             >
               Essai gratuit
             </Link>
@@ -25,31 +25,40 @@ export default function LandingPage() {
 
       <main>
         {/* Hero */}
-        <section className="mx-auto max-w-3xl px-6 pt-20 pb-16 text-center">
-          <h1 className="font-serif text-4xl font-semibold leading-tight text-encre sm:text-5xl">
-            Donne un prix à tes visiteurs avant qu&apos;ils ferment
-            l&apos;onglet.
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-ardoise">
-            Estimation affiche une fourchette de prix immédiate sur ton site,
-            à partir de quelques questions. Tu ne reçois plus que des
-            demandes déjà qualifiées, classées par montant.
-          </p>
-          <div className="mt-8 flex flex-col items-center gap-3">
-            <Link
-              href="/inscription"
-              className="rounded-md bg-corail px-6 py-3 text-base font-semibold text-ivoire hover:bg-corail-dark"
-            >
-              Essayer gratuitement, sans carte bancaire
-            </Link>
-            <span className="text-sm text-ardoise">
-              14 jours d&apos;essai · configuration en moins de 3 minutes
+        <section className="relative px-6 pt-24 pb-20">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/3 rounded-full bg-corail opacity-[0.14] blur-[120px]"
+          />
+          <div className="relative mx-auto max-w-3xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-ligne px-3 py-1 text-xs font-medium uppercase tracking-wider text-ardoise">
+              Pour les pros de l&apos;équipement sportif à domicile
             </span>
+            <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-encre sm:text-5xl">
+              Donne un prix à tes visiteurs avant qu&apos;ils ferment
+              l&apos;onglet.
+            </h1>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-ardoise">
+              Sprix affiche une fourchette de prix immédiate sur ton site, à
+              partir de quelques questions. Tu ne reçois plus que des
+              demandes déjà qualifiées, classées par montant.
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <Link
+                href="/inscription"
+                className="rounded-md bg-corail px-6 py-3 text-base font-semibold text-ivoire shadow-[0_0_40px_-8px_var(--color-corail)] hover:bg-corail-dark"
+              >
+                Essayer gratuitement, sans carte bancaire
+              </Link>
+              <span className="text-sm text-ardoise">
+                14 jours d&apos;essai · configuration en moins de 3 minutes
+              </span>
+            </div>
           </div>
         </section>
 
         {/* Douleur */}
-        <section className="border-t border-ligne bg-white">
+        <section className="border-t border-ligne bg-surface">
           <div className="mx-auto max-w-3xl px-6 py-16 text-center">
             <p className="font-serif text-2xl leading-snug text-encre sm:text-3xl">
               Le calcul est simple : un visiteur qui ne trouve pas de prix va
@@ -79,7 +88,7 @@ export default function LandingPage() {
         </section>
 
         {/* Comment ça marche */}
-        <section className="border-t border-ligne bg-white">
+        <section className="border-t border-ligne bg-surface">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <h2 className="text-center font-serif text-2xl font-semibold text-encre">
               Trois étapes, une seule fois
@@ -120,15 +129,19 @@ export default function LandingPage() {
         </section>
 
         {/* CTA final */}
-        <section className="border-t border-ligne bg-encre">
-          <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <h2 className="font-serif text-2xl font-semibold text-ivoire sm:text-3xl">
+        <section className="relative border-t border-ligne bg-surface">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-corail opacity-[0.10] blur-[100px]"
+          />
+          <div className="relative mx-auto max-w-2xl px-6 py-16 text-center">
+            <h2 className="font-serif text-2xl font-semibold text-encre sm:text-3xl">
               Arrête de chiffrer des demandes qui n&apos;aboutiront jamais.
             </h2>
             <div className="mt-8">
               <Link
                 href="/inscription"
-                className="inline-block rounded-md bg-corail px-6 py-3 text-base font-semibold text-ivoire hover:bg-corail-dark"
+                className="inline-block rounded-md bg-corail px-6 py-3 text-base font-semibold text-ivoire shadow-[0_0_40px_-8px_var(--color-corail)] hover:bg-corail-dark"
               >
                 Essayer gratuitement
               </Link>
@@ -139,7 +152,7 @@ export default function LandingPage() {
 
       <footer className="border-t border-ligne">
         <div className="mx-auto max-w-5xl px-6 py-8 text-sm text-ardoise">
-          Estimation — l&apos;estimation immédiate pour les pros du sport.
+          Sprix — l&apos;estimation immédiate pour les pros du sport.
         </div>
       </footer>
     </div>
@@ -148,7 +161,7 @@ export default function LandingPage() {
 
 function BenefitCard({ title, text }: { title: string; text: string }) {
   return (
-    <div className="rounded-lg border border-ligne bg-white p-6">
+    <div className="rounded-lg border border-ligne bg-surface p-6">
       <h3 className="font-serif text-lg font-semibold text-encre">{title}</h3>
       <p className="mt-2 text-sm text-ardoise">{text}</p>
     </div>

@@ -19,7 +19,7 @@ export default async function TableauDeBordPage() {
 
   if (questionCount === 0) {
     return (
-      <div className="mx-auto max-w-lg rounded-lg border border-ligne bg-white p-8 text-center">
+      <div className="mx-auto max-w-lg rounded-lg border border-ligne bg-surface p-8 text-center">
         <h1 className="font-serif text-2xl font-semibold text-encre">
           Bienvenue, {user.businessName}
         </h1>
@@ -49,13 +49,13 @@ export default async function TableauDeBordPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-ligne bg-white p-6">
+        <div className="rounded-lg border border-ligne bg-surface p-6">
           <p className="text-sm text-ardoise">Nouvelles demandes</p>
           <p className="mt-1 font-serif text-3xl font-semibold text-encre">
             {newLeadCount}
           </p>
         </div>
-        <div className="rounded-lg border border-ligne bg-white p-6">
+        <div className="rounded-lg border border-ligne bg-surface p-6">
           <p className="text-sm text-ardoise">Demandes reçues au total</p>
           <p className="mt-1 font-serif text-3xl font-semibold text-encre">
             {leadCount}
@@ -63,7 +63,7 @@ export default async function TableauDeBordPage() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-ligne bg-white p-6">
+      <div className="rounded-lg border border-ligne bg-surface p-6">
         <p className="text-sm font-medium text-encre">
           Ton lien d&apos;estimation
         </p>
@@ -78,13 +78,13 @@ export default async function TableauDeBordPage() {
       <div className="flex gap-3">
         <Link
           href="/demandes"
-          className="rounded-md border border-ligne bg-white px-4 py-2 text-sm font-medium text-encre hover:border-encre"
+          className="rounded-md border border-ligne bg-surface px-4 py-2 text-sm font-medium text-encre hover:border-encre"
         >
           Voir les demandes
         </Link>
         <Link
           href="/questionnaire"
-          className="rounded-md border border-ligne bg-white px-4 py-2 text-sm font-medium text-encre hover:border-encre"
+          className="rounded-md border border-ligne bg-surface px-4 py-2 text-sm font-medium text-encre hover:border-encre"
         >
           Modifier le questionnaire
         </Link>

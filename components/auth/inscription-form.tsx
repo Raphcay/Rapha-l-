@@ -22,7 +22,7 @@ export function InscriptionForm() {
           type="text"
           required
           placeholder="Ex. Sport & Maison"
-          className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+          className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
         />
       </div>
       <div>
@@ -35,7 +35,7 @@ export function InscriptionForm() {
           type="email"
           required
           autoComplete="email"
-          className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+          className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
         />
       </div>
       <div>
@@ -52,13 +52,13 @@ export function InscriptionForm() {
           required
           minLength={8}
           autoComplete="new-password"
-          className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+          className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
         />
         <p className="mt-1 text-xs text-ardoise">8 caractères minimum.</p>
       </div>
 
       {state?.error && (
-        <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="rounded-md bg-red-950 px-3 py-2 text-sm text-red-400">
           {state.error}
         </p>
       )}

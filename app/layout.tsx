@@ -15,7 +15,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Estimation — Le prix tout de suite, pour tes clients",
+  title: "Sprix — Le prix tout de suite, pour tes clients",
   description:
     "Un questionnaire court sur ton site qui donne une fourchette de prix immédiate à tes visiteurs, et te transmet les demandes classées par montant.",
 };

@@ -6,7 +6,7 @@ export default function InscriptionPage() {
     <div className="flex flex-1 items-center justify-center px-6 py-16">
       <div className="w-full max-w-sm">
         <Link href="/" className="font-serif text-xl font-semibold text-encre">
-          Estimation
+          Sprix
         </Link>
         <h1 className="mt-6 font-serif text-2xl font-semibold text-encre">
           Essaie gratuitement

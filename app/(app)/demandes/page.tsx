@@ -16,7 +16,7 @@ export default async function DemandesPage() {
 
   if (leads.length === 0) {
     return (
-      <div className="mx-auto max-w-lg rounded-lg border border-dashed border-ligne bg-white p-8 text-center">
+      <div className="mx-auto max-w-lg rounded-lg border border-dashed border-ligne bg-surface p-8 text-center">
         <h1 className="font-serif text-xl font-semibold text-encre">
           Aucune demande pour l&apos;instant
         </h1>
@@ -43,7 +43,7 @@ export default async function DemandesPage() {
         {leads.map((lead) => (
           <div
             key={lead.id}
-            className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-ligne bg-white p-5"
+            className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-ligne bg-surface p-5"
           >
             <div>
               <p className="font-serif text-lg font-semibold text-encre">

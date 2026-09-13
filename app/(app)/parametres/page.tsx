@@ -25,16 +25,16 @@ export default async function ParametresPage({
       {params.essai === "termine" && (
         <div className="rounded-md border border-corail/40 bg-corail/10 px-4 py-3 text-sm text-corail-dark">
           Ton essai gratuit est terminé. Abonne-toi pour continuer à
-          utiliser Estimation.
+          utiliser Sprix.
         </div>
       )}
       {params.abonnement === "succes" && (
-        <div className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+        <div className="rounded-md border border-green-900 bg-green-950 px-4 py-3 text-sm text-green-300">
           Ton abonnement est actif. Merci !
         </div>
       )}
 
-      <section className="rounded-lg border border-ligne bg-white p-6">
+      <section className="rounded-lg border border-ligne bg-surface p-6">
         <h2 className="font-serif text-lg font-semibold text-encre">
           Mon compte
         </h2>
@@ -50,7 +50,7 @@ export default async function ParametresPage({
         </dl>
       </section>
 
-      <section className="rounded-lg border border-ligne bg-white p-6">
+      <section className="rounded-lg border border-ligne bg-surface p-6">
         <h2 className="font-serif text-lg font-semibold text-encre">
           Abonnement
         </h2>
@@ -108,8 +108,8 @@ export default async function ParametresPage({
         )}
       </section>
 
-      <section className="rounded-lg border border-red-200 bg-white p-6">
-        <h2 className="font-serif text-lg font-semibold text-red-700">
+      <section className="rounded-lg border border-red-900 bg-surface p-6">
+        <h2 className="font-serif text-lg font-semibold text-red-400">
           Supprimer mon compte
         </h2>
         <p className="mt-2 text-sm text-ardoise">

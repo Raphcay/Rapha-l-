@@ -19,7 +19,7 @@ export function ConnexionForm() {
           type="email"
           required
           autoComplete="email"
-          className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+          className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
         />
       </div>
       <div>
@@ -35,12 +35,12 @@ export function ConnexionForm() {
           type="password"
           required
           autoComplete="current-password"
-          className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+          className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
         />
       </div>
 
       {state?.error && (
-        <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="rounded-md bg-red-950 px-3 py-2 text-sm text-red-400">
           {state.error}
         </p>
       )}

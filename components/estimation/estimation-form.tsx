@@ -48,7 +48,7 @@ export function EstimationForm({
 
   if (state?.status === "success") {
     return (
-      <div className="rounded-lg border border-ligne bg-white p-8 text-center">
+      <div className="rounded-lg border border-ligne bg-surface p-8 text-center">
         <p className="font-serif text-xl font-semibold text-encre">
           Merci, ta demande est envoyée.
         </p>
@@ -65,7 +65,7 @@ export function EstimationForm({
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-4 rounded-lg border border-ligne bg-white px-5 py-4 text-center">
+      <div className="sticky top-4 rounded-lg border border-ligne bg-surface px-5 py-4 text-center">
         <p className="text-xs font-medium uppercase tracking-wide text-ardoise">
           Ta fourchette estimée
         </p>
@@ -78,7 +78,7 @@ export function EstimationForm({
         {questions.map((question) => (
           <fieldset
             key={question.id}
-            className="rounded-lg border border-ligne bg-white p-5"
+            className="rounded-lg border border-ligne bg-surface p-5"
           >
             <legend className="px-1 font-medium text-encre">
               {question.label}
@@ -113,7 +113,7 @@ export function EstimationForm({
       {allAnswered && (
         <form
           action={formAction}
-          className="space-y-4 rounded-lg border border-ligne bg-white p-6"
+          className="space-y-4 rounded-lg border border-ligne bg-surface p-6"
         >
           <input type="hidden" name="slug" value={slug} />
           <input
@@ -134,7 +134,7 @@ export function EstimationForm({
               type="text"
               name="contactName"
               required
-              className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+              className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
             />
           </div>
           <div>
@@ -145,7 +145,7 @@ export function EstimationForm({
               type="email"
               name="contactEmail"
               required
-              className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+              className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
             />
           </div>
           <div>
@@ -156,12 +156,12 @@ export function EstimationForm({
               type="tel"
               name="contactPhone"
               required
-              className="mt-1 w-full rounded-md border border-ligne bg-white px-3 py-2 text-encre outline-none focus:border-corail"
+              className="mt-1 w-full rounded-md border border-ligne bg-surface px-3 py-2 text-encre outline-none focus:border-corail"
             />
           </div>
 
           {state?.status === "error" && (
-            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p className="rounded-md bg-red-950 px-3 py-2 text-sm text-red-400">
               {state.error}
             </p>
           )}
