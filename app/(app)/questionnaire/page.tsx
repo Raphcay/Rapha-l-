@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/lib/auth";
+import { requireActiveAccess } from "@/lib/access";
 import { prisma } from "@/lib/prisma";
 import {
   updateBasePriceAction,
@@ -12,6 +13,7 @@ import {
 export default async function QuestionnairePage() {
   const user = await getCurrentUser();
   if (!user) return null;
+  requireActiveAccess(user);
 
   const questions = await prisma.question.findMany({
     where: { userId: user.id },

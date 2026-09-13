@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
+import { requireActiveAccess } from "@/lib/access";
 import { prisma } from "@/lib/prisma";
 
 export default async function TableauDeBordPage() {
   const user = await getCurrentUser();
   if (!user) return null;
+  requireActiveAccess(user);
 
   const [questionCount, leadCount, newLeadCount] = await Promise.all([
     prisma.question.count({ where: { userId: user.id } }),

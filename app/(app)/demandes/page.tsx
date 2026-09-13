@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/lib/auth";
+import { requireActiveAccess } from "@/lib/access";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/pricing";
 import { markLeadContactedAction } from "@/lib/actions/leads";
@@ -6,6 +7,7 @@ import { markLeadContactedAction } from "@/lib/actions/leads";
 export default async function DemandesPage() {
   const user = await getCurrentUser();
   if (!user) return null;
+  requireActiveAccess(user);
 
   const leads = await prisma.lead.findMany({
     where: { userId: user.id },
