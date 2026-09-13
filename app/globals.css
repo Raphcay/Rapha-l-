@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --color-encre: #1b2b23;
+  --color-corail: #ff5a36;
+  --color-corail-dark: #e14a29;
+  --color-ivoire: #f7f3ec;
+  --color-ardoise: #5b6660;
+  --color-ligne: #ded6c7;
+}
+
+@theme inline {
+  --color-encre: var(--color-encre);
+  --color-corail: var(--color-corail);
+  --color-corail-dark: var(--color-corail-dark);
+  --color-ivoire: var(--color-ivoire);
+  --color-ardoise: var(--color-ardoise);
+  --color-ligne: var(--color-ligne);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-fraunces);
+}
+
+body {
+  font-feature-settings: "ss01" 1;
+}

@@ -1,0 +1,74 @@
+// Schema Prisma — Estimation (MVP "Sport")
+// Voir le README pour le contexte produit.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String    @id @default(cuid())
+  email                String    @unique
+  passwordHash         String
+  businessName         String
+  basePriceMin         Int       @default(0)
+  basePriceMax         Int       @default(0)
+
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  subscriptionStatus   String    @default("trialing") // trialing | active | past_due | canceled
+  trialEndsAt          DateTime?
+
+  createdAt            DateTime  @default(now())
+
+  sessions             Session[]
+  questions            Question[]
+  leads                Lead[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Question {
+  id       String           @id @default(cuid())
+  userId   String
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label    String
+  order    Int
+  options  QuestionOption[]
+}
+
+model QuestionOption {
+  id            String   @id @default(cuid())
+  questionId    String
+  question      Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  label         String
+  order         Int
+  priceDeltaMin Int      @default(0)
+  priceDeltaMax Int      @default(0)
+}
+
+model Lead {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answersJson    String
+  estimatedMin   Int
+  estimatedMax   Int
+  contactName    String
+  contactEmail   String
+  contactPhone   String
+  status         String   @default("NEW") // NEW | CONTACTED | WON | LOST
+  createdAt      DateTime @default(now())
+}
