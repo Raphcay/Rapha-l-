@@ -2,7 +2,7 @@
 
 Site vitrine de **Arc**, marque de vêtements techniques (première pièce : un t-shirt en coton épais, produit en série limitée).
 
-Stack : Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion + Anthropic SDK (assistant client).
+Stack : Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion + API Google Gemini (assistant client).
 
 Direction artistique : **Noir Absolu** — fond sombre, hero plein cadre en photo, typographie condensée majuscule (Anton) + sans (Work Sans) + mono (IBM Plex Mono) pour les libellés techniques.
 
@@ -10,7 +10,7 @@ Direction artistique : **Noir Absolu** — fond sombre, hero plein cadre en phot
 
 ```bash
 npm install
-cp .env.example .env.local   # puis renseigner ANTHROPIC_API_KEY (voir plus bas)
+cp .env.example .env.local   # puis renseigner GEMINI_API_KEY (voir plus bas)
 npm run dev
 ```
 
@@ -47,13 +47,15 @@ Le hero (`src/components/Hero.tsx`) affiche `public/hero-mountain.jpg` en plein 
 
 ## Assistant client IA (autonome)
 
-Un widget de chat (bas à droite, sur toutes les pages) répond automatiquement aux questions des visiteurs — produits, matières, précommande, contact — via l'API Claude (`claude-opus-5`). Le contexte envoyé au modèle est généré à partir de `src/data/products.ts` et `src/data/posts.ts` : toute modification du catalogue met donc à jour les réponses de l'assistant sans rien reconfigurer.
+Un widget de chat (bas à droite, sur toutes les pages) répond automatiquement aux questions des visiteurs — produits, matières, précommande, contact — via l'API **Google Gemini** (`gemini-2.0-flash`, gratuite). Le contexte envoyé au modèle est généré à partir de `src/data/products.ts` et `src/data/posts.ts` : toute modification du catalogue met donc à jour les réponses de l'assistant sans rien reconfigurer.
 
-**Pour l'activer :**
+**Pour l'activer (gratuit) :**
 
-1. Créer une clé sur [console.anthropic.com](https://console.anthropic.com/settings/keys).
-2. La renseigner en local dans `.env.local` (`ANTHROPIC_API_KEY=sk-ant-...`), et en production dans les variables d'environnement de l'hébergeur (ex. Vercel → Project Settings → Environment Variables).
+1. Créer une clé sur [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (compte Google, aucune carte bancaire requise pour le quota gratuit).
+2. La renseigner en local dans `.env.local` (`GEMINI_API_KEY=...`), et en production dans les variables d'environnement de l'hébergeur (ex. Vercel → Project Settings → Environment Variables), puis redéployer.
 3. Sans clé configurée, le widget reste visible mais affiche un message d'indisponibilité propre (pas de crash).
+
+Le quota gratuit de Gemini est limité en nombre de requêtes par minute/jour — largement suffisant pour un site qui démarre. S'il devient trop juste, Google propose un passage en facturation à l'usage sans changer de code.
 
 **Garde-fous en place** (`src/app/api/chat/route.ts`) :
 - Limitation de débit basique par IP (15 messages / 5 min) — best-effort, à remplacer par un vrai rate limiter (Upstash, etc.) si le trafic grossit.
@@ -77,7 +79,7 @@ Testé sans débordement horizontal sur mobile (375px), tablette (768px) et desk
 - Renseigner `NEXT_PUBLIC_SITE_URL` avec le vrai domaine (SEO — voir ci-dessus).
 - Photographier les coloris Noir/Gris/Beige pour remplacer la teinte CSS par de vraies photos (voir "Rendu produit" ci-dessus).
 - Confirmer le nombre de tailles réellement produites par coloris (XS-XXL listé pour l'instant).
-- Configurer `ANTHROPIC_API_KEY` pour activer l'assistant client.
+- Configurer `GEMINI_API_KEY` pour activer l'assistant client (gratuit).
 - Brancher le formulaire de contact à un service d'envoi (actuellement il ouvre le client email via `mailto:`).
 - Ajouter le paiement en ligne si la boutique doit vendre directement (Stripe).
 - Adapter `src/data/products.ts`, `src/data/posts.ts` et la politique dans `src/lib/chat-context.ts` au vrai catalogue et aux vraies conditions.
@@ -88,4 +90,4 @@ Un système de commande/livraison autonome (déclenchement automatique de comman
 
 ## Déploiement
 
-Le plus simple : [Vercel](https://vercel.com/new) (créateurs de Next.js), déploiement automatique à chaque push. Ne pas oublier d'y renseigner `ANTHROPIC_API_KEY`.
+Le plus simple : [Vercel](https://vercel.com/new) (créateurs de Next.js), déploiement automatique à chaque push. Ne pas oublier d'y renseigner `GEMINI_API_KEY`.
