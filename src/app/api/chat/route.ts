@@ -112,6 +112,8 @@ export async function POST(request: NextRequest) {
       );
     }
     if (!response.ok) {
+      const errorBody = await response.text();
+      console.error(`Gemini API error (${response.status}):`, errorBody);
       return NextResponse.json(
         { error: "L'assistant est momentanément indisponible." },
         { status: 502 },
@@ -133,7 +135,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ reply: text });
-  } catch {
+  } catch (error) {
+    console.error("Chat route unexpected error:", error);
     return NextResponse.json(
       { error: "Une erreur inattendue est survenue." },
       { status: 500 },
