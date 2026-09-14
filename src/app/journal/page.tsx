@@ -5,6 +5,7 @@ import { posts } from "@/data/posts";
 export const metadata: Metadata = {
   title: "Journal",
   description: "Notes sur les matières, la fabrication et les intentions d'Arc.",
+  alternates: { canonical: "/journal" },
 };
 
 const formatter = new Intl.DateTimeFormat("fr-FR", {

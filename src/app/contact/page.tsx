@@ -5,6 +5,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 export const metadata: Metadata = {
   title: "Contact",
   description: "Une question, une précommande, une collaboration : écris-nous.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

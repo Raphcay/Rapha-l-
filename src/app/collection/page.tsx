@@ -2,15 +2,43 @@ import type { Metadata } from "next";
 import { ProductVisual } from "@/components/ProductVisual";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { products } from "@/data/products";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collection",
   description: "La première collection Arc : des t-shirts techniques en coton épais, en série limitée.",
+  alternates: { canonical: "/collection" },
+};
+
+const productsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: products.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Product",
+      name: `${product.name} — ${product.colorName}`,
+      description: `${product.description} ${product.material}.`,
+      brand: { "@type": "Brand", name: "Arc" },
+      offers: {
+        "@type": "Offer",
+        url: `${SITE_URL}/collection`,
+        priceCurrency: "EUR",
+        price: product.price,
+        availability: "https://schema.org/PreOrder",
+      },
+    },
+  })),
 };
 
 export default function CollectionPage() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productsJsonLd) }}
+      />
       <ScrollReveal>
         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
           Drop 01

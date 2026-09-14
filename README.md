@@ -60,8 +60,21 @@ Un widget de chat (bas à droite, sur toutes les pages) répond automatiquement 
 - Longueur de message et historique plafonnés.
 - Consignes strictes dans le prompt système (`src/lib/chat-context.ts`) : jamais d'invention de statut de commande, de délai de livraison ou de politique non listée — l'assistant renvoie vers `contact@arc-wear.com` dans le doute.
 
+## Responsive
+
+Testé sans débordement horizontal sur mobile (375px), tablette (768px) et desktop (1440px), sur les 5 pages. Grilles produit en 1/2/4 colonnes selon la largeur, hero et typographie fluides, nav mobile dédiée. Le header devient opaque dès qu'on scrolle (`Nav.tsx`) pour rester lisible par-dessus le contenu qui défile.
+
+## SEO
+
+- **Métadonnées** par page (title, description, canonical) + Open Graph et Twitter Card avec image générée automatiquement (`src/app/opengraph-image.tsx`).
+- **`sitemap.xml`** (`src/app/sitemap.ts`) et **`robots.txt`** (`src/app/robots.ts`), générés automatiquement à partir des routes du site.
+- **`manifest.webmanifest`** (`src/app/manifest.ts`) — icône, couleurs, nom — pour l'ajout à l'écran d'accueil sur mobile.
+- **Données structurées JSON-LD** : `ClothingStore` sur tout le site (`layout.tsx`), `Product`/`Offer` sur la page Collection (`collection/page.tsx`), pour l'éligibilité aux résultats enrichis Google.
+- Tout ça dépend de l'URL réelle du site : **renseigner `NEXT_PUBLIC_SITE_URL`** (voir `.env.example`) avec le vrai domaine une fois déployé, sinon les métadonnées pointent vers un domaine provisoire.
+
 ## À faire avant mise en ligne
 
+- Renseigner `NEXT_PUBLIC_SITE_URL` avec le vrai domaine (SEO — voir ci-dessus).
 - Remplacer `TShirtIllustration` et `MountainHero` par les vraies photos/rendus (voir ci-dessus).
 - Configurer `ANTHROPIC_API_KEY` pour activer l'assistant client.
 - Brancher le formulaire de contact à un service d'envoi (actuellement il ouvre le client email via `mailto:`).

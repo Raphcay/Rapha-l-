@@ -5,6 +5,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 export const metadata: Metadata = {
   title: "À propos",
   description: "L'histoire et les intentions derrière Arc.",
+  alternates: { canonical: "/a-propos" },
 };
 
 const TIMELINE = [

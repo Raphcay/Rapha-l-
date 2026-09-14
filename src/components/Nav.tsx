@@ -26,7 +26,11 @@ export function Nav() {
     : "transition-all duration-300 ease-out";
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-line/60 bg-bg/70 backdrop-blur ${transitionClass}`}>
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur ${transitionClass} ${
+        compact ? "border-line bg-bg/95" : "border-line/40 bg-bg/50"
+      }`}
+    >
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between px-5 sm:px-8 ${transitionClass} ${
           compact ? "py-2.5" : "py-4"
