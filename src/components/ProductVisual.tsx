@@ -69,8 +69,6 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
         }}
         aria-hidden="true"
       />
-      <div className="absolute bottom-[10%] h-5 w-[50%] rounded-full bg-ink/10 blur-md" aria-hidden="true" />
-
       <div className="relative h-[80%] w-[80%]">
         <AnimatePresence mode="wait">
           {showBack ? (
