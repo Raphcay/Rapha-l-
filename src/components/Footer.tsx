@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mark } from "./Mark";
+import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -44,8 +45,8 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href="mailto:contact@arc-wear.com" className="hover:text-accent">
-                contact@arc-wear.com
+              <a href={`mailto:${CONTACT_EMAIL_REAL}`} className="hover:text-accent">
+                {CONTACT_EMAIL_DISPLAY}
               </a>
             </li>
           </ul>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -28,10 +29,10 @@ export default function ContactPage() {
               <dt className="uppercase tracking-[0.1em] text-muted">Email</dt>
               <dd className="mt-1">
                 <a
-                  href="mailto:contact@arc-wear.com"
+                  href={`mailto:${CONTACT_EMAIL_REAL}`}
                   className="underline decoration-line underline-offset-4 hover:text-accent"
                 >
-                  contact@arc-wear.com
+                  {CONTACT_EMAIL_DISPLAY}
                 </a>
               </dd>
             </div>
