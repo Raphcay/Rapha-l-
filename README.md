@@ -76,7 +76,7 @@ Testé sans débordement horizontal sur mobile (375px), tablette (768px) et desk
 
 - Renseigner `NEXT_PUBLIC_SITE_URL` avec le vrai domaine (SEO — voir ci-dessus).
 - Photographier les coloris Noir/Gris/Beige pour remplacer la teinte CSS par de vraies photos (voir "Rendu produit" ci-dessus).
-- Confirmer le prix (49 € est un placeholder, aucun prix n'a été communiqué) et le nombre de tailles réellement produites par coloris.
+- Confirmer le nombre de tailles réellement produites par coloris (XS-XXL listé pour l'instant).
 - Configurer `ANTHROPIC_API_KEY` pour activer l'assistant client.
 - Brancher le formulaire de contact à un service d'envoi (actuellement il ouvre le client email via `mailto:`).
 - Ajouter le paiement en ligne si la boutique doit vendre directement (Stripe).

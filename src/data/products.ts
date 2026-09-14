@@ -23,7 +23,7 @@ export const products: Product[] = [
   {
     slug: "tee-arc-blanc",
     name: "Tee Arc",
-    price: 49,
+    price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Blanc",
@@ -33,7 +33,7 @@ export const products: Product[] = [
   {
     slug: "tee-arc-noir",
     name: "Tee Arc",
-    price: 49,
+    price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Noir",
@@ -43,7 +43,7 @@ export const products: Product[] = [
   {
     slug: "tee-arc-gris",
     name: "Tee Arc",
-    price: 49,
+    price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Gris",
@@ -53,7 +53,7 @@ export const products: Product[] = [
   {
     slug: "tee-arc-beige",
     name: "Tee Arc",
-    price: 49,
+    price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Beige",
