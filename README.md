@@ -4,7 +4,7 @@ Site vitrine de **Arc**, marque de vêtements techniques (première pièce : un 
 
 Stack : Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion + Anthropic SDK (assistant client).
 
-Direction artistique : **Noir Absolu** — fond sombre, hero plein cadre avec une illustration de montagne (dans l'esprit du mark ARC, voir `MountainHero`), typographie condensée majuscule (Anton) + sans (Work Sans) + mono (IBM Plex Mono) pour les libellés techniques.
+Direction artistique : **Noir Absolu** — fond sombre, hero plein cadre en photo, typographie condensée majuscule (Anton) + sans (Work Sans) + mono (IBM Plex Mono) pour les libellés techniques.
 
 ## Lancer le projet en local
 
@@ -27,23 +27,23 @@ src/
     journal/                # Blog / actualités
     contact/                # Formulaire de contact
     api/chat/route.ts       # Endpoint de l'assistant client IA (Claude)
-  components/               # Nav, Footer, Mark (logo), MountainHero (hero illustré),
-                             # ProductVisual (zoom interactif), TShirtIllustration (rendu produit),
+  components/               # Nav, Footer, Mark (logo), Hero (parallaxe),
+                             # ProductVisual (zoom interactif), TintedProductImage (photo + teinte coloris),
                              # ContactForm, ChatWidget, ScrollReveal, AnimatedNumber, MagneticButton
   data/                     # products.ts, posts.ts — contenu éditable sans toucher au design
   lib/chat-context.ts       # Base de connaissance de l'assistant, générée depuis data/
+public/
+  hero-mountain.jpg          # Photo de fond du hero (fournie)
+  products/                  # Photos produit détourées (fournies + retouchées)
 ```
 
 ## Rendu produit
 
-`TShirtIllustration` est une **illustration vectorielle** du t-shirt (silhouette + mark ARC imprimé), déclinée par coloris — pas un rendu 3D photoréaliste ni une vraie photo. C'est un visuel honnête et léger en attendant les vraies photos/rendus 3D du produit (à commander séparément : photographe, ou un outil de rendu 3D dédié). Pour remplacer :
+Les photos du premier drop (fournies par la marque) sont dans `public/products/` — fond détouré en transparent (`arc-tee-front.png`, `arc-tee-back.png`, + 3 détails macro : logo, col, épaule). Un seul coloris a été photographié (**Blanc**) ; les 3 autres (**Noir**, **Gris**, **Beige**) sont obtenus en **teintant la même photo par CSS** (`TintedProductImage.tsx` — la couleur du produit est appliquée en `mix-blend-mode: multiply`, masquée sur la silhouette réelle du vêtement via `mask-image`) : c'est donc toujours la vraie texture du tissu, juste recolorée, pas une illustration. À remplacer coloris par coloris dès que ces variantes sont réellement photographiées (ajouter un champ image dédié par coloris dans `products.ts`).
 
-1. Déposer les vraies images dans `public/products/`.
-2. Dans `src/components/ProductVisual.tsx`, remplacer `<TShirtIllustration product={product} />` par une balise `<Image>` pointant vers le fichier correspondant à `product.slug`.
+`ProductVisual` ajoute une interaction de **zoom sur points d'intérêt** : trois pastilles (coupe/taille, mark, matière) qui, au survol ou au clic, font un fondu vers la photo macro correspondante (`getHotspots` dans `ProductVisual.tsx`) et affichent une légende tirée de `src/data/products.ts`. Un bouton "Voir le dos" bascule vers la photo du dos.
 
-`ProductVisual` ajoute une interaction de **zoom sur points d'intérêt** : trois pastilles (coupe/taille, mark, matière) qui, au survol ou au clic, zooment sur cette zone du visuel et affichent une légende descriptive tirée de `src/data/products.ts`. Fonctionne aussi avec une vraie photo une fois `TShirtIllustration` remplacée — les positions des pastilles (`x`/`y` en % dans `getHotspots`) sont à ajuster selon le nouveau visuel.
-
-`MountainHero` est une illustration de montagne en SVG (pas une photo — voir la limite ci-dessous) utilisée en fond du hero de l'accueil. Le hero (`src/components/Hero.tsx`) a un **effet de parallaxe** au scroll : l'arrière-plan défile plus lentement que le contenu. Pour brancher une vraie photo : dans `Hero.tsx`, remplacer `<MountainHero />` par `<Image src="/hero-mountain.jpg" alt="" fill className="object-cover" />` (photo déposée dans `public/`) — l'effet de parallaxe s'applique automatiquement, aucune autre modification nécessaire.
+Le hero (`src/components/Hero.tsx`) affiche `public/hero-mountain.jpg` en plein cadre avec un **effet de parallaxe** au scroll (l'arrière-plan défile plus lentement que le contenu, via Framer Motion `useScroll`/`useTransform`, désactivé sous `prefers-reduced-motion`).
 
 ## Assistant client IA (autonome)
 
@@ -75,7 +75,8 @@ Testé sans débordement horizontal sur mobile (375px), tablette (768px) et desk
 ## À faire avant mise en ligne
 
 - Renseigner `NEXT_PUBLIC_SITE_URL` avec le vrai domaine (SEO — voir ci-dessus).
-- Remplacer `TShirtIllustration` et `MountainHero` par les vraies photos/rendus (voir ci-dessus).
+- Photographier les coloris Noir/Gris/Beige pour remplacer la teinte CSS par de vraies photos (voir "Rendu produit" ci-dessus).
+- Confirmer le prix (49 € est un placeholder, aucun prix n'a été communiqué) et le nombre de tailles réellement produites par coloris.
 - Configurer `ANTHROPIC_API_KEY` pour activer l'assistant client.
 - Brancher le formulaire de contact à un service d'envoi (actuellement il ouvre le client email via `mailto:`).
 - Ajouter le paiement en ligne si la boutique doit vendre directement (Stripe).

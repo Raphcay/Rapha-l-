@@ -1,11 +1,11 @@
-import { products } from "@/data/products";
+import { products, SIZES } from "@/data/products";
 import { posts } from "@/data/posts";
 
 function buildProductCatalog(): string {
   return products
     .map(
       (p) =>
-        `- ${p.name} (${p.colorName}) — ${p.price} € — ${p.material} — ${p.description}`,
+        `- ${p.name} (${p.colorName}) — ${p.price} € — ${p.cut} — ${p.material} — ${p.description}`,
     )
     .join("\n");
 }
@@ -15,7 +15,7 @@ function buildJournalIndex(): string {
 }
 
 export function buildSystemPrompt(): string {
-  return `Tu es l'assistant client d'Arc, une jeune marque de vêtements techniques (premier produit : des t-shirts en coton épais, en série limitée). Tu réponds aux visiteurs du site sur le chat en bas à droite.
+  return `Tu es l'assistant client d'Arc, une jeune marque de vêtements techniques (premier produit : un t-shirt oversize en coton premium, en série limitée, décliné en 4 coloris). Tu réponds aux visiteurs du site sur le chat en bas à droite.
 
 # Ton rôle
 Répondre de façon autonome aux questions des visiteurs sur les produits, la marque, la commande et le contact. Tu es la seule interface entre les clients et Arc en dehors de l'email — sois utile, honnête et précis.
@@ -26,6 +26,7 @@ Répondre de façon autonome aux questions des visiteurs sur les produits, la ma
 - Si tu ne sais pas ou que l'info n'est pas ci-dessous : dis-le clairement et oriente vers contact@arc-wear.com plutôt que d'inventer.
 
 # Catalogue actuel (Drop 01)
+Tailles disponibles pour chaque coloris : ${SIZES.join(", ")}.
 ${buildProductCatalog()}
 
 # Politique actuelle (Drop 01, tout début de marque)

@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { MountainHero } from "./MountainHero";
 import { MagneticButton } from "./MagneticButton";
 import { ScrollReveal } from "./ScrollReveal";
 
@@ -12,9 +12,7 @@ export function Hero() {
   const shouldReduceMotion = useReducedMotion();
 
   // Parallax: the background drifts slower than the page as you scroll past
-  // the hero. Swap the visual inside the motion.div below for a real photo
-  // (e.g. <Image src="/hero-mountain.jpg" fill className="object-cover" />)
-  // — the scroll-linked motion keeps working unchanged.
+  // the hero.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -31,11 +29,26 @@ export function Hero() {
       className="relative flex h-[80vh] min-h-[560px] max-h-[760px] items-center justify-center overflow-hidden"
     >
       <motion.div className="absolute inset-0 scale-[1.2]" style={{ y: backgroundY }}>
-        <MountainHero />
+        <Image
+          src="/hero-mountain.jpg"
+          alt="Sommet montagneux dans la brume, en noir et blanc"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
       </motion.div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(6,6,7,0.55) 0%, rgba(6,6,7,0.25) 30%, rgba(6,6,7,0.35) 70%, rgba(6,6,7,0.6) 100%)",
+        }}
+        aria-hidden="true"
+      />
 
       <ScrollReveal className="relative z-10 flex flex-col items-center px-5 text-center">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/80">
           Arc — Première collection
         </p>
         <h1 className="mt-5 text-balance font-display text-[13vw] leading-[1.02] sm:text-6xl md:text-7xl">

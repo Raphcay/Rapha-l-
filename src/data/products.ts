@@ -1,57 +1,63 @@
-export const SIZES = ["S", "M", "L", "XL"] as const;
+export const SIZES = ["XS", "S", "M", "L", "XL", "XXL"] as const;
+
+export const PRODUCT_IMAGES = {
+  front: "/products/arc-tee-front.png",
+  back: "/products/arc-tee-back.png",
+  detailLogo: "/products/arc-tee-detail-logo.png",
+  detailCollar: "/products/arc-tee-detail-collar.png",
+  detailShoulder: "/products/arc-tee-detail-shoulder.png",
+};
 
 export type Product = {
   slug: string;
   name: string;
   price: number;
   material: string;
+  cut: string;
   colorName: string;
   colorHex: string;
-  tone: "raw" | "night" | "clay" | "steel";
   description: string;
 };
 
 export const products: Product[] = [
   {
-    slug: "tee-arc-01-noir",
-    name: "Tee Arc 01",
-    price: 45,
-    material: "100% coton épais 240g",
+    slug: "tee-arc-blanc",
+    name: "Tee Arc",
+    price: 49,
+    material: "100% coton premium 220g/m²",
+    cut: "Oversize / Streetwear",
+    colorName: "Blanc",
+    colorHex: "#fefefe",
+    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
+  },
+  {
+    slug: "tee-arc-noir",
+    name: "Tee Arc",
+    price: 49,
+    material: "100% coton premium 220g/m²",
+    cut: "Oversize / Streetwear",
     colorName: "Noir",
-    colorHex: "#0b0b0c",
-    tone: "night",
-    description:
-      "Coupe droite, col renforcé, teinture pièce pour une matière qui vit avec le temps.",
+    colorHex: "#151515",
+    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
   },
   {
-    slug: "tee-arc-01-ecru",
-    name: "Tee Arc 01",
-    price: 45,
-    material: "100% coton épais 240g",
-    colorName: "Écru",
-    colorHex: "#e4ddc9",
-    tone: "raw",
-    description:
-      "Coupe droite, col renforcé, teinture pièce pour une matière qui vit avec le temps.",
-  },
-  {
-    slug: "tee-arc-02-brique",
-    name: "Tee Arc 02",
+    slug: "tee-arc-gris",
+    name: "Tee Arc",
     price: 49,
-    material: "100% coton biologique 220g",
-    colorName: "Brique",
-    colorHex: "#8a3a24",
-    tone: "clay",
-    description: "Coupe oversize, ourlet côtelé, sérigraphie mark dos.",
+    material: "100% coton premium 220g/m²",
+    cut: "Oversize / Streetwear",
+    colorName: "Gris",
+    colorHex: "#9d9d9d",
+    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
   },
   {
-    slug: "tee-arc-02-gris",
-    name: "Tee Arc 02",
+    slug: "tee-arc-beige",
+    name: "Tee Arc",
     price: 49,
-    material: "100% coton biologique 220g",
-    colorName: "Gris acier",
-    colorHex: "#5a5e64",
-    tone: "steel",
-    description: "Coupe oversize, ourlet côtelé, sérigraphie mark dos.",
+    material: "100% coton premium 220g/m²",
+    cut: "Oversize / Streetwear",
+    colorName: "Beige",
+    colorHex: "#cebdab",
+    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
   },
 ];
