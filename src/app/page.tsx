@@ -8,17 +8,20 @@ import { products } from "@/data/products";
 
 const PILLARS = [
   {
-    label: "01 — Matière",
+    number: "01",
+    label: "Matière",
     title: "Un coton qui tient la distance",
     body: "On ne descend jamais sous les 240g. La teinture se fait pièce par pièce, dans des ateliers européens qu'on connaît personnellement.",
   },
   {
-    label: "02 — Coupe",
+    number: "02",
+    label: "Coupe",
     title: "Une coupe testée, pas devinée",
     body: "Chaque patron passe par plusieurs morphologies avant validation — pas de taille générique qui ne va à personne.",
   },
   {
-    label: "03 — Fabrication",
+    number: "03",
+    label: "Fabrication",
     title: "Peu de pièces, mais les bonnes",
     body: "Chaque drop est limité et numéroté. On préfère vendre vingt pièces bien faites que deux cents qu'on regrette.",
   },
@@ -38,15 +41,25 @@ export default function Home() {
       <Hero />
 
       {/* Pillars */}
-      <section className="border-y border-line bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 sm:py-20 md:grid-cols-3 md:gap-8">
+      <section className="bg-surface">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 md:grid-cols-3 md:gap-12">
           {PILLARS.map((pillar, index) => (
-            <ScrollReveal key={pillar.label} delay={index * 0.08}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
+            <ScrollReveal
+              key={pillar.number}
+              delay={index * 0.08}
+              className="border-t border-line pt-7"
+            >
+              <span
+                className="block font-display text-6xl leading-none text-ink/[0.08] sm:text-7xl"
+                aria-hidden="true"
+              >
+                {pillar.number}
+              </span>
+              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
                 {pillar.label}
               </p>
               <h3 className="mt-3 font-display text-xl">{pillar.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
+              <p className="mt-3 text-sm leading-relaxed text-muted">
                 {pillar.body}
               </p>
             </ScrollReveal>
