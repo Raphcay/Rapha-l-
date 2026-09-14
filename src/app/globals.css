@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f1efe9;
-  --surface: #e7e4da;
-  --surface-raised: #faf9f5;
-  --ink: #14151a;
-  --muted: #726e63;
-  --accent: #2f4a3c;
-  --line: #dad6cb;
+  --bg: #0b0b0c;
+  --surface: #141416;
+  --surface-raised: #1b1b1e;
+  --ink: #f3f1ea;
+  --muted: #9a978d;
+  --accent: #d9d3c2;
+  --line: #2a2a2c;
 }
 
 @theme inline {
@@ -18,13 +18,13 @@
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-line: var(--line);
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-public-sans);
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-work-sans);
   --font-mono: var(--font-plex-mono);
 }
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
@@ -35,6 +35,11 @@ body {
 ::selection {
   background: var(--accent);
   color: var(--bg);
+}
+
+.font-display {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 /* Animated hero gradient — GPU-friendly (transform-only), off by default under reduced motion */
@@ -50,7 +55,7 @@ body {
   inset: -30%;
   border-radius: 9999px;
   filter: blur(60px);
-  opacity: 0.5;
+  opacity: 0.35;
   will-change: transform;
   pointer-events: none;
 }
@@ -61,7 +66,7 @@ body {
 }
 
 .hero-gradient::after {
-  background: radial-gradient(circle at 70% 70%, #c9b88a, transparent 60%);
+  background: radial-gradient(circle at 70% 70%, #6b7280, transparent 60%);
   animation: hero-blob-b 22s ease-in-out infinite;
 }
 
@@ -75,9 +80,21 @@ body {
   50% { transform: translate(-10%, -8%) scale(1.12); }
 }
 
+/* Mountain hero — slow atmospheric mist drift */
+@keyframes mist-drift {
+  0%, 100% { transform: translateX(-2%) scaleX(1); }
+  50% { transform: translateX(2%) scaleX(1.04); }
+}
+
+.mist-layer {
+  animation: mist-drift 48s ease-in-out infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-gradient::before,
-  .hero-gradient::after {
+  .hero-gradient::after,
+  .mist-layer {
     animation: none;
   }
 }

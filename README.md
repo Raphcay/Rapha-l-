@@ -4,7 +4,7 @@ Site vitrine de **Arc**, marque de vêtements techniques (première pièce : un 
 
 Stack : Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion + Anthropic SDK (assistant client).
 
-Direction artistique : **Blanc Studio** — fond papier clair, accent vert forêt, typographie serif (Fraunces) + sans (Public Sans) + mono (IBM Plex Mono) pour les libellés techniques.
+Direction artistique : **Noir Absolu** — fond sombre, hero plein cadre avec une illustration de montagne (dans l'esprit du mark ARC, voir `MountainHero`), typographie condensée majuscule (Anton) + sans (Work Sans) + mono (IBM Plex Mono) pour les libellés techniques.
 
 ## Lancer le projet en local
 
@@ -27,9 +27,9 @@ src/
     journal/                # Blog / actualités
     contact/                # Formulaire de contact
     api/chat/route.ts       # Endpoint de l'assistant client IA (Claude)
-  components/               # Nav, Footer, Mark (logo), ProductVisual,
-                             # TShirtIllustration (rendu produit), ContactForm,
-                             # ChatWidget, ScrollReveal, AnimatedNumber, MagneticButton
+  components/               # Nav, Footer, Mark (logo), MountainHero (hero illustré),
+                             # ProductVisual (zoom interactif), TShirtIllustration (rendu produit),
+                             # ContactForm, ChatWidget, ScrollReveal, AnimatedNumber, MagneticButton
   data/                     # products.ts, posts.ts — contenu éditable sans toucher au design
   lib/chat-context.ts       # Base de connaissance de l'assistant, générée depuis data/
 ```
@@ -40,6 +40,10 @@ src/
 
 1. Déposer les vraies images dans `public/products/`.
 2. Dans `src/components/ProductVisual.tsx`, remplacer `<TShirtIllustration product={product} />` par une balise `<Image>` pointant vers le fichier correspondant à `product.slug`.
+
+`ProductVisual` ajoute une interaction de **zoom sur points d'intérêt** : trois pastilles (coupe/taille, mark, matière) qui, au survol ou au clic, zooment sur cette zone du visuel et affichent une légende descriptive tirée de `src/data/products.ts`. Fonctionne aussi avec une vraie photo une fois `TShirtIllustration` remplacée — les positions des pastilles (`x`/`y` en % dans `getHotspots`) sont à ajuster selon le nouveau visuel.
+
+`MountainHero` est une illustration de montagne en SVG (pas une photo — voir la limite ci-dessous) utilisée en fond du hero de l'accueil. Pour la remplacer par une vraie photo : dans `src/app/page.tsx`, remplacer `<MountainHero />` par une balise `<Image fill>` pointant vers le fichier déposé dans `public/`.
 
 ## Assistant client IA (autonome)
 
@@ -58,7 +62,7 @@ Un widget de chat (bas à droite, sur toutes les pages) répond automatiquement 
 
 ## À faire avant mise en ligne
 
-- Remplacer `TShirtIllustration` par les vraies photos/rendus des t-shirts (voir ci-dessus).
+- Remplacer `TShirtIllustration` et `MountainHero` par les vraies photos/rendus (voir ci-dessus).
 - Configurer `ANTHROPIC_API_KEY` pour activer l'assistant client.
 - Brancher le formulaire de contact à un service d'envoi (actuellement il ouvre le client email via `mailto:`).
 - Ajouter le paiement en ligne si la boutique doit vendre directement (Stripe).

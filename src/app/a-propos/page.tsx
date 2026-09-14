@@ -34,15 +34,14 @@ export default function AProposPage() {
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
               À propos
             </p>
-            <h1 className="mt-2 max-w-[18ch] text-balance font-display text-4xl italic sm:text-5xl">
-              Construire des vêtements qui méritent d&apos;être gardés.
+            <h1 className="mt-2 max-w-[18ch] text-balance font-display text-4xl leading-[1.15] sm:text-5xl">
+              Des vêtements qui méritent d&apos;être gardés.
             </h1>
             <p className="mt-6 max-w-[54ch] text-[15px] leading-relaxed text-muted">
-              Arc est née d&apos;une conviction simple : un vêtement du quotidien
-              ne devrait pas être jetable. Nous dessinons des pièces
-              techniques, taillées pour durer, produites en petites séries
-              pour rester exigeants sur chaque étape — de la matière au
-              dernier point de couture.
+              Arc est née d&apos;un constat simple : un t-shirt ne devrait pas
+              finir à la poubelle après six mois. On dessine des pièces
+              techniques, taillées pour durer. Petites séries, parce qu&apos;on
+              préfère bien faire vingt pièces que mal en faire deux cents.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.12} y={16}>

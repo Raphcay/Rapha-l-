@@ -15,13 +15,13 @@ export default function CollectionPage() {
         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
           Drop 01
         </p>
-        <h1 className="mt-2 max-w-[20ch] font-display text-4xl italic sm:text-5xl">
+        <h1 className="mt-2 max-w-[20ch] font-display text-4xl sm:text-5xl">
           La collection
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-          Quatre coloris, une seule coupe, produite en série limitée et
-          numérotée. Chaque pièce est cousue en petit atelier pour éviter la
-          surproduction.
+          Une seule coupe, déclinée en quatre coloris. Chaque édition est
+          cousue en petit atelier, limitée et numérotée, pour qu&apos;on ne
+          produise jamais plus que ce qu&apos;on peut vendre.
         </p>
       </ScrollReveal>
 

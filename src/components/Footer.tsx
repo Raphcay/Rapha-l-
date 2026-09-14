@@ -6,13 +6,13 @@ export function Footer() {
     <footer className="border-t border-line">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2.5 font-display text-lg uppercase tracking-wide">
+          <div className="flex items-center gap-2.5 font-display text-lg tracking-wide">
             <Mark className="h-6 w-6" />
             Arc
           </div>
           <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-muted">
-            Vêtements techniques conçus pour la ville. Première collection :
-            des t-shirts pensés comme du matériel.
+            Des vêtements techniques taillés pour durer. On commence par un
+            t-shirt.
           </p>
         </div>
 
@@ -21,7 +21,7 @@ export function Footer() {
             Navigation
           </p>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><Link href="/collection" className="hover:text-accent">Collection</Link></li>
+            <li><Link href="/collection" className="hover:text-accent">Boutique</Link></li>
             <li><Link href="/a-propos" className="hover:text-accent">À propos</Link></li>
             <li><Link href="/journal" className="hover:text-accent">Journal</Link></li>
             <li><Link href="/contact" className="hover:text-accent">Contact</Link></li>

@@ -20,7 +20,7 @@ export default function JournalPage() {
         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
           Journal
         </p>
-        <h1 className="mt-2 max-w-[20ch] font-display text-4xl italic sm:text-5xl">
+        <h1 className="mt-2 max-w-[20ch] font-display text-4xl sm:text-5xl">
           Notes d&apos;atelier
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
@@ -43,7 +43,7 @@ export default function JournalPage() {
               {post.readTime} de lecture
             </p>
             <div>
-              <h2 className="font-display text-2xl italic">{post.title}</h2>
+              <h2 className="font-display text-2xl">{post.title}</h2>
               <p className="mt-2 max-w-[60ch] text-sm leading-relaxed text-muted">
                 {post.excerpt}
               </p>

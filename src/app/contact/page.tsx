@@ -15,7 +15,7 @@ export default function ContactPage() {
           <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
             Contact
           </p>
-          <h1 className="mt-2 max-w-[16ch] text-balance font-display text-4xl italic sm:text-5xl">
+          <h1 className="mt-2 max-w-[16ch] text-balance font-display text-4xl sm:text-5xl">
             Parlons-en.
           </h1>
           <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-muted">

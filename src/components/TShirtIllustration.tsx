@@ -49,8 +49,9 @@ export function TShirtIllustration({ product }: { product: Product }) {
            Q84,50 76,32
            Z"
         fill={`url(#${gradientId})`}
-        stroke={palette.shade}
+        stroke={palette.highlight}
         strokeWidth="1.5"
+        strokeOpacity="0.6"
         strokeLinejoin="round"
       />
 

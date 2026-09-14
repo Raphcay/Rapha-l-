@@ -79,7 +79,7 @@ export function ChatWidget() {
             <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
               <Mark className="h-4 w-4 text-ink" />
               <div>
-                <p className="font-display text-sm italic leading-none">Arc — Assistant</p>
+                <p className="font-display text-sm leading-none">Arc — Assistant</p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
                   Répond en quelques secondes
                 </p>

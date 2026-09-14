@@ -1,3 +1,5 @@
+export const SIZES = ["S", "M", "L", "XL"] as const;
+
 export type Product = {
   slug: string;
   name: string;

@@ -1,26 +1,26 @@
 import Link from "next/link";
-import { Mark } from "@/components/Mark";
 import { ProductVisual } from "@/components/ProductVisual";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { MagneticButton } from "@/components/MagneticButton";
+import { MountainHero } from "@/components/MountainHero";
 import { products } from "@/data/products";
 
 const PILLARS = [
   {
     label: "01 — Matière",
-    title: "Coton épais, tenue dans le temps",
-    body: "240g minimum, teinture pièce, sourcé auprès d'ateliers européens contrôlés.",
+    title: "Un coton qui tient la distance",
+    body: "On ne descend jamais sous les 240g. La teinture se fait pièce par pièce, dans des ateliers européens qu'on connaît personnellement.",
   },
   {
     label: "02 — Coupe",
-    title: "Une silhouette, pensée pour durer",
-    body: "Patronage testé sur plusieurs morphologies avant chaque production, pas de coupe générique.",
+    title: "Une coupe testée, pas devinée",
+    body: "Chaque patron passe par plusieurs morphologies avant validation — pas de taille générique qui ne va à personne.",
   },
   {
     label: "03 — Fabrication",
-    title: "Petites séries, zéro surproduction",
-    body: "Chaque drop est produit en quantité limitée et numérotée, pour éviter le déstockage.",
+    title: "Peu de pièces, mais les bonnes",
+    body: "Chaque drop est limité et numéroté. On préfère vendre vingt pièces bien faites que deux cents qu'on regrette.",
   },
 ];
 
@@ -36,54 +36,26 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20">
-        <div className="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <ScrollReveal>
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                Arc — Première collection
-              </p>
-            </ScrollReveal>
-            <ScrollReveal delay={0.08}>
-              <h1 className="mt-5 text-balance font-display text-[13vw] italic leading-[0.95] sm:text-6xl md:text-7xl">
-                Une garde-robe,
-                <br />
-                une intention.
-              </h1>
-            </ScrollReveal>
-            <ScrollReveal delay={0.16}>
-              <p className="mt-6 max-w-[46ch] text-[15px] leading-relaxed text-muted">
-                Arc conçoit des vêtements techniques pensés pour la ville :
-                coupes précises, matières durables, séries limitées. La
-                première pièce de la marque : un t-shirt construit pour durer.
-              </p>
-            </ScrollReveal>
-            <ScrollReveal delay={0.24}>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <MagneticButton>
-                  <Link
-                    href="/collection"
-                    className="block border border-ink px-6 py-3 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent"
-                  >
-                    Voir la collection
-                  </Link>
-                </MagneticButton>
-                <Link
-                  href="/a-propos"
-                  className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted underline decoration-line underline-offset-4 hover:text-ink"
-                >
-                  Le projet Arc
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          <ScrollReveal delay={0.12} y={16}>
-            <div className="hero-gradient flex aspect-[4/5] items-center justify-center border border-line bg-surface">
-              <Mark className="relative z-10 h-28 w-28 text-ink/80 sm:h-36 sm:w-36" />
-            </div>
-          </ScrollReveal>
-        </div>
+      <section className="relative flex h-[80vh] min-h-[560px] max-h-[760px] items-center justify-center overflow-hidden">
+        <MountainHero />
+        <ScrollReveal className="relative z-10 flex flex-col items-center px-5 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+            Arc — Première collection
+          </p>
+          <h1 className="mt-5 text-balance font-display text-[13vw] leading-[1.02] sm:text-6xl md:text-7xl">
+            Plus qu&apos;un style,
+            <br />
+            une identité.
+          </h1>
+          <MagneticButton className="mt-9">
+            <Link
+              href="/collection"
+              className="block border border-ink/80 bg-bg/20 px-8 py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
+            >
+              Découvrir
+            </Link>
+          </MagneticButton>
+        </ScrollReveal>
       </section>
 
       {/* Pillars */}
@@ -108,7 +80,7 @@ export default function Home() {
         <div className="grid gap-10 sm:grid-cols-3">
           {STATS.map((stat, index) => (
             <ScrollReveal key={stat.label} delay={index * 0.08}>
-              <p className="font-display text-5xl italic text-accent sm:text-6xl">
+              <p className="font-display text-5xl text-accent sm:text-6xl">
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="mt-3 max-w-[24ch] text-sm leading-relaxed text-muted">
@@ -127,7 +99,7 @@ export default function Home() {
               <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
                 Drop 01
               </p>
-              <h2 className="mt-2 font-display text-3xl italic sm:text-4xl">
+              <h2 className="mt-2 font-display text-3xl sm:text-4xl">
                 Le t-shirt Arc
               </h2>
             </div>
@@ -168,7 +140,7 @@ export default function Home() {
       <section className="border-t border-line bg-ink text-bg">
         <ScrollReveal>
           <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-14 sm:flex-row sm:items-center sm:px-8">
-            <p className="max-w-[36ch] font-display text-2xl italic leading-snug">
+            <p className="max-w-[36ch] font-display text-2xl leading-snug">
               Sois averti·e au lancement du prochain drop.
             </p>
             <MagneticButton>
