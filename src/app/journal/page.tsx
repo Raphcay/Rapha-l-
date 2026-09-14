@@ -25,8 +25,9 @@ export default function JournalPage() {
           Notes d&apos;atelier
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-          Matières, fabrication, entretien : ce qu&apos;on apprend en construisant
-          Arc, écrit au fil des drops.
+          On note ici ce qu&apos;on apprend en construisant Arc — la matière,
+          la fabrication, comment entretenir les pièces. Publié au fil des
+          drops, sans calendrier fixe.
         </p>
       </ScrollReveal>
 

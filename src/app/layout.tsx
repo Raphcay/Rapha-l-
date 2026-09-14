@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   keywords: [
     "Arc",
     "vêtements techniques",
-    "t-shirt coton épais",
+    "t-shirt oversize coton premium",
     "marque streetwear",
     "série limitée",
     "mode française",

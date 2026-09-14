@@ -21,8 +21,8 @@ export default function ContactPage() {
             Parlons-en.
           </h1>
           <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-muted">
-            Une question sur une matière, une précommande, une proposition de
-            collaboration : écris-nous, on répond personnellement.
+            Une question, une envie de précommander, une proposition de
+            collaboration ? Écris-nous, on répond personnellement.
           </p>
           <dl className="mt-10 space-y-4 font-mono text-[13px]">
             <div>
