@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { posts } from "@/data/posts";
 
 export const metadata: Metadata = {
@@ -15,20 +16,27 @@ const formatter = new Intl.DateTimeFormat("fr-FR", {
 export default function JournalPage() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-        Journal
-      </p>
-      <h1 className="mt-2 max-w-[20ch] font-display text-4xl italic sm:text-5xl">
-        Notes d&apos;atelier
-      </h1>
-      <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-        Matières, fabrication, entretien : ce qu&apos;on apprend en construisant
-        Arc, écrit au fil des drops.
-      </p>
+      <ScrollReveal>
+        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+          Journal
+        </p>
+        <h1 className="mt-2 max-w-[20ch] font-display text-4xl italic sm:text-5xl">
+          Notes d&apos;atelier
+        </h1>
+        <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
+          Matières, fabrication, entretien : ce qu&apos;on apprend en construisant
+          Arc, écrit au fil des drops.
+        </p>
+      </ScrollReveal>
 
       <div className="mt-12 divide-y divide-line border-y border-line">
-        {posts.map((post) => (
-          <article key={post.slug} className="grid gap-2 py-8 sm:grid-cols-[1fr_2.4fr] sm:gap-8">
+        {posts.map((post, index) => (
+          <ScrollReveal
+            key={post.slug}
+            as="article"
+            delay={index * 0.06}
+            className="grid gap-2 py-8 sm:grid-cols-[1fr_2.4fr] sm:gap-8"
+          >
             <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
               {formatter.format(new Date(post.date))}
               <br />
@@ -40,7 +48,7 @@ export default function JournalPage() {
                 {post.excerpt}
               </p>
             </div>
-          </article>
+          </ScrollReveal>
         ))}
       </div>
 

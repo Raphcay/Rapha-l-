@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import { useState } from "react";
 import { Mark } from "./Mark";
+import { MagneticButton } from "./MagneticButton";
 
 const LINKS = [
   { href: "/collection", label: "Collection" },
@@ -9,14 +14,32 @@ const LINKS = [
 ];
 
 export function Nav() {
+  const [compact, setCompact] = useState(false);
+  const { scrollY } = useScroll();
+  const shouldReduceMotion = useReducedMotion();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setCompact(latest > 40);
+  });
+
+  const transitionClass = shouldReduceMotion
+    ? ""
+    : "transition-all duration-300 ease-out";
+
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+    <header className={`sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur ${transitionClass}`}>
+      <div
+        className={`mx-auto flex max-w-6xl items-center justify-between px-5 sm:px-8 ${transitionClass} ${
+          compact ? "py-2.5" : "py-4"
+        }`}
+      >
         <Link
           href="/"
-          className="flex items-center gap-2.5 font-display text-lg uppercase tracking-wide"
+          className={`flex items-center gap-2.5 font-display uppercase tracking-wide ${transitionClass} ${
+            compact ? "text-base" : "text-lg"
+          }`}
         >
-          <Mark className="h-6 w-6" />
+          <Mark className={`${transitionClass} ${compact ? "h-5 w-5" : "h-6 w-6"}`} />
           Arc
         </Link>
         <nav className="hidden gap-8 font-mono text-[11px] uppercase tracking-[0.12em] text-muted sm:flex">
@@ -30,12 +53,16 @@ export function Nav() {
             </Link>
           ))}
         </nav>
-        <Link
-          href="/collection"
-          className="border border-ink px-4 py-2 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent"
-        >
-          Boutique
-        </Link>
+        <MagneticButton>
+          <Link
+            href="/collection"
+            className={`block border border-ink font-mono text-[10px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent ${transitionClass} ${
+              compact ? "px-3.5 py-1.5" : "px-4 py-2"
+            }`}
+          >
+            Boutique
+          </Link>
+        </MagneticButton>
       </div>
       <nav className="flex gap-6 overflow-x-auto border-t border-line px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted sm:hidden">
         {LINKS.map((link) => (

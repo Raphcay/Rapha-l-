@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { MagneticButton } from "./MagneticButton";
 
 const CONTACT_EMAIL = "contact@arc-wear.com";
 
@@ -74,12 +75,14 @@ export function ContactForm() {
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-fit border border-ink px-6 py-3 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent"
-      >
-        Envoyer
-      </button>
+      <MagneticButton className="w-fit">
+        <button
+          type="submit"
+          className="border border-ink px-6 py-3 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent"
+        >
+          Envoyer
+        </button>
+      </MagneticButton>
 
       <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
         Ouvre ton client email — le formulaire n&apos;est pas encore relié à

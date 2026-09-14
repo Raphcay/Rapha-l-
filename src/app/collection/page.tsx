@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProductVisual } from "@/components/ProductVisual";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { products } from "@/data/products";
 
 export const metadata: Metadata = {
@@ -10,21 +11,23 @@ export const metadata: Metadata = {
 export default function CollectionPage() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-      <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-        Drop 01
-      </p>
-      <h1 className="mt-2 max-w-[20ch] font-display text-4xl italic sm:text-5xl">
-        La collection
-      </h1>
-      <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-        Quatre coloris, une seule coupe, produite en série limitée et
-        numérotée. Chaque pièce est cousue en petit atelier pour éviter la
-        surproduction.
-      </p>
+      <ScrollReveal>
+        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+          Drop 01
+        </p>
+        <h1 className="mt-2 max-w-[20ch] font-display text-4xl italic sm:text-5xl">
+          La collection
+        </h1>
+        <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
+          Quatre coloris, une seule coupe, produite en série limitée et
+          numérotée. Chaque pièce est cousue en petit atelier pour éviter la
+          surproduction.
+        </p>
+      </ScrollReveal>
 
       <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-        {products.map((product) => (
-          <div key={product.slug} className="group">
+        {products.map((product, index) => (
+          <ScrollReveal key={product.slug} delay={(index % 4) * 0.06} className="group">
             <ProductVisual product={product} />
             <div className="mt-3 flex items-start justify-between gap-2">
               <div>
@@ -40,7 +43,7 @@ export default function CollectionPage() {
             <p className="mt-2 text-xs leading-relaxed text-muted">
               {product.material}
             </p>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
 

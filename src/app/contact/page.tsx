@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -10,7 +11,7 @@ export default function ContactPage() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
       <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr]">
-        <div>
+        <ScrollReveal>
           <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
             Contact
           </p>
@@ -47,11 +48,13 @@ export default function ContactPage() {
               </dd>
             </div>
           </dl>
-        </div>
+        </ScrollReveal>
 
-        <div className="border border-line bg-surface p-6 sm:p-8">
-          <ContactForm />
-        </div>
+        <ScrollReveal delay={0.1} y={16}>
+          <div className="border border-line bg-surface p-6 sm:p-8">
+            <ContactForm />
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

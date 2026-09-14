@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mark } from "@/components/Mark";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "À propos",
@@ -29,7 +30,7 @@ export default function AProposPage() {
     <>
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid items-start gap-12 md:grid-cols-[1fr_0.7fr]">
-          <div>
+          <ScrollReveal>
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
               À propos
             </p>
@@ -43,21 +44,25 @@ export default function AProposPage() {
               pour rester exigeants sur chaque étape — de la matière au
               dernier point de couture.
             </p>
-          </div>
-          <div className="flex aspect-square items-center justify-center border border-line bg-surface">
-            <Mark className="h-20 w-20 text-ink/70" />
-          </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.12} y={16}>
+            <div className="hero-gradient flex aspect-square items-center justify-center border border-line bg-surface">
+              <Mark className="relative z-10 h-20 w-20 text-ink/70" />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       <section className="border-t border-line bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
-          <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-            Parcours
-          </p>
+          <ScrollReveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+              Parcours
+            </p>
+          </ScrollReveal>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
-            {TIMELINE.map((step) => (
-              <div key={step.year} className="border-t border-ink/20 pt-5">
+            {TIMELINE.map((step, index) => (
+              <ScrollReveal key={step.year} delay={index * 0.1} className="border-t border-ink/20 pt-5">
                 <p className="font-mono text-sm tabular-nums text-accent">
                   {step.year}
                 </p>
@@ -65,7 +70,7 @@ export default function AProposPage() {
                 <p className="mt-2 text-sm leading-relaxed text-muted">
                   {step.body}
                 </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
