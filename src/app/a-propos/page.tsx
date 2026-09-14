@@ -11,18 +11,18 @@ export const metadata: Metadata = {
 const TIMELINE = [
   {
     year: "2025",
-    title: "Le constat",
-    body: "Trop de t-shirts basiques, mal coupés, produits en masse et jetés vite. Arc part d'une frustration simple : vouloir une pièce qui dure.",
+    title: "Le déclic",
+    body: "On en avait assez des t-shirts basiques, mal coupés, qu'on remplaçait tous les six mois. L'idée d'Arc est partie de là : faire une pièce qui tienne vraiment.",
   },
   {
     year: "2026",
-    title: "Le premier drop",
-    body: "Un an de travail sur le patronage et le choix des matières pour sortir une première pièce : le Tee Arc, en série limitée.",
+    title: "Douze mois de travail",
+    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : le Tee Arc, sorti en série limitée.",
   },
   {
     year: "À venir",
-    title: "La suite",
-    body: "De nouvelles pièces techniques, toujours produites en petite série, jamais en stock permanent.",
+    title: "Ensuite",
+    body: "D'autres pièces techniques suivront, toujours en petite série. Pas de stock permanent, pas de réassort automatique.",
   },
 ];
 
@@ -39,10 +39,13 @@ export default function AProposPage() {
               Des vêtements qui méritent d&apos;être gardés.
             </h1>
             <p className="mt-6 max-w-[54ch] text-[15px] leading-relaxed text-muted">
-              Arc est née d&apos;un constat simple : un t-shirt ne devrait pas
-              finir à la poubelle après six mois. On dessine des pièces
-              techniques, taillées pour durer. Petites séries, parce qu&apos;on
-              préfère bien faire vingt pièces que mal en faire deux cents.
+              Arc est née d&apos;une frustration assez simple : trop de
+              t-shirts finissaient à la poubelle après quelques mois, mal
+              coupés ou mal cousus dès le départ. On a voulu faire
+              l&apos;inverse — des pièces techniques, taillées pour durer,
+              produites en petites séries parce qu&apos;on n&apos;a ni
+              l&apos;envie ni les moyens de stocker ce qu&apos;on ne vendra
+              pas.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.12} y={16}>

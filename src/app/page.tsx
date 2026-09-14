@@ -10,25 +10,25 @@ const PILLARS = [
   {
     number: "01",
     label: "Matière",
-    title: "Un coton qui tient la distance",
-    body: "On ne descend jamais sous les 240g. La teinture se fait pièce par pièce, dans des ateliers européens qu'on connaît personnellement.",
+    title: "220g minimum, sans discussion",
+    body: "C'est le seuil qu'on s'est fixé au lancement et qu'on n'a jamais revu à la baisse. La teinture se fait pièce par pièce, dans des ateliers européens qu'on connaît personnellement.",
   },
   {
     number: "02",
     label: "Coupe",
-    title: "Une coupe testée, pas devinée",
-    body: "Chaque patron passe par plusieurs morphologies avant validation — pas de taille générique qui ne va à personne.",
+    title: "Une coupe qui a mis du temps",
+    body: "Le patron est passé par plusieurs morphologies avant d'être validé. On voulait éviter la taille générique qui, au final, ne va vraiment à personne.",
   },
   {
     number: "03",
     label: "Fabrication",
-    title: "Peu de pièces, mais les bonnes",
-    body: "Chaque drop est limité et numéroté. On préfère vendre vingt pièces bien faites que deux cents qu'on regrette.",
+    title: "On produit peu, volontairement",
+    body: "Chaque drop est limité et numéroté. Vendre vingt pièces bien faites nous convient mieux que d'en écouler deux cents dont la moitié finit oubliée au fond d'un placard.",
   },
 ];
 
 const STATS = [
-  { value: 240, suffix: "g", label: "Grammage du coton épais" },
+  { value: 220, suffix: "g", label: "Grammage du coton premium" },
   { value: 50, suffix: "", label: "Exemplaires numérotés par coloris" },
   { value: 12, suffix: "", label: "Mois de développement avant le premier drop" },
 ];

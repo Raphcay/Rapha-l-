@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collection",
-  description: "La première collection Arc : des t-shirts techniques en coton épais, en série limitée.",
+  description: "La première collection Arc : un t-shirt oversize en coton premium, décliné en quatre coloris, en série limitée.",
   alternates: { canonical: "/collection" },
 };
 
@@ -48,8 +48,8 @@ export default function CollectionPage() {
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
           Une seule coupe, déclinée en quatre coloris. Chaque édition est
-          cousue en petit atelier, limitée et numérotée, pour qu&apos;on ne
-          produise jamais plus que ce qu&apos;on peut vendre.
+          cousue en petit atelier, en quantité limitée. Une fois le stock
+          épuisé, on ne le refait pas à l&apos;identique.
         </p>
       </ScrollReveal>
 
@@ -76,8 +76,8 @@ export default function CollectionPage() {
       </div>
 
       <p className="mt-16 border-t border-line pt-8 font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
-        Paiement en ligne à venir — pour précommander une pièce, écris-nous
-        via la page{" "}
+        Le paiement en ligne arrive bientôt. En attendant, pour précommander
+        une pièce, écris-nous via la page{" "}
         <a href="/contact" className="text-ink underline decoration-line underline-offset-4 hover:text-accent">
           contact
         </a>
