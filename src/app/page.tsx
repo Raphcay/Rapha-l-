@@ -3,7 +3,7 @@ import { ProductVisual } from "@/components/ProductVisual";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { MagneticButton } from "@/components/MagneticButton";
-import { MountainHero } from "@/components/MountainHero";
+import { Hero } from "@/components/Hero";
 import { products } from "@/data/products";
 
 const PILLARS = [
@@ -35,28 +35,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex h-[80vh] min-h-[560px] max-h-[760px] items-center justify-center overflow-hidden">
-        <MountainHero />
-        <ScrollReveal className="relative z-10 flex flex-col items-center px-5 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-            Arc — Première collection
-          </p>
-          <h1 className="mt-5 text-balance font-display text-[13vw] leading-[1.02] sm:text-6xl md:text-7xl">
-            Plus qu&apos;un style,
-            <br />
-            une identité.
-          </h1>
-          <MagneticButton className="mt-9">
-            <Link
-              href="/collection"
-              className="block border border-ink/80 bg-bg/20 px-8 py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
-            >
-              Découvrir
-            </Link>
-          </MagneticButton>
-        </ScrollReveal>
-      </section>
+      <Hero />
 
       {/* Pillars */}
       <section className="border-y border-line bg-surface">

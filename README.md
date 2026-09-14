@@ -43,7 +43,7 @@ src/
 
 `ProductVisual` ajoute une interaction de **zoom sur points d'intérêt** : trois pastilles (coupe/taille, mark, matière) qui, au survol ou au clic, zooment sur cette zone du visuel et affichent une légende descriptive tirée de `src/data/products.ts`. Fonctionne aussi avec une vraie photo une fois `TShirtIllustration` remplacée — les positions des pastilles (`x`/`y` en % dans `getHotspots`) sont à ajuster selon le nouveau visuel.
 
-`MountainHero` est une illustration de montagne en SVG (pas une photo — voir la limite ci-dessous) utilisée en fond du hero de l'accueil. Pour la remplacer par une vraie photo : dans `src/app/page.tsx`, remplacer `<MountainHero />` par une balise `<Image fill>` pointant vers le fichier déposé dans `public/`.
+`MountainHero` est une illustration de montagne en SVG (pas une photo — voir la limite ci-dessous) utilisée en fond du hero de l'accueil. Le hero (`src/components/Hero.tsx`) a un **effet de parallaxe** au scroll : l'arrière-plan défile plus lentement que le contenu. Pour brancher une vraie photo : dans `Hero.tsx`, remplacer `<MountainHero />` par `<Image src="/hero-mountain.jpg" alt="" fill className="object-cover" />` (photo déposée dans `public/`) — l'effet de parallaxe s'applique automatiquement, aucune autre modification nécessaire.
 
 ## Assistant client IA (autonome)
 
