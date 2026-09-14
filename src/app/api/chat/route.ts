@@ -1,10 +1,10 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { buildSystemPrompt } from "@/lib/chat-context";
 
 export const runtime = "nodejs";
 
-const MODEL = "claude-opus-5";
+const MODEL = "gemini-2.0-flash";
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 const MAX_MESSAGE_LENGTH = 1000;
 const MAX_HISTORY_MESSAGES = 12;
 const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
@@ -32,8 +32,17 @@ function getClientIp(request: NextRequest): string {
   return forwardedFor?.split(",")[0]?.trim() ?? "unknown";
 }
 
+type GeminiResponse = {
+  candidates?: {
+    content?: { parts?: { text?: string }[] };
+    finishReason?: string;
+  }[];
+  promptFeedback?: { blockReason?: string };
+};
+
 export async function POST(request: NextRequest) {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
     return NextResponse.json(
       {
         error:
@@ -82,20 +91,38 @@ export async function POST(request: NextRequest) {
 
   const history = incoming.slice(-MAX_HISTORY_MESSAGES);
 
-  const client = new Anthropic();
-
   try {
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: 1024,
-      system: buildSystemPrompt(),
-      output_config: { effort: "low" },
-      messages: history.map((m) => ({ role: m.role, content: m.content })),
+    const response = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: buildSystemPrompt() }] },
+        contents: history.map((m) => ({
+          role: m.role === "assistant" ? "model" : "user",
+          parts: [{ text: m.content }],
+        })),
+        generationConfig: { maxOutputTokens: 1024, temperature: 0.4 },
+      }),
     });
 
-    const textBlock = response.content.find((block) => block.type === "text");
+    if (response.status === 429) {
+      return NextResponse.json(
+        { error: "L'assistant est très sollicité, réessaie dans un instant." },
+        { status: 429 },
+      );
+    }
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: "L'assistant est momentanément indisponible." },
+        { status: 502 },
+      );
+    }
 
-    if (response.stop_reason === "refusal" || !textBlock) {
+    const data: GeminiResponse = await response.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const finishReason = data.candidates?.[0]?.finishReason;
+
+    if (data.promptFeedback?.blockReason || finishReason === "SAFETY" || !text) {
       return NextResponse.json(
         {
           error:
@@ -105,20 +132,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({ reply: textBlock.text });
-  } catch (error) {
-    if (error instanceof Anthropic.RateLimitError) {
-      return NextResponse.json(
-        { error: "L'assistant est très sollicité, réessaie dans un instant." },
-        { status: 429 },
-      );
-    }
-    if (error instanceof Anthropic.APIError) {
-      return NextResponse.json(
-        { error: "L'assistant est momentanément indisponible." },
-        { status: 502 },
-      );
-    }
+    return NextResponse.json({ reply: text });
+  } catch {
     return NextResponse.json(
       { error: "Une erreur inattendue est survenue." },
       { status: 500 },
