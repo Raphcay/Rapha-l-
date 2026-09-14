@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildSystemPrompt } from "@/lib/chat-context";
+import { CONTACT_EMAIL_DISPLAY } from "@/lib/site";
 
 export const runtime = "nodejs";
 
@@ -128,7 +129,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error:
-            "Je ne peux pas répondre à ça. Écris-nous directement à contact@arc-wear.com.",
+            `Je ne peux pas répondre à ça. Écris-nous directement à ${CONTACT_EMAIL_DISPLAY}.`,
         },
         { status: 200 },
       );

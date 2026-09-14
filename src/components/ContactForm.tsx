@@ -2,8 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { MagneticButton } from "./MagneticButton";
+import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL } from "@/lib/site";
 
-const CONTACT_EMAIL = "contact@arc-wear.com";
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -17,7 +17,7 @@ export function ContactForm() {
   function sendByMailto() {
     const subject = `Message de ${name} — site Arc`;
     const body = `${message}\n\n— ${name} (${email})`;
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    window.location.href = `mailto:${CONTACT_EMAIL_REAL}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
   }
@@ -137,8 +137,8 @@ export function ContactForm() {
       {status === "error" && (
         <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">
           Le message n&apos;a pas pu partir. Écris-nous directement à{" "}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
-            {CONTACT_EMAIL}
+          <a href={`mailto:${CONTACT_EMAIL_REAL}`} className="underline">
+            {CONTACT_EMAIL_DISPLAY}
           </a>
           .
         </p>
