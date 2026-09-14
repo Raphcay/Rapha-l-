@@ -47,7 +47,7 @@ Le hero (`src/components/Hero.tsx`) affiche `public/hero-mountain.jpg` en plein 
 
 ## Assistant client IA (autonome)
 
-Un widget de chat (bas à droite, sur toutes les pages) répond automatiquement aux questions des visiteurs — produits, matières, précommande, contact — via l'API **Google Gemini** (`gemini-2.0-flash`, gratuite). Le contexte envoyé au modèle est généré à partir de `src/data/products.ts` et `src/data/posts.ts` : toute modification du catalogue met donc à jour les réponses de l'assistant sans rien reconfigurer.
+Un widget de chat (bas à droite, sur toutes les pages) répond automatiquement aux questions des visiteurs — produits, matières, précommande, contact — via l'API **Google Gemini** (`gemini-3.6-flash`, gratuite). Le contexte envoyé au modèle est généré à partir de `src/data/products.ts` et `src/data/posts.ts` : toute modification du catalogue met donc à jour les réponses de l'assistant sans rien reconfigurer.
 
 **Pour l'activer (gratuit) :**
 
@@ -61,6 +61,18 @@ Le quota gratuit de Gemini est limité en nombre de requêtes par minute/jour �
 - Limitation de débit basique par IP (15 messages / 5 min) — best-effort, à remplacer par un vrai rate limiter (Upstash, etc.) si le trafic grossit.
 - Longueur de message et historique plafonnés.
 - Consignes strictes dans le prompt système (`src/lib/chat-context.ts`) : jamais d'invention de statut de commande, de délai de livraison ou de politique non listée — l'assistant renvoie vers `contact@arc-wear.com` dans le doute.
+
+## Formulaire de contact
+
+Le formulaire (`src/components/ContactForm.tsx`) envoie vraiment les messages par email via **Web3Forms** (gratuit, ~250 envois/mois).
+
+**Pour l'activer (gratuit) :**
+
+1. Va sur [web3forms.com](https://web3forms.com), entre l'adresse email qui doit recevoir les messages du site (ex. la vraie boîte derrière `contact@arc-wear.com`) — pas de compte à créer.
+2. Une clé d'accès arrive par email, à copier.
+3. Renseigner `NEXT_PUBLIC_WEB3FORMS_KEY` en local (`.env.local`) et sur l'hébergeur (Vercel → Environment Variables), puis redéployer.
+
+Sans clé configurée, le formulaire revient au comportement précédent : il ouvre le client email du visiteur (`mailto:`) au lieu d'envoyer directement — fonctionnel mais moins fiable (tout le monde n'a pas de client email configuré), donc à activer dès que possible.
 
 ## Responsive
 
@@ -80,7 +92,7 @@ Testé sans débordement horizontal sur mobile (375px), tablette (768px) et desk
 - Photographier les coloris Noir/Gris/Beige pour remplacer la teinte CSS par de vraies photos (voir "Rendu produit" ci-dessus).
 - Confirmer le nombre de tailles réellement produites par coloris (XS-XXL listé pour l'instant).
 - Configurer `GEMINI_API_KEY` pour activer l'assistant client (gratuit).
-- Brancher le formulaire de contact à un service d'envoi (actuellement il ouvre le client email via `mailto:`).
+- Configurer `NEXT_PUBLIC_WEB3FORMS_KEY` pour activer l'envoi réel du formulaire de contact (gratuit — voir "Formulaire de contact" ci-dessus).
 - Ajouter le paiement en ligne si la boutique doit vendre directement (Stripe).
 - Adapter `src/data/products.ts`, `src/data/posts.ts` et la politique dans `src/lib/chat-context.ts` au vrai catalogue et aux vraies conditions.
 
