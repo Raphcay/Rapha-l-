@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { TintedProductImage } from "./TintedProductImage";
-import { PRODUCT_IMAGES, SIZES, type Product } from "@/data/products";
+import { SIZES, type Product } from "@/data/products";
 
 type Hotspot = {
   id: string;
@@ -22,7 +22,7 @@ function getHotspots(product: Product): Hotspot[] {
       y: 18,
       label: "Coupe",
       text: `${product.cut}. Du ${SIZES[0]} au ${SIZES[SIZES.length - 1]}.`,
-      image: PRODUCT_IMAGES.detailCollar,
+      image: product.images.detailCollar,
     },
     {
       id: "mark",
@@ -30,7 +30,7 @@ function getHotspots(product: Product): Hotspot[] {
       y: 40,
       label: "Mark",
       text: "Logo Arc brodé, finition haut de gamme, résistant au lavage.",
-      image: PRODUCT_IMAGES.detailLogo,
+      image: product.images.detailLogo,
     },
     {
       id: "matiere",
@@ -38,7 +38,7 @@ function getHotspots(product: Product): Hotspot[] {
       y: 62,
       label: "Matière",
       text: `${product.material}, coloris ${product.colorName}.`,
-      image: PRODUCT_IMAGES.detailShoulder,
+      image: product.images.detailShoulder,
     },
   ];
 }
@@ -81,9 +81,8 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
               transition={zoomTransition}
             >
               <TintedProductImage
-                src={PRODUCT_IMAGES.back}
+                src={product.images.back}
                 alt={`${product.name} — ${product.colorName}, dos`}
-                colorHex={product.colorHex}
               />
             </motion.div>
           ) : (
@@ -96,9 +95,8 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
               transition={zoomTransition}
             >
               <TintedProductImage
-                src={PRODUCT_IMAGES.front}
+                src={product.images.front}
                 alt={`${product.name} — ${product.colorName}`}
-                colorHex={product.colorHex}
                 priority={priority}
               />
             </motion.div>
@@ -118,7 +116,6 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
               <TintedProductImage
                 src={activeHotspot.image}
                 alt={`${product.name} — détail ${activeHotspot.label.toLowerCase()}`}
-                colorHex={product.colorHex}
               />
             </motion.div>
           )}
