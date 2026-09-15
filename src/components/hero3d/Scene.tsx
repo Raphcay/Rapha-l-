@@ -1,6 +1,6 @@
 "use client";
 
-import type { RefObject } from "react";
+import { Suspense, type RefObject } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
 import { EffectComposer, Bloom, ChromaticAberration } from "@react-three/postprocessing";
@@ -59,8 +59,18 @@ export function Scene({ reducedMotion, onCreated, groupRef }: SceneProps) {
         <Lightformer intensity={0.6} color="#8ea2c9" position={[4, -1, 3]} scale={[4, 4, 1]} />
       </Environment>
 
+      {/* The group itself stays outside Suspense so `groupRef` is attached
+         the moment Scene mounts — Hero3D.tsx's GSAP effect reads it as soon
+         as `onCreated` fires and has no retry if it's still null then.
+         Only the actual garment (GarmentPlaceholder's useTexture, for the
+         logo decal, suspends while its image loads) is inside Suspense:
+         Canvas doesn't wrap children in one itself, so without this the
+         tree could throw or render blank depending on load timing instead
+         of just waiting. */}
       <group ref={groupRef}>
-        <IdleGarment />
+        <Suspense fallback={null}>
+          <IdleGarment />
+        </Suspense>
       </group>
 
       <ContactShadows
