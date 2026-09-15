@@ -2,6 +2,7 @@
 
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { Decal, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
@@ -27,21 +28,23 @@ import * as THREE from "three";
 
 function buildTeeShape() {
   const shape = new THREE.Shape();
-  // Simplified front-view t-shirt outline, unit-ish scale, centered at origin.
+  // Front-view t-shirt outline matching the real Arc tee's proportions:
+  // dropped shoulders, boxy (not tapered) body, straight hem — an
+  // "oversize / streetwear" cut, not a fitted tee.
   shape.moveTo(-0.55, 0.9);
   shape.lineTo(-0.22, 0.9);
   // Crew-neck collar: control point dips below the shoulder line so the
   // curve reads as a rounded neckline, not a peak.
   shape.quadraticCurveTo(0, 0.7, 0.22, 0.9);
   shape.lineTo(0.55, 0.9);
-  shape.lineTo(0.95, 0.6);
-  shape.lineTo(0.68, 0.38);
+  shape.lineTo(1.05, 0.5);
+  shape.lineTo(0.72, 0.28);
   shape.lineTo(0.6, 0.5);
   shape.lineTo(0.6, -0.95);
   shape.lineTo(-0.6, -0.95);
   shape.lineTo(-0.6, 0.5);
-  shape.lineTo(-0.68, 0.38);
-  shape.lineTo(-0.95, 0.6);
+  shape.lineTo(-0.72, 0.28);
+  shape.lineTo(-1.05, 0.5);
   shape.closePath();
   return shape;
 }
@@ -82,9 +85,19 @@ function useFoldedGarmentGeometry() {
   }, []);
 }
 
+// Real Arc colorways (kept in sync with src/data/products.ts by hand since
+// this placeholder can't import client product data into a texture-free
+// material the way the product cards do). Blanc by default: it's the
+// lead colorway in the real photography and reads best under the
+// dramatic studio lighting (visible fold shadow on light fabric).
+const GARMENT_COLOR = "#f3f1ea";
+
 export function GarmentPlaceholder() {
   const meshRef = useRef<THREE.Mesh>(null);
   const geometry = useFoldedGarmentGeometry();
+  // Real embroidered "ARC" logo, isolated from the actual product photo
+  // (see scripts/extract-logo-decal.py) — not a placeholder graphic.
+  const logoTexture = useTexture("/hero3d/arc-logo-decal.png");
 
   // Faint self-rotation independent of the idle/pointer tilt applied to
   // the parent group in Hero3D.tsx — reads as fabric settling, not a
@@ -97,14 +110,24 @@ export function GarmentPlaceholder() {
   return (
     <mesh ref={meshRef} geometry={geometry} castShadow receiveShadow>
       <meshPhysicalMaterial
-        color="#151515"
-        roughness={0.78}
-        metalness={0.02}
-        sheen={1}
-        sheenRoughness={0.6}
-        sheenColor="#8a8680"
-        clearcoat={0.05}
-        clearcoatRoughness={0.8}
+        color={GARMENT_COLOR}
+        roughness={0.82}
+        metalness={0.01}
+        sheen={0.6}
+        sheenRoughness={0.7}
+        sheenColor="#ffffff"
+        clearcoat={0.03}
+        clearcoatRoughness={0.9}
+      />
+      {/* Right-chest placement, matching the real garment photography.
+         No `mesh` prop: nested inside the target <mesh>, Decal picks up
+         its geometry from context. */}
+      <Decal
+        position={[0.22, -0.05, 0.17]}
+        rotation={[0, 0, 0]}
+        scale={0.13}
+        map={logoTexture}
+        polygonOffsetFactor={-4}
       />
     </mesh>
   );
