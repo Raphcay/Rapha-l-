@@ -40,7 +40,7 @@ export default function ContactPage() {
               <dt className="uppercase tracking-[0.1em] text-muted">Instagram</dt>
               <dd className="mt-1">
                 <a
-                  href="https://instagram.com"
+                  href="https://instagram.com/arc.wear"
                   target="_blank"
                   rel="noreferrer"
                   className="underline decoration-line underline-offset-4 hover:text-accent"

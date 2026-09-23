@@ -42,36 +42,53 @@ export default function Home() {
 
       {/* Pillars */}
       <section className="bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 md:grid-cols-3 md:gap-12">
-          {PILLARS.map((pillar, index) => (
-            <ScrollReveal
-              key={pillar.number}
-              delay={index * 0.08}
-              className="border-t border-line pt-7"
-            >
-              <span
-                className="block font-display text-6xl leading-none text-ink/[0.08] sm:text-7xl"
-                aria-hidden="true"
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.85fr_2fr] lg:gap-20">
+          <ScrollReveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+              Sans compromis
+            </p>
+            <h2 className="mt-3 max-w-[18ch] text-balance font-display text-3xl leading-[1.05] sm:text-4xl">
+              Trois choses qu&apos;on ne change pas.
+            </h2>
+          </ScrollReveal>
+
+          <div className="divide-y divide-line lg:mt-1">
+            {PILLARS.map((pillar, index) => (
+              <ScrollReveal
+                key={pillar.number}
+                delay={index * 0.08}
+                className="grid gap-3 py-7 first:pt-0 last:pb-0 sm:grid-cols-[3.5rem_1fr] sm:gap-8"
               >
-                {pillar.number}
-              </span>
-              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
-                {pillar.label}
-              </p>
-              <h3 className="mt-3 font-display text-xl">{pillar.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                {pillar.body}
-              </p>
-            </ScrollReveal>
-          ))}
+                <span
+                  className="font-display text-4xl leading-none text-ink/[0.12] sm:text-5xl"
+                  aria-hidden="true"
+                >
+                  {pillar.number}
+                </span>
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
+                    {pillar.label}
+                  </p>
+                  <h3 className="mt-2 font-display text-xl sm:text-2xl">{pillar.title}</h3>
+                  <p className="mt-2 max-w-[54ch] text-sm leading-relaxed text-muted">
+                    {pillar.body}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Stats */}
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="grid gap-10 sm:grid-cols-3">
+        <div className="grid divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {STATS.map((stat, index) => (
-            <ScrollReveal key={stat.label} delay={index * 0.08}>
+            <ScrollReveal
+              key={stat.label}
+              delay={index * 0.08}
+              className="py-6 first:pt-0 sm:px-8 sm:py-0 sm:first:pl-0 sm:last:pr-0"
+            >
               <p className="font-display text-5xl text-accent sm:text-6xl">
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} />
               </p>

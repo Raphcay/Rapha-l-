@@ -63,16 +63,22 @@ export default function AProposPage() {
               Parcours
             </p>
           </ScrollReveal>
-          <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
+          <div className="mt-8">
             {TIMELINE.map((step, index) => (
-              <ScrollReveal key={step.year} delay={index * 0.1} className="border-t border-ink/20 pt-5">
+              <ScrollReveal
+                key={step.year}
+                delay={index * 0.1}
+                className="grid grid-cols-[4.5rem_1fr] gap-6 border-t border-ink/15 py-8 first:border-t-0 first:pt-2 sm:grid-cols-[7rem_1fr] sm:gap-10"
+              >
                 <p className="font-mono text-sm tabular-nums text-accent">
                   {step.year}
                 </p>
-                <h3 className="mt-2 font-display text-xl">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {step.body}
-                </p>
+                <div>
+                  <h3 className="font-display text-xl sm:text-2xl">{step.title}</h3>
+                  <p className="mt-2 max-w-[58ch] text-sm leading-relaxed text-muted">
+                    {step.body}
+                  </p>
+                </div>
               </ScrollReveal>
             ))}
           </div>
