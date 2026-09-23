@@ -43,7 +43,7 @@ Les photos du premier drop (fournies par la marque) sont dans `public/products/`
 
 `ProductVisual` ajoute une interaction de **zoom sur points d'intérêt** : trois pastilles (coupe/taille, mark, matière) qui, au survol ou au clic, font un fondu vers la photo macro correspondante (`getHotspots` dans `ProductVisual.tsx`) et affichent une légende tirée de `src/data/products.ts`. Un bouton "Voir le dos" bascule vers la photo du dos.
 
-Le hero (`src/components/Hero.tsx`) affiche `public/hero-mountain.jpg` en plein cadre avec un **effet de parallaxe** au scroll (l'arrière-plan défile plus lentement que le contenu, via Framer Motion `useScroll`/`useTransform`, désactivé sous `prefers-reduced-motion`).
+Le hero (`src/components/hero3d/Hero3D.tsx`) affiche un t-shirt 3D (Three.js / React Three Fiber, modèle `public/models/tshirt.glb`) piloté par le scroll via GSAP ScrollTrigger + Lenis : apparition en wireframe puis remplissage, rotation face/profil/dos, zoom caméra avec textes matière, changement de coloris, puis glissement vers la section suivante. Réglages (coloris, textes, distance de scroll) regroupés en haut de `Hero3D.tsx`. Repli automatique sur une photo statique si WebGL est indisponible ou si `prefers-reduced-motion` est actif. Sandbox d'ajustement isolée sur `/preview-hero3d` (`?debug=1` pour un curseur de scroll manuel).
 
 ## Assistant client IA (autonome)
 

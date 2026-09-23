@@ -3,7 +3,8 @@ import { ProductVisual } from "@/components/ProductVisual";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { MagneticButton } from "@/components/MagneticButton";
-import { Hero } from "@/components/Hero";
+import { Hero3D } from "@/components/hero3d/Hero3D";
+import { LenisScrollProvider } from "@/components/hero3d/LenisScrollProvider";
 import { products } from "@/data/products";
 
 const PILLARS = [
@@ -37,11 +38,11 @@ export default function Home() {
   const featured = products.slice(0, 3);
 
   return (
-    <>
-      <Hero />
+    <LenisScrollProvider>
+      <Hero3D />
 
       {/* Pillars */}
-      <section className="bg-surface">
+      <section id="apres-hero" className="bg-surface">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.85fr_2fr] lg:gap-20">
           <ScrollReveal>
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
@@ -163,6 +164,6 @@ export default function Home() {
           </div>
         </ScrollReveal>
       </section>
-    </>
+    </LenisScrollProvider>
   );
 }
