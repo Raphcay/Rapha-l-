@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0b0b0c;
-  --surface: #141416;
-  --surface-raised: #1b1b1e;
+  /* Warm-neutral grays (not pure cool black) so bg/surface/line sit in the
+     same temperature family as --ink and --accent instead of clashing. */
+  --bg: #0c0b0a;
+  --surface: #151412;
+  --surface-raised: #1c1b18;
   --ink: #f3f1ea;
   --muted: #9a978d;
   --accent: #d9d3c2;
-  --line: #2a2a2c;
+  --line: #2c2a26;
 }
 
 @theme inline {
@@ -30,6 +32,21 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
+  position: relative;
+}
+
+/* Fixed film-grain overlay — breaks up the flat dark fields (large
+   sections of solid --bg/--surface read as sterile without it). Generated
+   with an inline SVG turbulence filter, no image request. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {

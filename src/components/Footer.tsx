@@ -36,7 +36,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm">
             <li>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/arc.wear"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-accent"
@@ -52,10 +52,15 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-line px-5 py-5 sm:px-8">
+      <div className="flex flex-col gap-3 border-t border-line px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
           © {new Date().getFullYear()} Arc — Tous droits réservés
         </p>
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+          <li><Link href="/mentions-legales" className="hover:text-ink">Mentions légales</Link></li>
+          <li><Link href="/confidentialite" className="hover:text-ink">Confidentialité</Link></li>
+          <li><Link href="/conditions-generales" className="hover:text-ink">CGV</Link></li>
+        </ul>
       </div>
     </footer>
   );

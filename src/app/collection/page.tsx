@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ProductVisual } from "@/components/ProductVisual";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { products } from "@/data/products";
@@ -78,9 +79,9 @@ export default function CollectionPage() {
       <p className="mt-16 border-t border-line pt-8 font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
         Le paiement en ligne arrive bientôt. En attendant, pour précommander
         une pièce, écris-nous via la page{" "}
-        <a href="/contact" className="text-ink underline decoration-line underline-offset-4 hover:text-accent">
+        <Link href="/contact" className="text-ink underline decoration-line underline-offset-4 hover:text-accent">
           contact
-        </a>
+        </Link>
         .
       </p>
     </section>
