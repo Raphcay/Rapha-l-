@@ -233,8 +233,14 @@ def main() -> int:
     blocksize = block_samples()
     noise_floor = 1e-4
 
-    pending_peak_level: float | None = None
-    pending_peak_time: float | None = None
+    # A clap is a short transient: level crosses the threshold, peaks, then falls
+    # back under CONFIRM_DROP_RATIO of that peak within CONFIRM_DELAY_S. Tracking
+    # "in transient" (rather than blocking on a fixed confirmation delay) lets a
+    # second, fast-following clap start its own transient the instant the first
+    # one ends, instead of being swallowed while the first is still being judged.
+    in_transient = False
+    transient_start = 0.0
+    transient_peak = 0.0
     first_clap_time: float | None = None
     last_double_clap_time = 0.0
 
@@ -269,44 +275,46 @@ def main() -> int:
                 now = time.monotonic()
 
                 quiet_gate = noise_floor * QUIET_GATE_MULT
-                if level < quiet_gate and pending_peak_level is None:
+                if level < quiet_gate and not in_transient:
                     noise_floor = NOISE_FLOOR_ALPHA * noise_floor + (1.0 - NOISE_FLOOR_ALPHA) * level
                     noise_floor = max(noise_floor, 1e-7)
 
                 threshold = max(noise_floor * SPIKE_RATIO, MIN_RMS)
 
-                if pending_peak_level is None:
+                if not in_transient:
                     if level >= threshold and (now - last_double_clap_time) >= COOLDOWN_S:
-                        pending_peak_level = level
-                        pending_peak_time = now
+                        in_transient = True
+                        transient_start = now
+                        transient_peak = level
                         if DEBUG:
                             log.debug(
-                                "Pic détecté: niveau=%.4f seuil=%.4f noise_floor=%.5f — confirmation dans %.0fms",
+                                "Pic détecté: niveau=%.4f seuil=%.4f noise_floor=%.5f",
                                 level,
                                 threshold,
                                 noise_floor,
-                                CONFIRM_DELAY_S * 1000,
                             )
                     continue
 
-                # A peak is pending confirmation: track its true max, then judge its shape.
-                pending_peak_level = max(pending_peak_level, level)
-                if now - pending_peak_time < CONFIRM_DELAY_S:
+                # In a transient: track its true peak, and end it as soon as the level
+                # falls back under CONFIRM_DROP_RATIO of that peak (or after a timeout,
+                # for a voice/music transient that never drops fast enough).
+                transient_peak = max(transient_peak, level)
+                elapsed = now - transient_start
+                if level >= transient_peak * CONFIRM_DROP_RATIO and elapsed < MAX_DOUBLE_GAP_S:
                     continue
 
-                is_clap = level < pending_peak_level * CONFIRM_DROP_RATIO
+                is_clap = elapsed <= CONFIRM_DELAY_S
                 if DEBUG:
                     log.debug(
-                        "Confirmation: pic=%.4f niveau_actuel=%.4f (seuil chute=%.4f) -> %s",
-                        pending_peak_level,
+                        "Fin du pic: pic=%.4f niveau_actuel=%.4f durée=%.3fs -> %s",
+                        transient_peak,
                         level,
-                        pending_peak_level * CONFIRM_DROP_RATIO,
+                        elapsed,
                         "clap" if is_clap else "voix/musique (ignoré)",
                     )
 
-                clap_time = pending_peak_time
-                pending_peak_level = None
-                pending_peak_time = None
+                clap_time = transient_start
+                in_transient = False
                 if not is_clap:
                     continue
 
