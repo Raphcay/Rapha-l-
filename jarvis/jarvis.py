@@ -198,7 +198,16 @@ def say_welcome() -> None:
 
             client = ElevenLabs(api_key=api_key)
             chunks = client.text_to_speech.convert(
-                voice_id=voice_id, text=text, model_id=model_id, output_format=output_format
+                voice_id=voice_id,
+                text=text,
+                model_id=model_id,
+                output_format=output_format,
+                voice_settings={
+                    "stability": 0.5,
+                    "similarity_boost": 0.6,
+                    "style": 0.0,
+                    "use_speaker_boost": True,
+                },
             )
             raw = b"".join(chunks)
         except Exception as e:
