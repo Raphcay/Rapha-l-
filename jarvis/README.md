@@ -2,7 +2,7 @@
 
 Écoute ton micro. Quand tu claques deux fois dans les mains, ça :
 
-1. Ouvre l'application **Claude** sur l'écran principal.
+1. Ouvre **VS Code** sur l'écran principal.
 2. Ouvre une fenêtre **Safari** vide sur le deuxième écran (celui du dessus).
 3. Fait dire par une voix ElevenLabs : *« Bonjour monsieur, que puis-je faire pour vous ? »*
 

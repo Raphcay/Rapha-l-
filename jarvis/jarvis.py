@@ -92,11 +92,11 @@ def rms_mono(block: np.ndarray) -> float:
 
 # --- macOS actions -----------------------------------------------------------
 
-def open_claude_app() -> None:
+def open_vscode_app() -> None:
     try:
-        subprocess.Popen(["open", "-a", "Claude"])
+        subprocess.Popen(["open", "-a", "Visual Studio Code"])
     except OSError as e:
-        log.warning("Impossible d'ouvrir l'application Claude: %s", e)
+        log.warning("Impossible d'ouvrir VS Code: %s", e)
 
 
 def _secondary_screen_quartz_rect() -> tuple[int, int, int, int] | None:
@@ -231,7 +231,7 @@ def say_welcome() -> None:
 
 
 def run_double_clap_actions() -> None:
-    open_claude_app()
+    open_vscode_app()
     open_safari_blank_on_second_screen()
     threading.Thread(target=say_welcome, daemon=True).start()
 
