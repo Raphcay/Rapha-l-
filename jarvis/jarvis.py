@@ -143,7 +143,11 @@ def open_safari_blank_on_second_screen() -> None:
     lines = [
         'tell application "Safari"',
         "    activate",
-        "    make new document",
+        "    if (count of windows) = 0 then",
+        "        make new document",
+        "    else",
+        '        set URL of front document to "about:blank"',
+        "    end if",
         "end tell",
         "delay 0.3",
     ]
