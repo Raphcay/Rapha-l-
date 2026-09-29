@@ -49,6 +49,7 @@ NOISE_FLOOR_ALPHA = 0.992  # closer to 1 = slower adaptation of the room noise f
 QUIET_GATE_MULT = 2.2      # only update the noise floor when below floor * this
 
 JARVIS_WELCOME_PHRASE = "Bonjour monsieur, que puis-je faire pour vous ?"
+SAFARI_SECOND_WINDOW_URL = "http://localhost:8788"
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 DEBUG = (os.environ.get("JARVIS_DEBUG") or "").strip().lower() in ("1", "true", "yes")
@@ -136,6 +137,31 @@ def _secondary_screen_quartz_rect() -> tuple[int, int, int, int] | None:
         y = main_h - (f["y"] + f["h"])
         return (int(x), int(y), int(f["w"]), int(f["h"]))
     return None
+
+
+def open_safari_url_window_on_second_screen(url: str) -> None:
+    rect = _secondary_screen_quartz_rect()
+    lines = [
+        'tell application "Safari"',
+        f'    make new document with properties {{URL:"{url}"}}',
+        "    activate",
+        "end tell",
+        "delay 0.3",
+    ]
+    if rect:
+        x, y, w, h = rect
+        lines += [
+            'tell application "System Events"',
+            '    tell process "Safari"',
+            f"        set position of front window to {{{x}, {y}}}",
+            f"        set size of front window to {{{w}, {h}}}",
+            "    end tell",
+            "end tell",
+        ]
+    try:
+        subprocess.run(["osascript", "-e", "\n".join(lines)], timeout=10, check=False)
+    except (OSError, subprocess.SubprocessError) as e:
+        log.warning("Impossible d'ouvrir %s dans Safari: %s", url, e)
 
 
 def open_safari_blank_on_second_screen() -> None:
@@ -237,6 +263,7 @@ def say_welcome() -> None:
 def run_double_clap_actions() -> None:
     open_vscode_app()
     open_safari_blank_on_second_screen()
+    open_safari_url_window_on_second_screen(SAFARI_SECOND_WINDOW_URL)
     threading.Thread(target=say_welcome, daemon=True).start()
 
 

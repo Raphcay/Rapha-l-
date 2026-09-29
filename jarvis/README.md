@@ -3,7 +3,7 @@
 Écoute ton micro. Quand tu claques deux fois dans les mains, ça :
 
 1. Ouvre **VS Code** sur l'écran principal.
-2. Ouvre une fenêtre **Safari** vide sur le deuxième écran (celui du dessus).
+2. Ouvre deux fenêtres **Safari** sur le deuxième écran (celui du dessus) : un nouvel onglet vide, et une fenêtre sur `http://localhost:8788` (modifiable en haut de `jarvis.py`, constante `SAFARI_SECOND_WINDOW_URL`).
 3. Fait dire par une voix ElevenLabs : *« Bonjour monsieur, que puis-je faire pour vous ? »*
 
 Adapté de [hectorg2211/jarvis](https://github.com/hectorg2211/jarvis) pour macOS
