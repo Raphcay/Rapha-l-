@@ -42,7 +42,27 @@ Sans ces deux valeurs, Claude et Safari s'ouvrent quand même, mais sans la voix
 ```
 
 macOS va demander l'autorisation d'accéder au micro la première fois — accepte.
-Arrête avec `Ctrl+C`.
+Arrête avec `Ctrl+C`. Dès qu'un double clap est détecté, Jarvis lance ses
+actions puis **s'arrête** (il n'écoute qu'une seule fois par lancement).
+
+## Lancement automatique à la connexion du 2e écran
+
+Un guetteur en arrière-plan peut surveiller tes écrans et lancer Jarvis tout
+seul dès que tu branches ton deuxième écran :
+
+```bash
+chmod +x install_watch.sh uninstall_watch.sh
+./install_watch.sh
+```
+
+Il tourne en continu (démarré automatiquement à ta connexion de session macOS)
+et lance `jarvis.py` dès qu'il détecte le passage à 2 écrans — donc pas besoin
+de retaper la commande à chaque fois. Comme Jarvis s'arrête après un double
+clap, il suffit de débrancher puis rebrancher ton écran pour le relancer.
+
+Pour tout retirer : `./uninstall_watch.sh`.
+Logs du guetteur : `.cache/jarvis_watch_stderr.log`. Logs de Jarvis lancé par
+le guetteur : `.cache/jarvis_run.log`.
 
 ### Mode debug
 

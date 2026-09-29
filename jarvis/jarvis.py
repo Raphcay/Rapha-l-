@@ -20,7 +20,6 @@ import logging
 import os
 import subprocess
 import sys
-import threading
 import time
 from pathlib import Path
 
@@ -264,7 +263,7 @@ def run_double_clap_actions() -> None:
     open_vscode_app()
     open_safari_blank_on_second_screen()
     open_safari_url_window_on_second_screen(SAFARI_SECOND_WINDOW_URL)
-    threading.Thread(target=say_welcome, daemon=True).start()
+    say_welcome()
 
 
 # --- clap detection ------------------------------------------------------------
@@ -369,10 +368,10 @@ def main() -> int:
                     first_clap_time = clap_time  # too far apart; this clap starts a new pair
                     continue
 
-                first_clap_time = None
-                last_double_clap_time = clap_time
                 log.info("Double clap détecté (écart=%.3fs) — lancement des actions", gap)
-                threading.Thread(target=run_double_clap_actions, daemon=True).start()
+                run_double_clap_actions()
+                log.info("Actions lancées, arrêt de l'écoute.")
+                return 0
 
     except KeyboardInterrupt:
         log.info("Arrêt.")
