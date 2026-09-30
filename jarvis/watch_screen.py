@@ -18,7 +18,13 @@ JARVIS = PROJECT_DIR / "jarvis.py"
 LOG_FILE = PROJECT_DIR / ".cache" / "jarvis_run.log"
 POLL_S = 3
 
-_SCREEN_COUNT_JS = 'ObjC.import("AppKit"); $.NSScreen.screens.length'
+_SCREEN_COUNT_JS = (
+    'ObjC.import("AppKit");'
+    "var out = [];"
+    "var screens = $.NSScreen.screens;"
+    "for (var i = 0; i < screens.count; i++) { out.push(i); }"
+    "JSON.stringify(out);"
+)
 
 
 def screen_count() -> int:
@@ -30,8 +36,8 @@ def screen_count() -> int:
             timeout=5,
             check=True,
         )
-        return int(result.stdout.strip())
-    except (OSError, subprocess.SubprocessError, ValueError):
+        return len(json.loads(result.stdout))
+    except (OSError, subprocess.SubprocessError, ValueError, json.JSONDecodeError):
         return 1
 
 
