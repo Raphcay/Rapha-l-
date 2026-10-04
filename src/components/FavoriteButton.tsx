@@ -9,6 +9,7 @@ export function FavoriteButton({ slug }: { slug: string }) {
   const [userId, setUserId] = useState<string | null | undefined>(supabase ? undefined : null);
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!supabase) return;
@@ -41,17 +42,20 @@ export function FavoriteButton({ slug }: { slug: string }) {
   async function toggle() {
     if (!supabase || !userId || busy) return;
     setBusy(true);
-    if (saved) {
-      await supabase.from("favorites").delete().eq("user_id", userId).eq("product_slug", slug);
-      setSaved(false);
+    setError(null);
+    const result = saved
+      ? await supabase.from("favorites").delete().eq("user_id", userId).eq("product_slug", slug)
+      : await supabase.from("favorites").insert({ user_id: userId, product_slug: slug });
+    if (result.error) {
+      setError("Enregistrement impossible pour le moment.");
     } else {
-      await supabase.from("favorites").insert({ user_id: userId, product_slug: slug });
-      setSaved(true);
+      setSaved(!saved);
     }
     setBusy(false);
   }
 
   return (
+    <div>
     <button
       type="button"
       onClick={toggle}
@@ -65,6 +69,8 @@ export function FavoriteButton({ slug }: { slug: string }) {
         <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />
       </svg>
       {saved ? "Dans mes favoris" : "Ajouter aux favoris"}
-    </button>
+      </button>
+      {error && <p className="mt-2 text-xs text-accent">{error}</p>}
+    </div>
   );
 }

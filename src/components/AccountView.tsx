@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
+import { FavoritesList } from "@/components/FavoritesList";
 
 const INPUT_CLASS =
   "w-full border-b border-ink/40 bg-transparent py-3 text-base outline-none placeholder:text-ink/30 focus:border-accent";
@@ -122,6 +123,9 @@ export function AccountView() {
       <button type="button" onClick={signOut} className={BUTTON_CLASS}>
         Me déconnecter
       </button>
+      <div className="md:col-span-2">
+        <FavoritesList userId={session.user.id} />
+      </div>
     </div>
   );
 }
