@@ -49,19 +49,22 @@ export function Hero() {
 
       <ScrollReveal className="relative z-10 flex flex-col items-center px-5 text-center">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/80">
-          Arc — Première collection
+          ARC · Première collection
         </p>
         <h1 className="mt-5 text-balance font-display text-[13vw] leading-[1.02] sm:text-6xl md:text-7xl">
-          Plus qu&apos;un style,
+          Un t-shirt bien fait,
           <br />
-          une identité.
+          dans toutes les couleurs.
         </h1>
+        <p className="mt-5 max-w-[44ch] text-[15px] leading-relaxed text-ink/80">
+          Coton épais, coupe oversize. Choisis la tienne.
+        </p>
         <MagneticButton className="mt-9">
           <Link
-            href="/collection"
+            href="#couleurs"
             className="block border border-ink/80 bg-bg/20 px-8 py-3.5 font-mono text-[11px] uppercase tracking-[0.14em] backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
           >
-            Découvrir
+            Découvrir les t-shirts
           </Link>
         </MagneticButton>
       </ScrollReveal>

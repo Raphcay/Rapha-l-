@@ -16,10 +16,10 @@ export const posts: Post[] = [
     readTime: "4 min",
   },
   {
-    slug: "petite-serie-pourquoi",
-    title: "Pourquoi on produit en petite série",
+    slug: "quantite-juste-pourquoi",
+    title: "Pourquoi on produit en quantité juste",
     excerpt:
-      "Ce que ça change concrètement, sur la qualité et sur le reste, de limiter chaque drop et de le numéroter.",
+      "Ce que ça change concrètement, sur la qualité et sur le reste, de ne fabriquer que ce qu'on sait pouvoir porter et défendre.",
     date: "2026-07-03",
     readTime: "3 min",
   },

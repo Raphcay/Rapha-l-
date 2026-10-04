@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { ProductVisual } from "@/components/ProductVisual";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { MagneticButton } from "@/components/MagneticButton";
 import { Hero } from "@/components/Hero";
+import { ColorCarousel } from "@/components/ColorCarousel";
 import { products } from "@/data/products";
 
 const PILLARS = [
@@ -22,20 +22,18 @@ const PILLARS = [
   {
     number: "03",
     label: "Fabrication",
-    title: "On produit peu, volontairement",
-    body: "Chaque drop est limité et numéroté. Vendre vingt pièces bien faites nous convient mieux que d'en écouler deux cents dont la moitié finit oubliée au fond d'un placard.",
+    title: "Quatre coloris, une seule coupe",
+    body: "Le même patron, le même coton et les mêmes finitions pour chaque couleur. Chaque pièce est cousue en petit atelier.",
   },
 ];
 
 const STATS = [
   { value: 220, suffix: "g", label: "Grammage du coton premium" },
-  { value: 50, suffix: "", label: "Exemplaires numérotés par coloris" },
-  { value: 12, suffix: "", label: "Mois de développement avant le premier drop" },
+  { value: 4, suffix: "", label: "Coloris disponibles" },
+  { value: 12, suffix: "", label: "Mois de développement avant la première pièce" },
 ];
 
 export default function Home() {
-  const featured = products.slice(0, 3);
-
   return (
     <>
       <Hero />
@@ -100,49 +98,75 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured products */}
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+      {/* Couleurs */}
+      <section id="couleurs" className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <ScrollReveal>
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+            Tee ARC
+          </p>
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl">Nos couleurs</h2>
+        </ScrollReveal>
+        <div className="mt-10">
+          <ColorCarousel products={products} />
+        </div>
+      </section>
+
+      {/* Ambassadeurs */}
+      <section className="border-t border-line bg-surface">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:gap-20">
+          <ScrollReveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+              Communauté
+            </p>
+            <h2 className="mt-3 max-w-[24ch] font-display text-3xl leading-[1.05] sm:text-4xl">
+              Porte ARC, raconte-le.
+            </h2>
+            <p className="mt-5 max-w-[46ch] text-sm leading-relaxed text-muted">
+              Tu portes une pièce ARC ? Publie ta photo et mentionne-nous avec le
+              tag <span className="text-ink">#PorteARC</span>. On la partage et on
+              te répond.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.08} className="flex flex-col justify-center">
+            <p className="max-w-[30ch] font-display text-2xl leading-snug">
+              Chaque photo repartagée t&apos;ouvre l&apos;accès anticipé de 24 h aux
+              nouvelles pièces.
+            </p>
+            <MagneticButton className="mt-8 self-start">
+              <Link
+                href="/contact"
+                className="block border border-ink/80 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent"
+              >
+                Envoyer ma photo
+              </Link>
+            </MagneticButton>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Parrainage */}
+      <section className="border-t border-line">
+        <ScrollReveal>
+          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-14 sm:flex-row sm:items-center sm:px-8">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-                Drop 01
+              <p className="font-display text-2xl leading-snug">
+                Un ami, un code, une réduction.
               </p>
-              <h2 className="mt-2 font-display text-3xl sm:text-4xl">
-                Le t-shirt Arc
-              </h2>
+              <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-muted">
+                Parraine un ami : il reçoit 10 % sur sa première commande, et toi
+                10 % dès son premier achat.
+              </p>
             </div>
-            <Link
-              href="/collection"
-              className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted underline decoration-line underline-offset-4 hover:text-ink"
-            >
-              Toute la collection →
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/contact"
+                className="block shrink-0 border border-ink/80 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors hover:border-accent hover:text-accent"
+              >
+                Demander mon code
+              </Link>
+            </MagneticButton>
           </div>
         </ScrollReveal>
-
-        <div className="grid gap-8 sm:grid-cols-3">
-          {featured.map((product, index) => (
-            <ScrollReveal key={product.slug} delay={index * 0.08}>
-              <Link href="/collection" className="group block">
-                <ProductVisual product={product} />
-                <div className="mt-3 flex items-start justify-between gap-2">
-                  <div>
-                    <p className="text-sm font-medium group-hover:text-accent">
-                      {product.name}
-                    </p>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
-                      {product.colorName}
-                    </p>
-                  </div>
-                  <p className="font-mono text-sm tabular-nums">
-                    {product.price} €
-                  </p>
-                </div>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
       </section>
 
       {/* CTA band */}
@@ -150,7 +174,7 @@ export default function Home() {
         <ScrollReveal>
           <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-14 sm:flex-row sm:items-center sm:px-8">
             <p className="max-w-[36ch] font-display text-2xl leading-snug">
-              Sois averti·e au lancement du prochain drop.
+              Sois averti·e des prochaines pièces.
             </p>
             <MagneticButton>
               <Link

@@ -109,7 +109,7 @@ export function Hero3D({ debug = false }: { debug?: boolean }) {
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-5">
           <div ref={heroTextRef} className="max-w-3xl text-center">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-              Arc — Première collection
+              ARC — Première collection
             </p>
             <h1 className="mt-3 font-display text-5xl leading-[0.95] text-ink sm:text-7xl">
               Plus qu&apos;un style,
@@ -154,7 +154,7 @@ function FallbackVisual() {
       />
       <Image
         src="/products/arc-tee-front.png"
-        alt="Tee Arc"
+        alt="Tee ARC"
         fill
         priority
         className="object-contain object-center p-16"

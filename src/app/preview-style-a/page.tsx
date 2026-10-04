@@ -21,7 +21,7 @@ export default function PreviewStyleA() {
           />
           <Image
             src="/products/arc-tee-front.png"
-            alt="Tee Arc"
+            alt="Tee ARC"
             fill
             priority
             className="object-contain object-center p-10"
@@ -30,7 +30,7 @@ export default function PreviewStyleA() {
 
         <div className="max-w-lg text-center sm:text-left">
           <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-            Arc — Première collection
+            ARC — Première collection
           </p>
           <h1 className="mt-4 font-display text-4xl leading-[0.95] text-ink sm:text-5xl">
             Une pièce pensée pour durer.
@@ -40,8 +40,7 @@ export default function PreviewStyleA() {
             oublie dans six mois : une base qu&apos;on porte des années.
           </p>
           <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
-            Coupe ajustée classique · 100% coton premium 220g/m² · Petite
-            série
+            Coupe ajustée classique · 100% coton premium 220g/m² · Plusieurs coloris
           </p>
           <Link
             href="/preview-style-a"

@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "À propos",
-  description: "L'histoire et les intentions derrière Arc.",
+  description: "L'histoire et les intentions derrière ARC.",
   alternates: { canonical: "/a-propos" },
 };
 
@@ -12,17 +12,17 @@ const TIMELINE = [
   {
     year: "2025",
     title: "Le déclic",
-    body: "On en avait assez des t-shirts basiques, mal coupés, qu'on remplaçait tous les six mois. L'idée d'Arc est partie de là : faire une pièce qui tienne vraiment.",
+    body: "On en avait assez des t-shirts basiques, mal coupés, qu'on remplaçait tous les six mois. L'idée d'ARC est partie de là : faire une pièce qui tienne vraiment.",
   },
   {
     year: "2026",
     title: "Douze mois de travail",
-    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : le Tee Arc, sorti en série limitée.",
+    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : le Tee ARC, en quatre coloris.",
   },
   {
     year: "À venir",
     title: "Ensuite",
-    body: "D'autres pièces techniques suivront, toujours en petite série. Pas de stock permanent, pas de réassort automatique.",
+    body: "D'autres pièces techniques suivront, au fil des envies et des besoins.",
   },
 ];
 
@@ -39,11 +39,11 @@ export default function AProposPage() {
               Des vêtements qui méritent d&apos;être gardés.
             </h1>
             <p className="mt-6 max-w-[54ch] text-[15px] leading-relaxed text-muted">
-              Arc est née d&apos;une frustration assez simple : trop de
+              ARC est née d&apos;une frustration assez simple : trop de
               t-shirts finissaient à la poubelle après quelques mois, mal
               coupés ou mal cousus dès le départ. On a voulu faire
               l&apos;inverse — des pièces techniques, taillées pour durer,
-              produites en petites séries parce qu&apos;on n&apos;a ni
+              produites en quantité juste, parce qu&apos;on n&apos;a ni
               l&apos;envie ni les moyens de stocker ce qu&apos;on ne vendra
               pas.
             </p>

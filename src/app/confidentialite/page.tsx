@@ -3,7 +3,7 @@ import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL, SITE_NAME } from "@/lib/site
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
-  description: "Comment Arc traite les données transmises sur ce site.",
+  description: "Comment ARC traite les données transmises sur ce site.",
   alternates: { canonical: "/confidentialite" },
   robots: { index: false, follow: true },
 };

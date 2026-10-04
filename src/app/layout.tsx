@@ -39,11 +39,10 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "Arc",
+    "ARC",
     "vêtements techniques",
     "t-shirt oversize coton premium",
     "marque streetwear",
-    "série limitée",
     "mode française",
   ],
   authors: [{ name: SITE_NAME }],

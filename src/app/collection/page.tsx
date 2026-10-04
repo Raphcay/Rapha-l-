@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collection",
-  description: "La première collection Arc : un t-shirt oversize en coton premium, décliné en quatre coloris, en série limitée.",
+  description: "La première collection ARC : un t-shirt oversize en coton premium, décliné en quatre coloris.",
   alternates: { canonical: "/collection" },
 };
 
@@ -21,7 +21,7 @@ const productsJsonLd = {
       "@type": "Product",
       name: `${product.name} — ${product.colorName}`,
       description: `${product.description} ${product.material}.`,
-      brand: { "@type": "Brand", name: "Arc" },
+      brand: { "@type": "Brand", name: "ARC" },
       offers: {
         "@type": "Offer",
         url: `${SITE_URL}/collection`,
@@ -42,15 +42,14 @@ export default function CollectionPage() {
       />
       <ScrollReveal>
         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-          Drop 01
+          Tee ARC
         </p>
         <h1 className="mt-2 max-w-[20ch] font-display text-4xl sm:text-5xl">
           La collection
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-          Une seule coupe, déclinée en quatre coloris. Chaque édition est
-          cousue en petit atelier, en quantité limitée. Une fois le stock
-          épuisé, on ne le refait pas à l&apos;identique.
+          Une seule coupe, déclinée en quatre coloris. Chaque pièce est cousue en
+          petit atelier, avec le même coton et les mêmes finitions.
         </p>
       </ScrollReveal>
 
@@ -60,7 +59,9 @@ export default function CollectionPage() {
             <ProductVisual product={product} priority={index === 0} />
             <div className="mt-3 flex items-start justify-between gap-2">
               <div>
-                <p className="text-sm font-medium">{product.name}</p>
+                <Link href={`/collection/${product.slug}`} className="text-sm font-medium hover:text-accent">
+                  {product.name}
+                </Link>
                 <p className="font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
                   {product.colorName}
                 </p>

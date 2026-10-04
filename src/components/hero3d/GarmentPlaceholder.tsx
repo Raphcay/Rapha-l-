@@ -6,7 +6,7 @@ import { Decal, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * Stand-in for the real Arc tee.
+ * Stand-in for the real ARC tee.
  *
  * ------------------------------------------------------------------
  * TODO(3D model): once a real scan/model of the ARC tee exists, delete
@@ -24,9 +24,9 @@ import * as THREE from "three";
  * https://github.com/sanidhyy/3d-website (LICENSE.md, MIT). Swapped in for
  * an earlier hand-built low-poly placeholder that read as "robotic" rather
  * than fabric; this one has real sculpted folds and a baked cloth normal
- * map, which the low-poly version couldn't fake. Recolored to Arc's Blanc
+ * map, which the low-poly version couldn't fake. Recolored to ARC's Blanc
  * and decaled with the real embroidered logo below — nothing about its
- * own baked-in look is Arc-branded.
+ * own baked-in look is ARC-branded.
  */
 
 const MODEL_PATH = "/models/arc-tee-placeholder.glb";

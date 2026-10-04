@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${SITE_NAME} — Vêtements techniques`,
     short_name: SITE_NAME,
     description:
-      "Vêtements techniques en série limitée. Découvre la première collection Arc.",
+      "Vêtements techniques pensés pour la ville. Découvre le t-shirt ARC, en plusieurs couleurs.",
     start_url: "/",
     display: "standalone",
     background_color: "#0b0b0c",

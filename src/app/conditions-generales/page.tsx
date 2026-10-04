@@ -3,7 +3,7 @@ import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL, SITE_NAME } from "@/lib/site
 
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
-  description: "Conditions générales de vente du site Arc.",
+  description: "Conditions générales de vente du site ARC.",
   alternates: { canonical: "/conditions-generales" },
   robots: { index: false, follow: true },
 };
@@ -28,10 +28,7 @@ export default function ConditionsGeneralesPage() {
         <div>
           <h2 className="font-display text-lg text-ink">Produits et prix</h2>
           <p className="mt-2">
-            Les prix affichés sont en euros, toutes taxes comprises. Chaque
-            pièce est produite en petite série et numérotée — une fois un
-            coloris épuisé, il n&apos;est pas systématiquement reconduit à
-            l&apos;identique.
+            Les prix affichés sont en euros, toutes taxes comprises. Les coloris disponibles sont indiqués sur chaque fiche produit.
           </p>
         </div>
 

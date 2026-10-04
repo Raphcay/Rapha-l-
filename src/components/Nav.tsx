@@ -47,7 +47,7 @@ export function Nav() {
           }`}
         >
           <Mark className={`${TRANSITION} ${compact ? "h-5 w-5" : "h-6 w-6"}`} />
-          Arc
+          ARC
         </Link>
         <nav className="hidden gap-8 font-mono text-[11px] uppercase tracking-[0.12em] sm:flex">
           {LINKS.map((link) => {

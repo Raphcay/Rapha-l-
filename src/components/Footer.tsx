@@ -9,7 +9,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-2.5 font-display text-lg tracking-wide">
             <Mark className="h-6 w-6" />
-            Arc
+            ARC
           </div>
           <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-muted">
             Des vêtements techniques taillés pour durer. On commence par un
@@ -54,7 +54,8 @@ export function Footer() {
       </div>
       <div className="flex flex-col gap-3 border-t border-line px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
-          © {new Date().getFullYear()} Arc — Tous droits réservés
+          Pensé sur la Côte d&apos;Azur · Livraison offerte dès 50 €
+          © {new Date().getFullYear()} ARC · Tous droits réservés
         </p>
         <ul className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
           <li><Link href="/mentions-legales" className="hover:text-ink">Mentions légales</Link></li>

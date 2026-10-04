@@ -9,7 +9,7 @@ type Message = { role: "user" | "assistant"; content: string };
 const GREETING: Message = {
   role: "assistant",
   content:
-    "Bonjour, je suis l'assistant Arc. Pose-moi une question sur les matières, les tailles, une précommande ou la marque.",
+    "Bonjour, je suis l'assistant ARC. Pose-moi une question sur les matières, les tailles, une précommande ou la marque.",
 };
 
 export function ChatWidget() {
@@ -79,7 +79,7 @@ export function ChatWidget() {
             <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
               <Mark className="h-4 w-4 text-ink" />
               <div>
-                <p className="font-display text-sm leading-none">Arc — Assistant</p>
+                <p className="font-display text-sm leading-none">ARC — Assistant</p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
                   Répond en quelques secondes
                 </p>

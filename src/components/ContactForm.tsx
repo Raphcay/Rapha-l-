@@ -15,7 +15,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
   function sendByMailto() {
-    const subject = `Message de ${name} — site Arc`;
+    const subject = `Message de ${name} — site ARC`;
     const body = `${message}\n\n— ${name} (${email})`;
     window.location.href = `mailto:${CONTACT_EMAIL_REAL}?subject=${encodeURIComponent(
       subject,
@@ -37,8 +37,8 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Nouveau message — site Arc (${name})`,
-          from_name: "Site Arc",
+          subject: `Nouveau message — site ARC (${name})`,
+          from_name: "Site ARC",
           name,
           email,
           message,

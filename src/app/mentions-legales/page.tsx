@@ -3,7 +3,7 @@ import { CONTACT_EMAIL_DISPLAY, SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
-  description: "Mentions légales du site Arc.",
+  description: "Mentions légales du site ARC.",
   alternates: { canonical: "/mentions-legales" },
   robots: { index: false, follow: true },
 };
