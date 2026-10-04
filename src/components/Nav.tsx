@@ -5,12 +5,16 @@ import { usePathname } from "next/navigation";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 import { Mark } from "./Mark";
+import { useCart } from "./CartProvider";
 
 const LINKS = [
   { href: "/", label: "Accueil" },
   { href: "/collection", label: "Boutique" },
   { href: "/a-propos", label: "À propos" },
   { href: "/contact", label: "Contact" },
+  { href: "/recherche", label: "Recherche" },
+  { href: "/compte", label: "Compte" },
+  { href: "/panier", label: "Panier" },
 ];
 
 // `motion-reduce:` (a CSS media query) instead of a JS useReducedMotion()
@@ -24,6 +28,7 @@ export function Nav() {
   const [compact, setCompact] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
+  const { count } = useCart();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setCompact(latest > 40);
@@ -61,7 +66,7 @@ export function Nav() {
                   isActive ? "text-ink" : "text-muted"
                 }`}
               >
-                {link.label}
+                {link.href === "/panier" ? `Panier (${count})` : link.label}
                 {isActive && (
                   <span className="absolute inset-x-0 -bottom-2 h-px bg-accent" aria-hidden="true" />
                 )}
@@ -80,7 +85,7 @@ export function Nav() {
               aria-current={isActive ? "page" : undefined}
               className={`whitespace-nowrap ${isActive ? "text-ink" : "text-muted"}`}
             >
-              {link.label}
+              {link.href === "/panier" ? `Panier (${count})` : link.label}
             </Link>
           );
         })}

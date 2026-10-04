@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/ProductGallery";
+import { AddToCart } from "@/components/AddToCart";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { products, SIZES } from "@/data/products";
 
@@ -88,15 +89,11 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </dl>
 
-          <Link
-            href="/contact"
-            className="mt-8 block w-full border border-ink/80 px-6 py-4 text-center font-mono text-[11px] uppercase tracking-[0.12em] transition-colors hover:border-accent hover:text-accent sm:w-auto sm:px-10"
-          >
-            Précommander {product.colorName.toLowerCase()}
-          </Link>
+          <div className="mt-8">
+            <AddToCart product={product} />
+          </div>
           <p className="mt-4 max-w-[48ch] text-xs leading-relaxed text-muted">
-            Le paiement en ligne arrive bientôt. D&apos;ici là, la précommande
-            se fait par email ou via le formulaire de contact.
+            Le paiement en ligne arrive bientôt. D&apos;ici là, ta commande part par email.
           </p>
         </ScrollReveal>
       </div>
