@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/ProductGallery";
 import { AddToCart } from "@/components/AddToCart";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { products, SIZES } from "@/data/products";
 
@@ -91,6 +92,9 @@ export default async function ProductPage({ params }: Props) {
 
           <div className="mt-8">
             <AddToCart product={product} />
+          </div>
+          <div className="mt-6">
+            <FavoriteButton slug={product.slug} />
           </div>
           <p className="mt-4 max-w-[48ch] text-xs leading-relaxed text-muted">
             Le paiement en ligne arrive bientôt. D&apos;ici là, ta commande part par email.
