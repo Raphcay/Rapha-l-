@@ -42,7 +42,7 @@ export default function CollectionPage() {
       />
       <ScrollReveal>
         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-          Tee ARC
+          T-shirt ARC
         </p>
         <h1 className="mt-2 max-w-[20ch] font-display text-4xl sm:text-5xl">
           La collection

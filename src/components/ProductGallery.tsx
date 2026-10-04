@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type PointerEvent } from "react";
+import { useState, type KeyboardEvent, type PointerEvent } from "react";
 import type { Product } from "@/data/products";
 
 type View = {
@@ -35,6 +35,32 @@ type Lens = { x: number; y: number; width: number; height: number };
 function GarmentViewer({ src, alt }: { src: string; alt: string }) {
   const [lens, setLens] = useState<Lens | null>(null);
 
+  // Keyboard: Tab to the shirt, arrows move the magnifier, Escape hides it.
+  function handleKey(event: KeyboardEvent<HTMLDivElement>) {
+    const step = 24;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const current = lens ?? { x: rect.width / 2, y: rect.height / 2, width: rect.width, height: rect.height };
+    const moves: Record<string, [number, number]> = {
+      ArrowLeft: [-step, 0],
+      ArrowRight: [step, 0],
+      ArrowUp: [0, -step],
+      ArrowDown: [0, step],
+    };
+    if (event.key === "Escape") {
+      setLens(null);
+      return;
+    }
+    const move = moves[event.key];
+    if (!move) return;
+    event.preventDefault();
+    setLens({
+      x: Math.min(rect.width, Math.max(0, current.x + move[0])),
+      y: Math.min(rect.height, Math.max(0, current.y + move[1])),
+      width: rect.width,
+      height: rect.height,
+    });
+  }
+
   function track(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
     setLens({
@@ -49,7 +75,10 @@ function GarmentViewer({ src, alt }: { src: string; alt: string }) {
     <div
       role="img"
       aria-label={alt}
-      className="absolute inset-0 touch-none cursor-crosshair"
+      tabIndex={0}
+      onKeyDown={handleKey}
+      onBlur={() => setLens(null)}
+      className="absolute inset-0 touch-none cursor-crosshair focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent"
       style={{ background: BACKGROUND }}
       onPointerEnter={(event) => {
         if (event.pointerType === "mouse") track(event);
@@ -157,7 +186,7 @@ export function ProductGallery({ product }: { product: Product }) {
 
       {view.garment && (
         <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
-          Survole le t-shirt pour zoomer. Sur mobile, appuie et glisse.
+          Survole le t-shirt pour zoomer. Sur mobile, appuie et glisse. Au clavier, Tab puis flèches.
         </p>
       )}
     </div>

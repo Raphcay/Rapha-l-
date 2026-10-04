@@ -10,8 +10,8 @@ export type SearchEntry = {
 };
 
 const PAGES: SearchEntry[] = [
-  { title: "Accueil", subtitle: "La marque et le Tee ARC", href: "/", type: "Page", text: "accueil marque tee arc coloris carrousel ambassadeurs parrainage" },
-  { title: "Boutique", subtitle: "Tous les coloris du Tee ARC", href: "/collection", type: "Page", text: "boutique collection t-shirt coloris tailles" },
+  { title: "Accueil", subtitle: "La marque et le T-shirt ARC", href: "/", type: "Page", text: "accueil marque t-shirt arc coloris carrousel ambassadeurs parrainage" },
+  { title: "Boutique", subtitle: "Tous les coloris du T-shirt ARC", href: "/collection", type: "Page", text: "boutique collection t-shirt coloris tailles" },
   { title: "À propos", subtitle: "L'histoire ARC, deux frères, une marque", href: "/a-propos", type: "Page", text: "a propos histoire frères axel raphaël nom de famille côte d'azur" },
   { title: "Contact", subtitle: "Écrire à l'équipe, précommander, collaborer", href: "/contact", type: "Page", text: "contact email question précommande collaboration formulaire" },
   { title: "Journal", subtitle: "Notes sur la matière, la fabrication, l'entretien", href: "/journal", type: "Page", text: "journal blog articles coton entretien fabrication" },
@@ -29,7 +29,7 @@ const INDEX: SearchEntry[] = [
     subtitle: `${product.price} € · ${product.colorName}`,
     href: `/collection/${product.slug}`,
     type: "Produit" as const,
-    text: `${product.name} ${product.colorName} ${product.description} ${product.material} ${product.cut} tee t-shirt`,
+    text: `${product.name} ${product.colorName} ${product.description} ${product.material} ${product.cut} t-shirt`,
   })),
   ...PAGES,
   ...posts.map((post) => ({
@@ -41,7 +41,7 @@ const INDEX: SearchEntry[] = [
   })),
 ];
 
-// Lowercase and strip accents, so "ecole" finds "école" and "tee" finds "Tee".
+// Lowercase and strip accents, so "ecole" finds "école" and "t-shirt" finds "T-shirt".
 export function normalize(value: string): string {
   return value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
 }

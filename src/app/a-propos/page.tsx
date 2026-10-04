@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const STATS = [
   { value: "220", suffix: "g/m²", label: "Coton premium" },
   { value: "4", suffix: "", label: "Coloris : blanc, noir, gris, beige" },
-  { value: "25", suffix: "€", label: "Le Tee ARC, un prix juste" },
+  { value: "25", suffix: "€", label: "Le T-shirt ARC, un prix juste" },
 ];
 
 export default function AProposPage() {
@@ -67,7 +67,7 @@ export default function AProposPage() {
         <ScrollReveal className="relative aspect-[4/5] overflow-hidden bg-surface">
           <Image
             src="/products/arc-tee-front-gris.png"
-            alt="Tee ARC gris, vue de face"
+            alt="T-shirt ARC gris, vue de face"
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
             className="object-contain p-10"
@@ -100,13 +100,13 @@ export default function AProposPage() {
               être encombrante.
             </p>
             <p className="mt-4 max-w-[48ch] text-[15px] leading-relaxed text-muted">
-              Le résultat : le Tee ARC, en quatre coloris, à 25 €.
+              Le résultat : le T-shirt ARC, en quatre coloris, à 25 €.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.08} className="relative order-1 aspect-[4/5] overflow-hidden bg-ink/[0.03] md:order-2">
             <Image
               src="/products/arc-tee-detail-collar-gris.png"
-              alt="Tee ARC gris, détail du col"
+              alt="T-shirt ARC gris, détail du col"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"
@@ -120,14 +120,14 @@ export default function AProposPage() {
         <ScrollReveal className="relative aspect-[4/5] overflow-hidden bg-surface">
           <Image
             src="/products/arc-tee-back-noir.png"
-            alt="Tee ARC noir, vue de dos"
+            alt="T-shirt ARC noir, vue de dos"
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
             className="object-contain p-10"
           />
         </ScrollReveal>
         <ScrollReveal delay={0.08}>
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Le Tee ARC</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Le T-shirt ARC</p>
           <h2 className="mt-3 font-display text-3xl sm:text-5xl">Un coton épais, une coupe oversize.</h2>
           <p className="mt-6 max-w-[48ch] text-[15px] leading-relaxed text-muted">
             220 g/m², des épaules tombantes, un logo brodé discret sur le torse.

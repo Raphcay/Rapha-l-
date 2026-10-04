@@ -12,9 +12,6 @@ const LINKS = [
   { href: "/collection", label: "Boutique" },
   { href: "/a-propos", label: "À propos" },
   { href: "/contact", label: "Contact" },
-  { href: "/recherche", label: "Recherche" },
-  { href: "/compte", label: "Compte" },
-  { href: "/panier", label: "Panier" },
 ];
 
 // `motion-reduce:` (a CSS media query) instead of a JS useReducedMotion()
@@ -23,6 +20,39 @@ const LINKS = [
 // it caused a real hydration mismatch. The CSS variant reads the same
 // media query but purely in CSS, so server and client markup always match.
 const TRANSITION = "transition-all duration-300 ease-out motion-reduce:transition-none";
+
+const ICON_CLASS = "relative flex h-9 w-9 items-center justify-center text-muted transition-colors hover:text-ink";
+
+// Search, account and cart as icons, with the cart count as a small badge.
+function NavIcons({ count }: { count: number }) {
+  return (
+    <div className="flex items-center gap-1">
+      <Link href="/recherche" aria-label="Rechercher" title="Rechercher" className={ICON_CLASS}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.3-4.3" />
+        </svg>
+      </Link>
+      <Link href="/compte" aria-label="Mon compte" title="Mon compte" className={ICON_CLASS}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+        </svg>
+      </Link>
+      <Link href="/panier" aria-label={`Panier, ${count} pièce${count > 1 ? "s" : ""}`} title="Panier" className={ICON_CLASS}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
+          <path d="M5 8h14l-1 13H6L5 8z" />
+          <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+        </svg>
+        {count > 0 && (
+          <span className="absolute right-0 top-0 flex h-4 min-w-4 items-center justify-center bg-accent px-1 font-mono text-[9px] leading-none text-bg">
+            {count}
+          </span>
+        )}
+      </Link>
+    </div>
+  );
+}
 
 export function Nav() {
   const [compact, setCompact] = useState(false);
@@ -66,7 +96,7 @@ export function Nav() {
                   isActive ? "text-ink" : "text-muted"
                 }`}
               >
-                {link.href === "/panier" ? `Panier (${count})` : link.label}
+                {link.label}
                 {isActive && (
                   <span className="absolute inset-x-0 -bottom-2 h-px bg-accent" aria-hidden="true" />
                 )}
@@ -74,6 +104,7 @@ export function Nav() {
             );
           })}
         </nav>
+        <NavIcons count={count} />
       </div>
       <nav className="flex gap-6 overflow-x-auto border-t border-line/60 px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] sm:hidden">
         {LINKS.map((link) => {
@@ -85,7 +116,7 @@ export function Nav() {
               aria-current={isActive ? "page" : undefined}
               className={`whitespace-nowrap ${isActive ? "text-ink" : "text-muted"}`}
             >
-              {link.href === "/panier" ? `Panier (${count})` : link.label}
+              {link.label}
             </Link>
           );
         })}

@@ -102,7 +102,7 @@ export default function Home() {
       <section id="couleurs" className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
         <ScrollReveal>
           <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-            Tee ARC
+            T-shirt ARC
           </p>
           <h2 className="mt-2 font-display text-3xl sm:text-4xl">Nos couleurs</h2>
         </ScrollReveal>

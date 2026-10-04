@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { search } from "@/lib/search";
 
-const SUGGESTIONS = ["tee", "noir", "beige", "côte d'azur", "parrainage", "précommande"];
+const SUGGESTIONS = ["t-shirt", "noir", "beige", "côte d'azur", "parrainage", "précommande"];
 
 export function SearchPanel() {
   const [query, setQuery] = useState("");
