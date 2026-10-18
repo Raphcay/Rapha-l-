@@ -79,8 +79,9 @@ export function GarmentPlaceholder({
 }: GarmentPlaceholderProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const sourceMesh = useSourceMesh();
-  // The La Rue des Nôtres Mark, rendered to a texture (not extracted from a
-  // real photo — see the product-photography TODO above).
+  // Ink isolated from the real logo (public/brand/la-rue-des-notres-logo.webp)
+  // with a brightness threshold, same technique as extract-logo-decal.py —
+  // not extracted from a garment photo, see the product-photography TODO above.
   const logoTexture = useTexture("/hero3d/notres-logo-decal.png");
 
   const sourceMaterial = sourceMesh?.material as THREE.MeshStandardMaterial | undefined;

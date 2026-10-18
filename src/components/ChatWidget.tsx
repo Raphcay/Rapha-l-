@@ -78,7 +78,7 @@ export function ChatWidget() {
             className="mb-3 flex h-[28rem] w-[calc(100vw-2.5rem)] max-w-sm flex-col border border-line bg-surface-raised shadow-xl sm:w-96"
           >
             <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
-              <Mark className="h-4 w-4 text-ink" />
+              <Mark className="h-4 w-4" />
               <div>
                 <p className="font-display text-sm leading-none">{SITE_NAME} — Assistant</p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">

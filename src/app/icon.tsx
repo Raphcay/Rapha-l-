@@ -1,7 +1,18 @@
+import { readFileSync } from "fs";
+import { join } from "path";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 512, height: 512 };
 export const contentType = "image/png";
+
+// The actual badge logo, not a redrawn interpretation — ImageResponse can't
+// use next/image, so it's embedded as a data URI read from disk at request
+// time. PNG rather than the source webp: Satori (ImageResponse's renderer)
+// can't decode webp and fails the whole route with an opaque error.
+const logoDataUrl = (() => {
+  const buf = readFileSync(join(process.cwd(), "public/brand/la-rue-des-notres-logo.png"));
+  return `data:image/png;base64,${buf.toString("base64")}`;
+})();
 
 export default function Icon() {
   return new ImageResponse(
@@ -13,20 +24,10 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0b0b0c",
         }}
       >
-        <svg width="352" height="352" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="16" r="9" stroke="#f3f1ea" strokeWidth="6" />
-          <path
-            d="M8 78 L32 32 L50 52 L68 22 L92 78"
-            stroke="#f3f1ea"
-            strokeWidth="6"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-          <path d="M4 82 L96 82" stroke="#f3f1ea" strokeWidth="4" strokeLinecap="round" />
-        </svg>
+        {/* ImageResponse (satori) needs a plain <img>, not next/image. */}
+        <img src={logoDataUrl} width={512} height={512} alt="" />
       </div>
     ),
     { ...size },

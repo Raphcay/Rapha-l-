@@ -3,12 +3,14 @@ transparent-background decal texture for the Hero3D placeholder garment
 (src/components/hero3d/GarmentPlaceholder.tsx).
 
 NOT CURRENTLY USED: the live decal (public/hero3d/notres-logo-decal.png) was
-generated from the La Rue des Nôtres Mark component's SVG, not extracted
-from a photo — the real product photos in public/products/ still show the
-old "Arc" embroidery (see the GarmentPlaceholder.tsx TODO about re-shooting
-product photography for the new brand). This script is kept for whenever
-that re-shoot happens and the real embroidered logo needs isolating again;
-point SRC at the new logo detail photo first.
+isolated from public/brand/la-rue-des-notres-logo.webp (the real logo badge)
+with the same brightness-threshold technique below, via
+scripts/extract-logo-from-badge.py — not from a garment photo, since the
+real product photos in public/products/ still show the old "Arc" embroidery
+(see the GarmentPlaceholder.tsx TODO about re-shooting product photography
+for the new brand). This script is kept for whenever that re-shoot happens
+and the real embroidered logo needs isolating again; point SRC at the new
+logo detail photo first.
 
 public/products/tee-detail-logo.png is a plain opaque crop (real fabric
 background, no alpha) — fine for the product cards, which composite it as a

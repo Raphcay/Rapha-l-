@@ -1,25 +1,23 @@
-// Simplified line-art echo of the full badge logo (twin peaks, a sun/moon
-// resting in the gap between them, a horizon line below) — small enough to
-// read at 20px in the nav, unlike the illustrated badge itself. The full
-// badge lives at public/brand/la-rue-des-notres-logo.webp for places with
-// room to show it properly (about page, favicon-adjacent marketing use).
+import Image from "next/image";
+
+// The actual badge logo (public/brand/la-rue-des-notres-logo.webp), not a
+// redrawn interpretation — cropped to a circle so it reads as a small badge
+// in the nav/footer/chat widget instead of showing the square canvas it
+// sits on. The full square version (with its own margin) is used as-is on
+// /a-propos, where there's room for it.
 export function Mark({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      className={className}
+    <span
+      className={`relative inline-block shrink-0 overflow-hidden rounded-full ${className}`}
       aria-hidden="true"
     >
-      <circle cx="50" cy="16" r="9" stroke="currentColor" strokeWidth="6" />
-      <path
-        d="M8 78 L32 32 L50 52 L68 22 L92 78"
-        stroke="currentColor"
-        strokeWidth="6"
-        strokeLinejoin="round"
-        strokeLinecap="round"
+      <Image
+        src="/brand/la-rue-des-notres-logo.webp"
+        alt=""
+        fill
+        sizes="48px"
+        className="scale-[1.12] object-cover"
       />
-      <path d="M4 82 L96 82" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-    </svg>
+    </span>
   );
 }
