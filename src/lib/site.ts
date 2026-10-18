@@ -20,8 +20,5 @@ export const CONTACT_EMAIL_DISPLAY = "contact@laruedesnotres";
 // CONTACT_EMAIL_DISPLAY for that.
 export const CONTACT_EMAIL_REAL = "rcay.pro@gmail.com";
 
-// Instagram handles can't carry spaces or accents, so this is a slugified
-// guess at "la rue des nôtres textile" — swap it for the real @handle once
-// the account exists if this isn't it.
-export const INSTAGRAM_HANDLE = "laruedesnotrestextile";
+export const INSTAGRAM_HANDLE = "lrdn.clothing";
 export const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM_HANDLE}`;
