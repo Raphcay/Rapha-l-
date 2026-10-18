@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-// The actual badge logo (public/brand/la-rue-des-notres-logo.webp), not a
-// redrawn interpretation — cropped to a circle so it reads as a small badge
-// in the nav/footer/chat widget instead of showing the square canvas it
-// sits on. The full square version (with its own margin) is used as-is on
+// The actual logo's icon (mountains, sun, reflection — no wordmark text,
+// which doesn't read at nav/favicon size), cropped from the real file
+// (public/brand/la-rue-des-notres-logo.webp) via scripts/crop-logo-icon.py,
+// not redrawn. The full wide logo (icon + wordmark) is used as-is on
 // /a-propos, where there's room for it.
 export function Mark({ className = "" }: { className?: string }) {
   return (
@@ -12,11 +12,11 @@ export function Mark({ className = "" }: { className?: string }) {
       aria-hidden="true"
     >
       <Image
-        src="/brand/la-rue-des-notres-logo.webp"
+        src="/brand/la-rue-des-notres-icon.png"
         alt=""
         fill
         sizes="48px"
-        className="scale-[1.12] object-cover"
+        className="scale-[1.15] object-cover"
       />
     </span>
   );
