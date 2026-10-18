@@ -61,15 +61,15 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
   const zoomTransition = { duration: shouldReduceMotion ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <div className="group/visual relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-surface">
+    <div className="group/visual relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-[#c9c7c3]">
       <div
         className="absolute inset-0"
         style={{
-          background: "radial-gradient(60% 55% at 50% 42%, var(--surface-raised), var(--surface) 72%)",
+          background: "radial-gradient(60% 55% at 50% 42%, #d4d2cd, #c3c1bc 72%)",
         }}
         aria-hidden="true"
       />
-      <div className="relative h-[80%] w-[80%]">
+      <div className="relative h-full w-full">
         <AnimatePresence mode="wait">
           {showBack ? (
             <motion.div
@@ -139,11 +139,11 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
               >
                 <span
                   className={`h-2 w-2 rounded-full border transition-colors ${
-                    active === hotspot.id ? "border-accent bg-accent" : "border-ink/70 bg-bg/80"
+                    active === hotspot.id ? "border-black bg-black" : "border-black/55 bg-white/80"
                   }`}
                 />
                 {active === hotspot.id && !shouldReduceMotion && (
-                  <span className="absolute h-4 w-4 animate-ping rounded-full border border-accent/60" />
+                  <span className="absolute h-4 w-4 animate-ping rounded-full border border-black/40" />
                 )}
               </span>
             ))}
@@ -158,7 +158,7 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
           setActive(null);
           setShowBack((v) => !v);
         }}
-        className="absolute left-3 top-3 z-20 font-mono text-[10px] uppercase tracking-[0.1em] text-muted transition-colors hover:text-ink"
+        className="absolute left-3 top-3 z-20 font-mono text-[10px] uppercase tracking-[0.1em] text-black/55 transition-colors hover:text-black"
       >
         {showBack ? "← Devant" : "Voir le dos"}
       </button>
@@ -172,9 +172,9 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-              className="bg-surface-raised/95 px-2.5 py-1.5 text-right font-mono text-[10px] uppercase leading-snug tracking-[0.03em] text-ink backdrop-blur-sm"
+              className="bg-white/90 px-2.5 py-1.5 text-right font-mono text-[10px] uppercase leading-snug tracking-[0.03em] text-black backdrop-blur-sm"
             >
-              <span className="text-accent">{activeHotspot.label} — </span>
+              <span className="text-black/60">{activeHotspot.label} — </span>
               {activeHotspot.text}
             </motion.p>
           ) : (
@@ -184,7 +184,7 @@ export function ProductVisual({ product, priority }: { product: Product; priorit
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-              className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted"
+              className="font-mono text-[10px] uppercase tracking-[0.12em] text-black/50"
             >
               {showBack ? "" : "Survoler pour explorer"}
             </motion.span>
