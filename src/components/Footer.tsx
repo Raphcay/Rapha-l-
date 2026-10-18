@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { Mark } from "./Mark";
-import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL } from "@/lib/site";
+import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL, INSTAGRAM_URL, SITE_NAME } from "@/lib/site";
 
 export function Footer() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2.5 font-display text-lg tracking-wide">
-            <Mark className="h-6 w-6" />
-            Arc
+          <div className="flex items-center gap-2.5 font-display text-base tracking-wide">
+            <Mark className="h-8 w-8 shrink-0" />
+            {SITE_NAME}
           </div>
           <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-muted">
             Des vêtements techniques taillés pour durer. On commence par un
@@ -36,7 +36,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm">
             <li>
               <a
-                href="https://instagram.com/arc.wear"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-accent"
@@ -54,7 +54,7 @@ export function Footer() {
       </div>
       <div className="flex flex-col gap-3 border-t border-line px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
-          © {new Date().getFullYear()} Arc — Tous droits réservés
+          © {new Date().getFullYear()} {SITE_NAME} — Tous droits réservés
         </p>
         <ul className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
           <li><Link href="/mentions-legales" className="hover:text-ink">Mentions légales</Link></li>

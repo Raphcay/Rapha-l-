@@ -3,7 +3,7 @@ import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL, SITE_NAME } from "@/lib/site
 
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
-  description: "Conditions générales de vente du site Arc.",
+  description: "Conditions générales de vente du site La Rue des Nôtres.",
   alternates: { canonical: "/conditions-generales" },
   robots: { index: false, follow: true },
 };

@@ -20,8 +20,8 @@ export default function PreviewStyleA() {
             }}
           />
           <Image
-            src="/products/arc-tee-front.png"
-            alt="Tee Arc"
+            src="/products/tee-front.png"
+            alt="Tee La Rue des Nôtres"
             fill
             priority
             className="object-contain object-center p-10"
@@ -30,7 +30,7 @@ export default function PreviewStyleA() {
 
         <div className="max-w-lg text-center sm:text-left">
           <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-            Arc — Première collection
+            La Rue des Nôtres — Première collection
           </p>
           <h1 className="mt-4 font-display text-4xl leading-[0.95] text-ink sm:text-5xl">
             Une pièce pensée pour durer.

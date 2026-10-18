@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { MagneticButton } from "./MagneticButton";
-import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL } from "@/lib/site";
+import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL, SITE_NAME } from "@/lib/site";
 
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
@@ -15,7 +15,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
   function sendByMailto() {
-    const subject = `Message de ${name} — site Arc`;
+    const subject = `Message de ${name} — site ${SITE_NAME}`;
     const body = `${message}\n\n— ${name} (${email})`;
     window.location.href = `mailto:${CONTACT_EMAIL_REAL}?subject=${encodeURIComponent(
       subject,
@@ -37,8 +37,8 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Nouveau message — site Arc (${name})`,
-          from_name: "Site Arc",
+          subject: `Nouveau message — site ${SITE_NAME} (${name})`,
+          from_name: `Site ${SITE_NAME}`,
           name,
           email,
           message,

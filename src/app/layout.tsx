@@ -4,7 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ChatWidget } from "@/components/ChatWidget";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { INSTAGRAM_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "Arc",
+    "La Rue des Nôtres",
     "vêtements techniques",
     "t-shirt oversize coton premium",
     "marque streetwear",
@@ -83,7 +83,7 @@ const organizationJsonLd = {
   url: SITE_URL,
   description: SITE_DESCRIPTION,
   logo: `${SITE_URL}/icon`,
-  sameAs: ["https://instagram.com/arc.wear"],
+  sameAs: [INSTAGRAM_URL],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

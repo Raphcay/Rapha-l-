@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Mark } from "@/components/Mark";
+import Image from "next/image";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "À propos",
-  description: "L'histoire et les intentions derrière Arc.",
+  description: "L'histoire et les intentions derrière La Rue des Nôtres.",
   alternates: { canonical: "/a-propos" },
 };
 
@@ -12,12 +12,12 @@ const TIMELINE = [
   {
     year: "2025",
     title: "Le déclic",
-    body: "On en avait assez des t-shirts basiques, mal coupés, qu'on remplaçait tous les six mois. L'idée d'Arc est partie de là : faire une pièce qui tienne vraiment.",
+    body: "On en avait assez des t-shirts basiques, mal coupés, qu'on remplaçait tous les six mois. L'idée de La Rue des Nôtres est partie de là : faire une pièce qui tienne vraiment.",
   },
   {
     year: "2026",
     title: "Douze mois de travail",
-    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : le Tee Arc, sorti en série limitée.",
+    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : deux lignes, le Basique et le Spécial, sorties en série limitée.",
   },
   {
     year: "À venir",
@@ -39,9 +39,9 @@ export default function AProposPage() {
               Des vêtements qui méritent d&apos;être gardés.
             </h1>
             <p className="mt-6 max-w-[54ch] text-[15px] leading-relaxed text-muted">
-              Arc est née d&apos;une frustration assez simple : trop de
-              t-shirts finissaient à la poubelle après quelques mois, mal
-              coupés ou mal cousus dès le départ. On a voulu faire
+              La Rue des Nôtres est née d&apos;une frustration assez simple :
+              trop de t-shirts finissaient à la poubelle après quelques mois,
+              mal coupés ou mal cousus dès le départ. On a voulu faire
               l&apos;inverse — des pièces techniques, taillées pour durer,
               produites en petites séries parce qu&apos;on n&apos;a ni
               l&apos;envie ni les moyens de stocker ce qu&apos;on ne vendra
@@ -49,8 +49,14 @@ export default function AProposPage() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.12} y={16}>
-            <div className="hero-gradient flex aspect-square items-center justify-center border border-line bg-surface">
-              <Mark className="relative z-10 h-20 w-20 text-ink/70" />
+            <div className="hero-gradient flex aspect-square items-center justify-center overflow-hidden border border-line bg-surface">
+              <Image
+                src="/brand/la-rue-des-notres-logo-light.png"
+                alt="Logo La Rue des Nôtres"
+                width={480}
+                height={480}
+                className="relative z-10 h-3/5 w-3/5 object-contain"
+              />
             </div>
           </ScrollReveal>
         </div>

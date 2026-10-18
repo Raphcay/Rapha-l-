@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 import { Mark } from "./Mark";
+import { SITE_NAME } from "@/lib/site";
 
 const LINKS = [
   { href: "/", label: "Accueil" },
@@ -42,12 +43,12 @@ export function Nav() {
       >
         <Link
           href="/"
-          className={`flex items-center gap-2.5 font-display tracking-wide ${TRANSITION} ${
-            compact ? "text-base" : "text-lg"
+          className={`flex items-center gap-2.5 whitespace-nowrap font-display tracking-wide ${TRANSITION} ${
+            compact ? "text-sm" : "text-base"
           }`}
         >
-          <Mark className={`${TRANSITION} ${compact ? "h-5 w-5" : "h-6 w-6"}`} />
-          Arc
+          <Mark className={`shrink-0 ${TRANSITION} ${compact ? "h-7 w-7" : "h-8 w-8"}`} />
+          {SITE_NAME}
         </Link>
         <nav className="hidden gap-8 font-mono text-[11px] uppercase tracking-[0.12em] sm:flex">
           {LINKS.map((link) => {

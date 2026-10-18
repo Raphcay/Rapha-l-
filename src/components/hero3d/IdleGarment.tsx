@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { GarmentPlaceholder } from "./GarmentPlaceholder";
@@ -9,6 +9,16 @@ const IDLE_SPIN_SPEED = 0.06; // rad/s, slow constant turntable
 const POINTER_TILT_RANGE = 0.16; // rad, max tilt toward the pointer
 const POINTER_DAMPING = 3.2; // higher = snappier lerp toward the pointer
 
+type IdleGarmentProps = {
+  /** False while the scroll sequence owns rotation precisely (front/profile/back
+     framing) — the idle spin + pointer tilt would otherwise fight it. */
+  active: boolean;
+  initialColor: string;
+  materialRef: RefObject<THREE.MeshPhysicalMaterial | null>;
+  wireframeRef: RefObject<THREE.MeshBasicMaterial | null>;
+  onReady: () => void;
+};
+
 /**
  * The inner group: idle rotation + pointer-follow tilt, both damped
  * (lerp), running every frame independently of the outer scroll-driven
@@ -16,13 +26,19 @@ const POINTER_DAMPING = 3.2; // higher = snappier lerp toward the pointer
  * outer group's position/rotation/scale) never fights this one — they
  * compose instead of overwriting each other.
  */
-export function IdleGarment() {
+export function IdleGarment({
+  active,
+  initialColor,
+  materialRef,
+  wireframeRef,
+  onReady,
+}: IdleGarmentProps) {
   const innerRef = useRef<THREE.Group>(null);
   const spin = useRef(0);
 
   useFrame((state, delta) => {
     const group = innerRef.current;
-    if (!group) return;
+    if (!group || !active) return;
 
     spin.current += delta * IDLE_SPIN_SPEED;
 
@@ -41,7 +57,12 @@ export function IdleGarment() {
 
   return (
     <group ref={innerRef}>
-      <GarmentPlaceholder />
+      <GarmentPlaceholder
+        initialColor={initialColor}
+        materialRef={materialRef}
+        wireframeRef={wireframeRef}
+        onReady={onReady}
+      />
     </group>
   );
 }

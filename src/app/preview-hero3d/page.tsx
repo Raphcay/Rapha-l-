@@ -14,9 +14,9 @@ function getDebugFlag() {
   return new URLSearchParams(window.location.search).get("debug") === "1";
 }
 
-// Isolated review sandbox for Hero3D — nothing here is wired into the real
-// homepage. Once the render/scroll/lighting are approved, Hero3D mounts on
-// page.tsx in place of the current <Hero /> and this route can be deleted.
+// Isolated review sandbox for Hero3D, which now also runs live on the real
+// homepage (src/app/page.tsx). Kept around for tuning the scroll sequence
+// in isolation, with the ?debug=1 scrubber below.
 export default function PreviewHero3DPage() {
   // useSyncExternalStore (not useState+useEffect) so this reads correctly
   // client-side without a setState-after-mount render pass.

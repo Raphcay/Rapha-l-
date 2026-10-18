@@ -33,8 +33,8 @@ export default function PreviewStyleB() {
             }}
           />
           <Image
-            src="/products/arc-tee-front.png"
-            alt="Tee Arc"
+            src="/products/tee-front.png"
+            alt="Tee La Rue des Nôtres"
             fill
             priority
             className="object-contain object-center p-10"
@@ -51,7 +51,7 @@ export default function PreviewStyleB() {
             className="text-[11px] uppercase tracking-[0.2em]"
             style={{ color: "#8a7a5c" }}
           >
-            Arc — La collection essentielle
+            La Rue des Nôtres — La collection essentielle
           </p>
           <h1
             className="mt-4 text-5xl leading-[1.05] sm:text-6xl"

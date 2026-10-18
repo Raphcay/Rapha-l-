@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, type RefObject } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, type RefObject } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
 import { EffectComposer, Bloom, ChromaticAberration } from "@react-three/postprocessing";
 import * as THREE from "three";
@@ -10,8 +10,27 @@ import { IdleGarment } from "./IdleGarment";
 type SceneProps = {
   reducedMotion: boolean;
   onCreated?: () => void;
+  /** Fired once the garment (behind Suspense) has actually mounted — see GarmentPlaceholder.tsx. */
+  onGarmentReady: () => void;
   groupRef: RefObject<THREE.Group | null>;
+  cameraRef: RefObject<THREE.PerspectiveCamera | null>;
+  materialRef: RefObject<THREE.MeshPhysicalMaterial | null>;
+  wireframeRef: RefObject<THREE.MeshBasicMaterial | null>;
+  initialColor: string;
+  idleActive: boolean;
 };
+
+/** Hands the R3F-managed camera up to Hero3D.tsx, same reasoning as `groupRef` below. */
+function CameraHandle({ cameraRef }: { cameraRef: RefObject<THREE.PerspectiveCamera | null> }) {
+  const { camera } = useThree();
+  useEffect(() => {
+    cameraRef.current = camera as THREE.PerspectiveCamera;
+    return () => {
+      cameraRef.current = null;
+    };
+  }, [camera, cameraRef]);
+  return null;
+}
 
 /**
  * Everything inside <Canvas>. `groupRef` is the outer scroll-driven group
@@ -20,9 +39,20 @@ type SceneProps = {
  * the canvas. Passed as a plain prop rather than a forwarded ref: this
  * component is loaded through next/dynamic, and ref-forwarding through a
  * dynamic() boundary isn't guaranteed, so the ref is attached directly to
- * the <group> below instead.
+ * the <group> below instead. `cameraRef`, `materialRef` and `wireframeRef`
+ * follow the same pattern for the timeline's zoom and colorway stages.
  */
-export function Scene({ reducedMotion, onCreated, groupRef }: SceneProps) {
+export function Scene({
+  reducedMotion,
+  onCreated,
+  onGarmentReady,
+  groupRef,
+  cameraRef,
+  materialRef,
+  wireframeRef,
+  initialColor,
+  idleActive,
+}: SceneProps) {
   return (
     <Canvas
       shadows
@@ -31,6 +61,7 @@ export function Scene({ reducedMotion, onCreated, groupRef }: SceneProps) {
       gl={{ antialias: true, powerPreference: "high-performance" }}
       onCreated={() => onCreated?.()}
     >
+      <CameraHandle cameraRef={cameraRef} />
       {/* Key light: strong, directional, slightly cool — studio-photo main light */}
       <directionalLight
         position={[2.4, 3.2, 2.6]}
@@ -69,13 +100,21 @@ export function Scene({ reducedMotion, onCreated, groupRef }: SceneProps) {
          of just waiting. */}
       <group ref={groupRef}>
         <Suspense fallback={null}>
-          <IdleGarment />
+          <IdleGarment
+            active={idleActive}
+            initialColor={initialColor}
+            materialRef={materialRef}
+            wireframeRef={wireframeRef}
+            onReady={onGarmentReady}
+          />
         </Suspense>
       </group>
 
+      {/* "Ombre légère au sol" — a soft, understated contact shadow rather
+         than a heavy studio drop shadow. */}
       <ContactShadows
         position={[0, -1.02, 0]}
-        opacity={0.55}
+        opacity={0.32}
         scale={6}
         blur={2.6}
         far={2}
