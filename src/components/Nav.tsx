@@ -47,7 +47,7 @@ export function Nav() {
             compact ? "text-sm" : "text-base"
           }`}
         >
-          <Mark className={`shrink-0 ${TRANSITION} ${compact ? "h-5 w-5" : "h-6 w-6"}`} />
+          <Mark className={`shrink-0 ${TRANSITION} ${compact ? "h-7 w-7" : "h-8 w-8"}`} />
           {SITE_NAME}
         </Link>
         <nav className="hidden gap-8 font-mono text-[11px] uppercase tracking-[0.12em] sm:flex">

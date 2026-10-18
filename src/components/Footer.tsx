@@ -8,7 +8,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5 font-display text-base tracking-wide">
-            <Mark className="h-6 w-6 shrink-0" />
+            <Mark className="h-8 w-8 shrink-0" />
             {SITE_NAME}
           </div>
           <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-muted">
