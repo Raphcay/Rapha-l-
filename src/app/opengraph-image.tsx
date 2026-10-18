@@ -5,12 +5,13 @@ import { ImageResponse } from "next/og";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// The actual badge logo, not a redrawn interpretation — it already carries
-// the brand name, so there's no separate text wordmark below it here. PNG
-// rather than the source webp: Satori (ImageResponse's renderer) can't
-// decode webp and fails the whole route with an opaque error.
+// The actual logo ink, not a redrawn interpretation — background removed
+// and recolored to the site's light "ink" tone (see Mark.tsx) so it sits
+// directly on the dark card instead of inside its own white canvas. It
+// already carries the brand name, so there's no separate text wordmark
+// below it here.
 const logoDataUrl = (() => {
-  const buf = readFileSync(join(process.cwd(), "public/brand/la-rue-des-notres-logo.png"));
+  const buf = readFileSync(join(process.cwd(), "public/brand/la-rue-des-notres-logo-light.png"));
   return `data:image/png;base64,${buf.toString("base64")}`;
 })();
 
@@ -29,8 +30,10 @@ export default function OpengraphImage() {
           gap: 28,
         }}
       >
-        {/* ImageResponse (satori) needs a plain <img>, not next/image. */}
-        <img src={logoDataUrl} width={340} height={340} alt="" />
+        {/* ImageResponse (satori) needs a plain <img>, not next/image.
+           Logo is a wide rectangle (~2.15:1) — width/height kept in that
+           ratio so it isn't stretched. */}
+        <img src={logoDataUrl} width={560} height={260} alt="" />
         <div
           style={{
             fontSize: 26,

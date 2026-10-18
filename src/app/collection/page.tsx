@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collection",
-  description: "La première collection La Rue des Nôtres : un t-shirt oversize en coton premium, décliné en quatre coloris, en série limitée.",
+  description: "La première collection La Rue des Nôtres : deux t-shirts en coton premium, Basique et Spécial, en série limitée.",
   alternates: { canonical: "/collection" },
 };
 
@@ -48,15 +48,16 @@ export default function CollectionPage() {
           La collection
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-          Une seule coupe, déclinée en quatre coloris. Chaque édition est
-          cousue en petit atelier, en quantité limitée. Une fois le stock
-          épuisé, on ne le refait pas à l&apos;identique.
+          Deux lignes, une seule coupe : le Basique et le Spécial, imprimé
+          au dos. Chaque édition est cousue en petit atelier, en quantité
+          limitée. Une fois le stock épuisé, on ne le refait pas à
+          l&apos;identique.
         </p>
       </ScrollReveal>
 
-      <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto mt-12 grid max-w-3xl gap-x-8 gap-y-12 sm:grid-cols-2">
         {products.map((product, index) => (
-          <ScrollReveal key={product.slug} delay={(index % 4) * 0.06} className="group">
+          <ScrollReveal key={product.slug} delay={index * 0.08} className="group">
             <ProductVisual product={product} priority={index === 0} />
             <div className="mt-3 flex items-start justify-between gap-2">
               <div>

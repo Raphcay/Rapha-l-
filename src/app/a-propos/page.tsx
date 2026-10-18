@@ -17,7 +17,7 @@ const TIMELINE = [
   {
     year: "2026",
     title: "Douze mois de travail",
-    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : le Tee La Rue des Nôtres, sorti en série limitée.",
+    body: "Le patronage et le choix des matières ont pris plus de temps que prévu. Le résultat : deux lignes, le Basique et le Spécial, sorties en série limitée.",
   },
   {
     year: "À venir",
@@ -51,11 +51,11 @@ export default function AProposPage() {
           <ScrollReveal delay={0.12} y={16}>
             <div className="hero-gradient flex aspect-square items-center justify-center overflow-hidden border border-line bg-surface">
               <Image
-                src="/brand/la-rue-des-notres-logo.webp"
+                src="/brand/la-rue-des-notres-logo-light.png"
                 alt="Logo La Rue des Nôtres"
                 width={480}
                 height={480}
-                className="relative z-10 h-4/5 w-4/5 object-contain"
+                className="relative z-10 h-3/5 w-3/5 object-contain"
               />
             </div>
           </ScrollReveal>

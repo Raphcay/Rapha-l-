@@ -1,5 +1,15 @@
 """Regenerate the Noir/Gris/Beige product photos from the real Blanc photos.
 
+NOT CURRENTLY WIRED UP: src/data/products.ts now lists two lines (Basique,
+Spécial — see tee-basique-*.png / tee-special-*.png), each Blanc-only,
+built from mockup renders rather than real photography. This script still
+targets the older single-line real photos (tee-front.png etc., kept around
+as the only real garment photography in the repo — see the
+product-photography TODO in GarmentPlaceholder.tsx) and produces colorway
+variants (tee-front-noir.png etc.) that nothing currently references. Useful
+again once Basique/Spécial get real photography and need colorways of
+their own — point BASE_IMAGES at the new filenames first.
+
 Re-run this whenever tee-front.png / tee-back.png / tee-detail-*.png
 (the real Blanc photos) are replaced. It anchors each colorway's median
 lightness on the target color and keeps the photo's own shading around it, so
