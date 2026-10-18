@@ -1,6 +1,6 @@
 import { products, SIZES } from "@/data/products";
 import { posts } from "@/data/posts";
-import { CONTACT_EMAIL_DISPLAY } from "@/lib/site";
+import { CONTACT_EMAIL_DISPLAY, INSTAGRAM_HANDLE } from "@/lib/site";
 
 function buildProductCatalog(): string {
   return products
@@ -36,7 +36,7 @@ ${buildProductCatalog()}
 - Chaque coloris est produit en édition limitée et numérotée (environ 50 exemplaires par coloris).
 - Pas encore de politique de retour formalisée publiquement — si demandé, dire que c'est à voir au cas par cas par email avec l'équipe, ne pas inventer de délai ou de condition précise.
 - Pas de délai de livraison garanti publiquement pour l'instant (la marque vient de lancer) — orienter vers ${CONTACT_EMAIL_DISPLAY} pour une réponse précise.
-- Réseaux : Instagram @laruedesnotrestextile. Email : ${CONTACT_EMAIL_DISPLAY}.
+- Réseaux : Instagram @${INSTAGRAM_HANDLE}. Email : ${CONTACT_EMAIL_DISPLAY}.
 
 # Journal (articles du site, pour context si on te pose une question dessus)
 ${buildJournalIndex()}
