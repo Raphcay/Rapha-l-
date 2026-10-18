@@ -44,8 +44,7 @@ def crop_icon(img: Image.Image) -> Image.Image:
     alpha = np.array(img)[:, :, 3]
     has_ink = alpha > 20
 
-    # The wordmark sits in its own band below the icon, separated by a gap
-    # of rows with no ink — the icon is the first (tallest) such band.
+    # Find every run of rows that has ink, separated by fully-empty rows.
     row_has = has_ink.any(axis=1)
     bands, in_band, start = [], False, 0
     for y, has in enumerate(row_has):
@@ -56,20 +55,38 @@ def crop_icon(img: Image.Image) -> Image.Image:
             bands.append((start, y))
     if in_band:
         bands.append((start, len(row_has)))
-    y0, y1 = max(bands, key=lambda b: b[1] - b[0])
+
+    # The reflection's wavy lines are themselves separated by small gaps,
+    # so the mountain + reflection is actually several close bands, not
+    # one. Merge bands that are close together; only the real gap before
+    # the wordmark (much larger) should stay a separator.
+    gap_merge = max(15, int(img.height * 0.03))
+    merged = [bands[0]]
+    for b0, b1 in bands[1:]:
+        if b0 - merged[-1][1] <= gap_merge:
+            merged[-1] = (merged[-1][0], b1)
+        else:
+            merged.append((b0, b1))
+
+    # The icon (mountains + sun + full reflection) is the first merged
+    # band — the wordmark starts after the real gap further down.
+    y0, y1 = merged[0]
 
     xs = np.where(has_ink[y0:y1, :].any(axis=0))[0]
     x0, x1 = xs.min(), xs.max()
 
-    # Square crop sized off the icon's height, not its width: the icon is
-    # much wider than tall, so sizing to the width would run off the top of
-    # the image and pull the wordmark in at the bottom.
-    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
-    half = (y1 - y0) / 2 * (1 + ICON_PAD_FRACTION)
-    left, top, size = int(cx - half), int(cy - half), int(half * 2)
-    left = max(0, min(left, img.width - size))
-    top = max(0, min(top, img.height - size))
-    return img.crop((left, top, left + size, top + size))
+    # Crop to the icon's own bounding box (mountains + sun + full reflection),
+    # padded a little on every side — not forced to a square, so the outer
+    # mountain slopes never get cut off. Callers (Mark.tsx, icon.tsx) use
+    # object-contain inside a square box, so a wider-than-tall result just
+    # letterboxes instead of losing content.
+    w, h = x1 - x0, y1 - y0
+    pad_x, pad_y = int(w * ICON_PAD_FRACTION), int(h * ICON_PAD_FRACTION)
+    left = max(0, x0 - pad_x)
+    top = max(0, y0 - pad_y)
+    right = min(img.width, x1 + pad_x)
+    bottom = min(img.height, y1 + pad_y)
+    return img.crop((left, top, right, bottom))
 
 
 def main():
