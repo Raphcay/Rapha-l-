@@ -1,6 +1,6 @@
-# Arc
+# La Rue des Nôtres
 
-Site vitrine de **Arc**, marque de vêtements techniques (première pièce : un t-shirt en coton épais, produit en série limitée).
+Site vitrine de **La Rue des Nôtres**, marque de vêtements techniques (première pièce : un t-shirt en coton épais, produit en série limitée).
 
 Stack : Next.js (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion + API Google Gemini (assistant client).
 
@@ -27,7 +27,7 @@ src/
     journal/                # Blog / actualités
     contact/                # Formulaire de contact
     api/chat/route.ts       # Endpoint de l'assistant client IA (Claude)
-  components/               # Nav, Footer, Mark (logo), Hero (parallaxe),
+  components/               # Nav, Footer, Mark (logo),
                              # ProductVisual (zoom interactif), TintedProductImage (photo + teinte coloris),
                              # ContactForm, ChatWidget, ScrollReveal, AnimatedNumber, MagneticButton
   data/                     # products.ts, posts.ts — contenu éditable sans toucher au design
@@ -39,9 +39,11 @@ public/
 
 ## Rendu produit
 
-Les photos du premier drop (fournies par la marque) sont dans `public/products/` — fond détouré en transparent (`arc-tee-front.png`, `arc-tee-back.png`, + 3 détails macro : logo, col, épaule). Un seul coloris a été photographié (**Blanc**) ; les 3 autres (**Noir**, **Gris**, **Beige**) sont obtenus en **teintant la même photo par CSS** (`TintedProductImage.tsx` — la couleur du produit est appliquée en `mix-blend-mode: multiply`, masquée sur la silhouette réelle du vêtement via `mask-image`) : c'est donc toujours la vraie texture du tissu, juste recolorée, pas une illustration. À remplacer coloris par coloris dès que ces variantes sont réellement photographiées (ajouter un champ image dédié par coloris dans `products.ts`).
+Les photos du premier drop (fournies par la marque) sont dans `public/products/` — fond détouré en transparent (`tee-front.png`, `tee-back.png`, + 3 détails macro : logo, col, épaule). **Ces photos montrent encore l'ancien logo "Arc" brodé sur le vêtement réel** — un changement de nom dans le code ne change pas ce qui est brodé sur la pièce physique photographiée ; il faudra une nouvelle séance photo (ou une retouche) une fois un exemplaire avec le nouveau logo disponible. Un seul coloris a été photographié (**Blanc**) ; les 3 autres (**Noir**, **Gris**, **Beige**) sont obtenus en **teintant la même photo par CSS** (`TintedProductImage.tsx` — la couleur du produit est appliquée en `mix-blend-mode: multiply`, masquée sur la silhouette réelle du vêtement via `mask-image`) : c'est donc toujours la vraie texture du tissu, juste recolorée, pas une illustration. À remplacer coloris par coloris dès que ces variantes sont réellement photographiées (ajouter un champ image dédié par coloris dans `products.ts`).
 
 `ProductVisual` ajoute une interaction de **zoom sur points d'intérêt** : trois pastilles (coupe/taille, mark, matière) qui, au survol ou au clic, font un fondu vers la photo macro correspondante (`getHotspots` dans `ProductVisual.tsx`) et affichent une légende tirée de `src/data/products.ts`. Un bouton "Voir le dos" bascule vers la photo du dos.
+
+Le mark (`src/components/Mark.tsx`, favicon, image Open Graph) est une version simplifiée en traits du badge complet — celui-ci vit en `public/brand/la-rue-des-notres-logo.webp` et s'affiche en entier sur la page `/a-propos`.
 
 Le hero (`src/components/hero3d/Hero3D.tsx`) affiche un t-shirt 3D (Three.js / React Three Fiber, modèle `public/models/tshirt.glb`) piloté par le scroll via GSAP ScrollTrigger + Lenis : apparition en wireframe puis remplissage, rotation face/profil/dos, zoom caméra avec textes matière, changement de coloris, puis glissement vers la section suivante. Réglages (coloris, textes, distance de scroll) regroupés en haut de `Hero3D.tsx`. Repli automatique sur une photo statique si WebGL est indisponible ou si `prefers-reduced-motion` est actif. Sandbox d'ajustement isolée sur `/preview-hero3d` (`?debug=1` pour un curseur de scroll manuel).
 
@@ -60,7 +62,7 @@ Le quota gratuit de Gemini est limité en nombre de requêtes par minute/jour �
 **Garde-fous en place** (`src/app/api/chat/route.ts`) :
 - Limitation de débit basique par IP (15 messages / 5 min) — best-effort, à remplacer par un vrai rate limiter (Upstash, etc.) si le trafic grossit.
 - Longueur de message et historique plafonnés.
-- Consignes strictes dans le prompt système (`src/lib/chat-context.ts`) : jamais d'invention de statut de commande, de délai de livraison ou de politique non listée — l'assistant renvoie vers `contact@arc-wear.com` dans le doute.
+- Consignes strictes dans le prompt système (`src/lib/chat-context.ts`) : jamais d'invention de statut de commande, de délai de livraison ou de politique non listée — l'assistant renvoie vers `contact@laruedesnotres.com` dans le doute.
 
 ## Formulaire de contact
 
@@ -68,7 +70,7 @@ Le formulaire (`src/components/ContactForm.tsx`) envoie vraiment les messages pa
 
 **Pour l'activer (gratuit) :**
 
-1. Va sur [web3forms.com](https://web3forms.com), entre l'adresse email qui doit recevoir les messages du site (ex. la vraie boîte derrière `contact@arc-wear.com`) — pas de compte à créer.
+1. Va sur [web3forms.com](https://web3forms.com), entre l'adresse email qui doit recevoir les messages du site (ex. la vraie boîte derrière `contact@laruedesnotres.com`) — pas de compte à créer.
 2. Une clé d'accès arrive par email, à copier.
 3. Renseigner `NEXT_PUBLIC_WEB3FORMS_KEY` en local (`.env.local`) et sur l'hébergeur (Vercel → Environment Variables), puis redéployer.
 

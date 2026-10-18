@@ -110,7 +110,7 @@ export default function Home() {
                 Drop 01
               </p>
               <h2 className="mt-2 font-display text-3xl sm:text-4xl">
-                Le t-shirt Arc
+                Le t-shirt
               </h2>
             </div>
             <Link

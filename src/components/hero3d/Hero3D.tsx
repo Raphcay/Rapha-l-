@@ -289,12 +289,24 @@ export function Hero3D({ debug = false }: { debug?: boolean }) {
           </div>
 
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-5">
-            <div ref={heroTextRef} className="flex max-w-3xl flex-col items-center text-center">
+            <div
+              ref={heroTextRef}
+              className="relative flex max-w-3xl flex-col items-center text-center"
+            >
+              {/* Legibility scrim: on narrow viewports the camera frames the
+                 garment (and its chest decal) close behind this text, so it
+                 needs its own contrast floor independent of the 3D layer. A
+                 flat panel rather than a radial fade, so it covers the
+                 eyebrow line near the top edge as evenly as the H1. */}
+              <div
+                className="pointer-events-none absolute inset-x-[-6%] inset-y-[-8%] -z-10 bg-bg/55 backdrop-blur-md"
+                aria-hidden="true"
+              />
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                Arc — Marketplace décentralisée
+                La Rue des Nôtres — Vêtements techniques
               </p>
-              <h1 className="mt-3 font-display text-5xl leading-[0.95] text-ink sm:text-7xl">
-                ARC
+              <h1 className="mt-3 max-w-[16ch] text-balance font-display text-4xl leading-[1.05] text-ink sm:text-6xl">
+                Des vêtements qui nous ressemblent.
               </h1>
               <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-muted sm:text-base">
                 Le vêtement technique pensé pièce par pièce, produit en série limitée.
@@ -357,8 +369,8 @@ function FallbackVisual() {
   return (
     <div className="relative h-full w-full">
       <Image
-        src="/products/arc-tee-front.png"
-        alt="Tee Arc"
+        src="/products/tee-front.png"
+        alt="Tee La Rue des Nôtres"
         fill
         priority
         className="object-contain object-center p-16"

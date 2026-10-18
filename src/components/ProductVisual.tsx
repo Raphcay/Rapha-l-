@@ -29,7 +29,7 @@ function getHotspots(product: Product): Hotspot[] {
       x: 62,
       y: 40,
       label: "Mark",
-      text: "Logo Arc brodé, finition haut de gamme, résistant au lavage.",
+      text: "Logo La Rue des Nôtres brodé, finition haut de gamme, résistant au lavage.",
       image: product.images.detailLogo,
     },
     {

@@ -36,11 +36,11 @@ CORNER = 15
 FABRIC_BRIGHTNESS_MIN = 190  # garment white (~225+) vs backdrop gray (~110-150)
 
 MAPPING = {
-    "front.jpg": "arc-tee-front.png",
-    "back.jpg": "arc-tee-back.png",
-    "detail-logo.jpg": "arc-tee-detail-logo.png",
-    "detail-collar.jpg": "arc-tee-detail-collar.png",
-    "detail-shoulder.jpg": "arc-tee-detail-shoulder.png",
+    "front.jpg": "tee-front.png",
+    "back.jpg": "tee-back.png",
+    "detail-logo.jpg": "tee-detail-logo.png",
+    "detail-collar.jpg": "tee-detail-collar.png",
+    "detail-shoulder.jpg": "tee-detail-shoulder.png",
 }
 
 

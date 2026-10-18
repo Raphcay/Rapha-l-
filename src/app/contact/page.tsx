@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL } from "@/lib/site";
+import { CONTACT_EMAIL_DISPLAY, CONTACT_EMAIL_REAL, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -40,12 +40,12 @@ export default function ContactPage() {
               <dt className="uppercase tracking-[0.1em] text-muted">Instagram</dt>
               <dd className="mt-1">
                 <a
-                  href="https://instagram.com/arc.wear"
+                  href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="underline decoration-line underline-offset-4 hover:text-accent"
                 >
-                  @arc.wear
+                  @{INSTAGRAM_HANDLE}
                 </a>
               </dd>
             </div>

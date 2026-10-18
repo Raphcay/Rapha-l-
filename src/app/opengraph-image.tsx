@@ -19,23 +19,28 @@ export default function OpengraphImage() {
         }}
       >
         <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="16" r="9" stroke="#f3f1ea" strokeWidth="6" />
           <path
-            d="M50 8 L92 88 L66 88 L50 58 L34 88 L8 88 Z"
+            d="M8 78 L32 32 L50 52 L68 22 L92 78"
             stroke="#f3f1ea"
-            strokeWidth="8"
-            strokeLinejoin="miter"
+            strokeWidth="6"
+            strokeLinejoin="round"
+            strokeLinecap="round"
           />
+          <path d="M4 82 L96 82" stroke="#f3f1ea" strokeWidth="4" strokeLinecap="round" />
         </svg>
         <div
           style={{
-            fontSize: 72,
+            fontSize: 54,
             fontWeight: 700,
-            letterSpacing: 6,
+            letterSpacing: 2,
             color: "#f3f1ea",
             display: "flex",
+            textAlign: "center",
+            maxWidth: 1000,
           }}
         >
-          ARC
+          LA RUE DES NÔTRES
         </div>
         <div
           style={{

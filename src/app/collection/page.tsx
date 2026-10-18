@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collection",
-  description: "La première collection Arc : un t-shirt oversize en coton premium, décliné en quatre coloris, en série limitée.",
+  description: "La première collection La Rue des Nôtres : un t-shirt oversize en coton premium, décliné en quatre coloris, en série limitée.",
   alternates: { canonical: "/collection" },
 };
 
@@ -21,7 +21,7 @@ const productsJsonLd = {
       "@type": "Product",
       name: `${product.name} — ${product.colorName}`,
       description: `${product.description} ${product.material}.`,
-      brand: { "@type": "Brand", name: "Arc" },
+      brand: { "@type": "Brand", name: "La Rue des Nôtres" },
       offers: {
         "@type": "Offer",
         url: `${SITE_URL}/collection`,

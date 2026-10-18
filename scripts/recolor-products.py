@@ -1,6 +1,6 @@
 """Regenerate the Noir/Gris/Beige product photos from the real Blanc photos.
 
-Re-run this whenever arc-tee-front.png / arc-tee-back.png / arc-tee-detail-*.png
+Re-run this whenever tee-front.png / tee-back.png / tee-detail-*.png
 (the real Blanc photos) are replaced. It anchors each colorway's median
 lightness on the target color and keeps the photo's own shading around it, so
 dark colorways (Noir) keep visible fabric detail instead of crushing to a flat
@@ -19,11 +19,11 @@ SRC_DIR = Path(__file__).resolve().parent.parent / "public" / "products"
 OUT_DIR = SRC_DIR
 
 BASE_IMAGES = [
-    "arc-tee-front.png",
-    "arc-tee-back.png",
-    "arc-tee-detail-logo.png",
-    "arc-tee-detail-collar.png",
-    "arc-tee-detail-shoulder.png",
+    "tee-front.png",
+    "tee-back.png",
+    "tee-detail-logo.png",
+    "tee-detail-collar.png",
+    "tee-detail-shoulder.png",
 ]
 
 COLORWAYS = {
@@ -92,7 +92,7 @@ def recolor(src_path: Path, out_path: Path, target_hex: str):
 def main():
     for base_name in BASE_IMAGES:
         src_path = SRC_DIR / base_name
-        stem = src_path.stem  # e.g. arc-tee-front
+        stem = src_path.stem  # e.g. tee-front
         for color_slug, hex_color in COLORWAYS.items():
             out_path = OUT_DIR / f"{stem}-{color_slug}.png"
             recolor(src_path, out_path, hex_color)

@@ -4,7 +4,7 @@ import { posts } from "@/data/posts";
 
 export const metadata: Metadata = {
   title: "Journal",
-  description: "Notes sur les matières, la fabrication et les intentions d'Arc.",
+  description: "Notes sur les matières, la fabrication et les intentions de La Rue des Nôtres.",
   alternates: { canonical: "/journal" },
 };
 
@@ -25,7 +25,7 @@ export default function JournalPage() {
           Notes d&apos;atelier
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-muted">
-          On note ici ce qu&apos;on apprend en construisant Arc — la matière,
+          On note ici ce qu&apos;on apprend en construisant La Rue des Nôtres — la matière,
           la fabrication, comment entretenir les pièces. Publié au fil des
           drops, sans calendrier fixe.
         </p>

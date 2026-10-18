@@ -6,15 +6,20 @@ import { Decal, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * Stand-in for the real Arc tee.
+ * Stand-in for the real La Rue des Nôtres tee.
  *
  * ------------------------------------------------------------------
- * TODO(3D model): once a real scan/model of the ARC tee exists, replace
+ * TODO(3D model): once a real scan/model of the tee exists, replace
  * public/models/tshirt.glb with it (re-tune MODEL_SCALE — the real scan's
  * units almost certainly won't match this placeholder's). Keep the outer
  * <group> wrapper in IdleGarment.tsx / Hero3D.tsx as-is: the idle rotation,
  * pointer-tilt and GSAP scroll timeline all animate that group's
  * transform, not this mesh's geometry, so they don't care what's inside.
+ * TODO(product photography): public/products/*.png are still the original
+ * physical sample with "Arc" embroidered on the chest for real — a text
+ * rename can't fix that. The chest decal below was swapped to the new Mark
+ * (generated, not photographed), but the flat-lay product photos need a
+ * re-shoot once a sample with the new logo exists.
  * ------------------------------------------------------------------
  *
  * The mesh itself (public/models/tshirt.glb) is a free,
@@ -23,9 +28,8 @@ import * as THREE from "three";
  * https://github.com/sanidhyy/3d-website (LICENSE.md, MIT). Swapped in for
  * an earlier hand-built low-poly placeholder that read as "robotic" rather
  * than fabric; this one has real sculpted folds and a baked cloth normal
- * map, which the low-poly version couldn't fake. Recolored to Arc's Blanc
- * and decaled with the real embroidered logo below — nothing about its
- * own baked-in look is Arc-branded.
+ * map, which the low-poly version couldn't fake. Recolored to the brand's
+ * Blanc and decaled with the new Mark below.
  */
 
 const MODEL_PATH = "/models/tshirt.glb";
@@ -75,9 +79,9 @@ export function GarmentPlaceholder({
 }: GarmentPlaceholderProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const sourceMesh = useSourceMesh();
-  // Real embroidered "ARC" logo, isolated from the actual product photo
-  // (see scripts/extract-logo-decal.py) — not a placeholder graphic.
-  const logoTexture = useTexture("/hero3d/arc-logo-decal.png");
+  // The La Rue des Nôtres Mark, rendered to a texture (not extracted from a
+  // real photo — see the product-photography TODO above).
+  const logoTexture = useTexture("/hero3d/notres-logo-decal.png");
 
   const sourceMaterial = sourceMesh?.material as THREE.MeshStandardMaterial | undefined;
 

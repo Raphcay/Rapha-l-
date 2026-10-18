@@ -14,11 +14,11 @@ export type ProductImageSet = {
 function buildImageSet(colorSlug: "blanc" | "noir" | "gris" | "beige"): ProductImageSet {
   const suffix = colorSlug === "blanc" ? "" : `-${colorSlug}`;
   return {
-    front: `/products/arc-tee-front${suffix}.png`,
-    back: `/products/arc-tee-back${suffix}.png`,
-    detailLogo: `/products/arc-tee-detail-logo${suffix}.png`,
-    detailCollar: `/products/arc-tee-detail-collar${suffix}.png`,
-    detailShoulder: `/products/arc-tee-detail-shoulder${suffix}.png`,
+    front: `/products/tee-front${suffix}.png`,
+    back: `/products/tee-back${suffix}.png`,
+    detailLogo: `/products/tee-detail-logo${suffix}.png`,
+    detailCollar: `/products/tee-detail-collar${suffix}.png`,
+    detailShoulder: `/products/tee-detail-shoulder${suffix}.png`,
   };
 }
 
@@ -36,47 +36,47 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    slug: "tee-arc-blanc",
-    name: "Tee Arc",
+    slug: "tee-blanc",
+    name: "Tee La Rue des Nôtres",
     price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Blanc",
     colorHex: "#fefefe",
-    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
+    description: "Logo La Rue des Nôtres brodé, col rond côtelé, épaules tombantes.",
     images: buildImageSet("blanc"),
   },
   {
-    slug: "tee-arc-noir",
-    name: "Tee Arc",
+    slug: "tee-noir",
+    name: "Tee La Rue des Nôtres",
     price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Noir",
     colorHex: "#151515",
-    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
+    description: "Logo La Rue des Nôtres brodé, col rond côtelé, épaules tombantes.",
     images: buildImageSet("noir"),
   },
   {
-    slug: "tee-arc-gris",
-    name: "Tee Arc",
+    slug: "tee-gris",
+    name: "Tee La Rue des Nôtres",
     price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Gris",
     colorHex: "#9d9d9d",
-    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
+    description: "Logo La Rue des Nôtres brodé, col rond côtelé, épaules tombantes.",
     images: buildImageSet("gris"),
   },
   {
-    slug: "tee-arc-beige",
-    name: "Tee Arc",
+    slug: "tee-beige",
+    name: "Tee La Rue des Nôtres",
     price: 25,
     material: "100% coton premium 220g/m²",
     cut: "Oversize / Streetwear",
     colorName: "Beige",
     colorHex: "#cebdab",
-    description: "Logo Arc brodé, col rond côtelé, épaules tombantes.",
+    description: "Logo La Rue des Nôtres brodé, col rond côtelé, épaules tombantes.",
     images: buildImageSet("beige"),
   },
 ];
