@@ -124,7 +124,10 @@ export default function Home() {
           {products.map((product, index) => (
             <ScrollReveal key={product.slug} delay={index * 0.08}>
               <Link href="/collection" className="group block">
-                <ProductVisual product={product} />
+                <ProductVisual
+                  product={product}
+                  defaultView={product.slug === "special" ? "back" : "front"}
+                />
                 <div className="mt-3 flex items-start justify-between gap-2">
                   <div>
                     <p className="text-sm font-medium group-hover:text-accent">
