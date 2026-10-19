@@ -107,7 +107,22 @@ def garment_mask(arr: np.ndarray):
     dist = np.sqrt(((arr.astype(float) - bg_ref) ** 2).sum(axis=2))
     bg_like = dist < BG_TOLERANCE
 
-    labeled, _ = ndimage.label(bg_like)
+    # The ribbed collar trim photographs noticeably lighter than the rest
+    # of the body fabric — close enough to the studio backdrop's grey that
+    # it's "bg_like" in its own right. Normally that's harmless (it's not
+    # connected to the image border, so the flood-fill below leaves it as
+    # garment) — but at the gap where the two sides of the collar meet, a
+    # narrow sliver of bg_like pixels can bridge the ribbing to the real
+    # background, which then sweeps the *entire* ribbing loop (and the
+    # neck label sitting inside it) into "background, don't recolor":
+    # exactly the stray light patch at the collar on dark colorways. An
+    # opening (erode then dilate) breaks narrow bridges like that one
+    # pixel-wide gap while leaving the wide expanse of real background
+    # fully connected, so it's used only to decide *which* regions count
+    # as background, not to shrink the final mask itself.
+    bg_like_for_connectivity = ndimage.binary_opening(bg_like, structure=np.ones((5, 5), dtype=bool))
+
+    labeled, _ = ndimage.label(bg_like_for_connectivity)
     border_labels = set(labeled[0, :]) | set(labeled[-1, :])
     border_labels |= set(labeled[:, 0]) | set(labeled[:, -1])
     border_labels.discard(0)
