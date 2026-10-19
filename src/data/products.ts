@@ -8,14 +8,45 @@ export type ProductImageSet = {
   detailShoulder: string;
 };
 
-function buildImageSet(slug: "basique" | "special"): ProductImageSet {
+type ProductSlug = "basique" | "special";
+
+export type ColorwaySlug = "blanc" | "beige" | "gris" | "noir";
+
+export type Colorway = {
+  slug: ColorwaySlug;
+  name: string;
+  hex: string;
+  images: ProductImageSet;
+};
+
+const COLORWAY_DEFS: { slug: ColorwaySlug; name: string; hex: string }[] = [
+  { slug: "blanc", name: "Blanc", hex: "#fefefe" },
+  { slug: "beige", name: "Beige", hex: "#c9b995" },
+  { slug: "gris", name: "Gris", hex: "#9d9d9d" },
+  { slug: "noir", name: "Noir", hex: "#151515" },
+];
+
+function buildImageSet(productSlug: ProductSlug, colorSlug: ColorwaySlug): ProductImageSet {
+  // Blanc is the real photography the other colorways are recolored from
+  // (see scripts/recolor-catalog.py) — it keeps the bare filename, the
+  // others carry a "-{colorSlug}" suffix.
+  const suffix = colorSlug === "blanc" ? "" : `-${colorSlug}`;
   return {
-    front: `/products/tee-${slug}-front.png`,
-    back: `/products/tee-${slug}-back.png`,
-    detailLogo: `/products/tee-${slug}-detail-logo.png`,
-    detailCollar: `/products/tee-${slug}-detail-collar.png`,
-    detailShoulder: `/products/tee-${slug}-detail-shoulder.png`,
+    front: `/products/tee-${productSlug}-front${suffix}.png`,
+    back: `/products/tee-${productSlug}-back${suffix}.png`,
+    detailLogo: `/products/tee-${productSlug}-detail-logo${suffix}.png`,
+    detailCollar: `/products/tee-${productSlug}-detail-collar${suffix}.png`,
+    detailShoulder: `/products/tee-${productSlug}-detail-shoulder${suffix}.png`,
   };
+}
+
+function buildColorways(productSlug: ProductSlug): Colorway[] {
+  return COLORWAY_DEFS.map((c) => ({
+    slug: c.slug,
+    name: c.name,
+    hex: c.hex,
+    images: buildImageSet(productSlug, c.slug),
+  }));
 }
 
 export type Product = {
@@ -24,17 +55,19 @@ export type Product = {
   price: number;
   material: string;
   cut: string;
+  description: string;
   colorName: string;
   colorHex: string;
-  description: string;
-  images: ProductImageSet;
+  colorways: Colorway[];
 };
 
 // Two lines, not colorways of one product: Basique is the plain tee (chest
 // embroidery only), Spécial adds the "Montagne — Mer — Sud" back print.
-// Both only exist in Blanc for now — the old 4-colorway recoloring
-// (scripts/recolor-products.py) hasn't been re-run against these new
-// photos yet.
+// Each line comes in 4 colorways (see scripts/recolor-catalog.py) — Blanc
+// is the real photography, Beige/Gris/Noir are recolored from it, with the
+// embroidery/print flipped to the light "ink" cream on Noir so it stays
+// legible. colorName/colorHex below describe the *default* (Blanc)
+// colorway shown before a visitor picks a swatch.
 export const products: Product[] = [
   {
     slug: "special",
@@ -46,7 +79,7 @@ export const products: Product[] = [
     colorHex: "#fefefe",
     description:
       "Logo LRDN brodé poitrine, impression dos « Montagne — Mer — Sud », col rond côtelé.",
-    images: buildImageSet("special"),
+    colorways: buildColorways("special"),
   },
   {
     slug: "basique",
@@ -57,6 +90,6 @@ export const products: Product[] = [
     colorName: "Blanc",
     colorHex: "#fefefe",
     description: "Logo LRDN brodé poitrine, dos uni, col rond côtelé.",
-    images: buildImageSet("basique"),
+    colorways: buildColorways("basique"),
   },
 ];
