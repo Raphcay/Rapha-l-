@@ -115,22 +115,38 @@ def garment_mask(arr: np.ndarray) -> np.ndarray:
     return np.array(mask_img).astype(np.float64) / 255.0
 
 
+LOCAL_BASELINE_SIGMA_PX = 2
+
+
 def recolor_region(arr: np.ndarray, region_mask: np.ndarray, target_hex: str) -> np.ndarray:
     """Hue/lightness-shift pixels where region_mask > 0 toward target_hex,
-    anchoring the region's median lightness on the target so natural
-    shading (folds, shadow) is preserved around the new base tone."""
+    anchoring each pixel's *local* lightness baseline on the target so
+    natural shading (folds, shadow) is preserved around the new base tone.
+
+    The baseline is a mask-weighted local average (a small Gaussian
+    neighborhood), not one global median for the whole region: the woven
+    neck label sits right next to the shirt fabric but is a visibly
+    different material/lighting, so anchoring it on the *shirt's* median
+    pushed its lightish background toward mid-grey instead of a clean
+    dark tone on Noir/Gris Bleu — it read as a blurry, washed-out patch.
+    A local baseline lets the label (and anything else locally brighter
+    or darker than the garment around it) land on its own correct tone."""
     rgb = arr[:, :, :3].astype(np.float64)
     gray = rgb.mean(axis=2) / 255.0
 
     weighted = region_mask > 0.05
     if not weighted.any():
         return arr
-    median = np.median(gray[weighted])
+
+    weighted_gray = ndimage.gaussian_filter(gray * weighted, LOCAL_BASELINE_SIGMA_PX)
+    weight_sum = ndimage.gaussian_filter(weighted.astype(np.float64), LOCAL_BASELINE_SIGMA_PX)
+    global_median = np.median(gray[weighted])
+    local_baseline = np.where(weight_sum > 1e-6, weighted_gray / np.maximum(weight_sum, 1e-6), global_median)
 
     target_r, target_g, target_b = hex_to_rgb01(target_hex)
     h, l, s = colorsys.rgb_to_hls(target_r, target_g, target_b)
 
-    deviation = gray - median
+    deviation = gray - local_baseline
     final_l = np.clip(l + deviation, 0.0, 1.0)
     out_rgb = hls_to_rgb_vectorized(h, final_l, s) * 255.0
     out_rgb = np.clip(out_rgb, 0, 255)
