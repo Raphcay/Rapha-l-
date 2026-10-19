@@ -34,8 +34,8 @@ VIEWS = ["front", "back", "detail-logo", "detail-collar", "detail-shoulder"]
 PRODUCTS = ["basique", "special"]
 
 COLORWAYS = {
-    "beige": "#c9b995",
-    "gris": "#9d9d9d",
+    "beige": "#cec6bb",
+    "gris": "#5f6369",
     "noir": "#151515",
 }
 LIGHT_INK = "#f3f1ea"  # matches --ink in globals.css
@@ -137,9 +137,11 @@ def recolor_image(src_path: Path, out_path: Path, colorway_hex: str, colorway_sl
     fabric_mask = g_mask - ink_mask
 
     result = recolor_region(arr, fabric_mask, colorway_hex)
-    if colorway_slug == "noir":
+    if colorway_slug in ("noir", "gris"):
+        # Noir and Gris Bleu are both dark enough that navy ink loses too
+        # much contrast against them — flip to the light cream instead.
         result = recolor_region(result, ink_mask, LIGHT_INK)
-    # else: ink stays as-is (dark navy reads fine on Beige/Gris)
+    # else (Beige): ink stays as-is, dark navy reads fine on a light base.
 
     Image.fromarray(np.clip(result, 0, 255).astype(np.uint8)).save(out_path)
 
