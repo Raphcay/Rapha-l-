@@ -96,6 +96,18 @@ def garment_mask(arr: np.ndarray) -> np.ndarray:
     border_labels |= set(labeled[:, 0]) | set(labeled[:, -1])
     border_labels.discard(0)
     true_bg = np.isin(labeled, list(border_labels))
+
+    # The detail crops (logo/collar-tag/fabric close-ups) are framed tight
+    # enough that there's no studio backdrop in shot at all — just fabric
+    # edge-to-edge. There, the "background" the flood-fill finds is really
+    # fabric that happens to touch the border, and treating it as
+    # background would leave the whole close-up unrecolored (this is what
+    # made the Beige zoom detail look white). If the flood-filled region
+    # covers nearly the whole frame, there's no real backdrop to find —
+    # recolor everything instead.
+    if true_bg.mean() > 0.7:
+        true_bg = np.zeros_like(true_bg)
+
     mask = (~true_bg).astype(np.float64)
 
     mask_img = Image.fromarray((mask * 255).astype(np.uint8))
@@ -127,13 +139,37 @@ def recolor_region(arr: np.ndarray, region_mask: np.ndarray, target_hex: str) ->
     return arr * (1 - blend) + out_rgb * blend
 
 
-def recolor_image(src_path: Path, out_path: Path, colorway_hex: str, colorway_slug: str):
+def recolor_image(
+    src_path: Path,
+    out_path: Path,
+    colorway_hex: str,
+    colorway_slug: str,
+    has_backdrop: bool = True,
+    has_ink: bool = True,
+):
     img = Image.open(src_path).convert("RGB")
     arr = np.array(img).astype(np.float64)
 
-    g_mask = garment_mask(np.array(img))
+    if has_backdrop:
+        g_mask = garment_mask(np.array(img))
+    else:
+        # The close-up detail crops (logo/collar-tag/fabric) never have the
+        # studio backdrop in frame — it's fabric edge-to-edge. Trying to
+        # flood-fill a "background" out of that is unreliable (bright fold
+        # highlights look like background), and partially recolors the
+        # fabric instead of all of it. There's nothing to protect from
+        # recoloring here, so just recolor everything.
+        g_mask = np.ones(arr.shape[:2], dtype=np.float64)
     gray = arr.mean(axis=2) / 255.0
-    ink_mask = g_mask * (gray < (INK_LUMINANCE_THRESHOLD / 255.0))
+    if has_ink:
+        ink_mask = g_mask * (gray < (INK_LUMINANCE_THRESHOLD / 255.0))
+    else:
+        # The plain-fabric close-up has no embroidery/print at all — only
+        # natural shadow in the folds, which can dip under the luminance
+        # threshold too. Treating that as "ink" flips a stray dark crease
+        # to cream on Noir/Gris Bleu, a visible speck in otherwise plain
+        # fabric. There's nothing to protect here either.
+        ink_mask = np.zeros(arr.shape[:2], dtype=np.float64)
     fabric_mask = g_mask - ink_mask
 
     result = recolor_region(arr, fabric_mask, colorway_hex)
@@ -146,6 +182,10 @@ def recolor_image(src_path: Path, out_path: Path, colorway_hex: str, colorway_sl
     Image.fromarray(np.clip(result, 0, 255).astype(np.uint8)).save(out_path)
 
 
+CLOSEUP_VIEWS = {"detail-logo", "detail-collar", "detail-shoulder"}
+NO_INK_VIEWS = {"detail-shoulder"}
+
+
 def main():
     for product in PRODUCTS:
         for view in VIEWS:
@@ -155,7 +195,14 @@ def main():
                 continue
             for slug, hex_color in COLORWAYS.items():
                 out = SRC_DIR / f"tee-{product}-{view}-{slug}.png"
-                recolor_image(src, out, hex_color, slug)
+                recolor_image(
+                    src,
+                    out,
+                    hex_color,
+                    slug,
+                    has_backdrop=view not in CLOSEUP_VIEWS,
+                    has_ink=view not in NO_INK_VIEWS,
+                )
                 print(f"wrote {out.name}")
 
 
