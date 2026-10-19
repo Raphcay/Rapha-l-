@@ -12,8 +12,7 @@ export function Footer() {
             {SITE_NAME}
           </div>
           <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-muted">
-            Des vêtements techniques taillés pour durer. On commence par un
-            t-shirt.
+            Des vêtements taillés pour durer. On commence par un t-shirt.
           </p>
         </div>
 

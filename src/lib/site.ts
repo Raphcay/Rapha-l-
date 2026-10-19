@@ -7,7 +7,7 @@ export const SITE_URL = rawSiteUrl
   : "https://laruedesnotres.com";
 
 export const SITE_DESCRIPTION =
-  "La Rue des Nôtres conçoit des vêtements techniques pensés pour la ville. La première pièce : un t-shirt oversize en coton premium 220g, taillé pour durer et produit en série limitée.";
+  "La Rue des Nôtres conçoit des vêtements pensés pour la ville. La première pièce : un t-shirt oversize en coton premium 220g, taillé pour durer et produit en série limitée.";
 
 // Shown to visitors everywhere on the site (footer, contact page, chat
 // assistant). Not a real deliverable address on its own — CONTACT_EMAIL_REAL

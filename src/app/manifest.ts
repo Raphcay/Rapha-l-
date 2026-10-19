@@ -3,10 +3,10 @@ import { SITE_NAME } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE_NAME} — Vêtements techniques`,
+    name: `${SITE_NAME} — Série limitée`,
     short_name: SITE_NAME,
     description:
-      "Vêtements techniques en série limitée. Découvre la première collection La Rue des Nôtres.",
+      "Vêtements en série limitée. Découvre la première collection La Rue des Nôtres.",
     start_url: "/",
     display: "standalone",
     background_color: "#0b0b0c",
