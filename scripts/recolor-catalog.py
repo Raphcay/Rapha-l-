@@ -49,7 +49,21 @@ INK_LUMINANCE_THRESHOLD = 120
 # outside that tolerance) while still relying on border-connectivity,
 # not just color distance, to keep it from eating into real fabric.
 BG_TOLERANCE = 35
-MASK_FEATHER_PX = 2.5
+# Just enough feather to anti-alias the mask edge, not to hide it. A wider
+# blur (previously 2.5) was imperceptible on Blanc/Beige but read as a
+# visible out-of-focus halo around the whole garment on Noir/Gris Bleu,
+# where the fabric-to-backdrop contrast is much higher.
+MASK_FEATHER_PX = 1.0
+# How many pixels of studio backdrop next to the garment silhouette get
+# flattened to the flat backdrop reference color instead of their raw
+# photographed value (see EDGE_DECLUTTER_PX usage in recolor_image). The
+# photo's own anti-aliasing blends those edge pixels toward the *fabric*
+# color (close to white, since Blanc is the source), so on a light
+# colorway they read as background either way — but on Noir/Gris Bleu they
+# stay a stray light sliver forever, since (being classified as
+# background) they're never recolored. Flattening them removes that sliver
+# without having to blur the edge itself to hide it.
+EDGE_DECLUTTER_PX = 8
 
 
 def hex_to_rgb01(hex_color: str):
@@ -76,8 +90,10 @@ def hls_to_rgb_vectorized(h: float, l: np.ndarray, s: float) -> np.ndarray:
     return np.stack([r, g, b], axis=-1)
 
 
-def garment_mask(arr: np.ndarray) -> np.ndarray:
-    """Soft (0..1) mask: 1 = garment (fabric or ink), 0 = studio background."""
+def garment_mask(arr: np.ndarray):
+    """Soft (0..1) mask: 1 = garment (fabric or ink), 0 = studio background.
+    Also returns the sampled backdrop color and the hard (pre-feather)
+    background map, which recolor_image uses to declutter the edge."""
     h, w, _ = arr.shape
     border = np.concatenate(
         [
@@ -112,10 +128,12 @@ def garment_mask(arr: np.ndarray) -> np.ndarray:
 
     mask_img = Image.fromarray((mask * 255).astype(np.uint8))
     mask_img = mask_img.filter(ImageFilter.GaussianBlur(MASK_FEATHER_PX))
-    return np.array(mask_img).astype(np.float64) / 255.0
+    soft_mask = np.array(mask_img).astype(np.float64) / 255.0
+    return soft_mask, bg_ref, true_bg
 
 
 LOCAL_BASELINE_SIGMA_PX = 2
+DEVIATION_GAIN = 1.0
 
 
 def recolor_region(arr: np.ndarray, region_mask: np.ndarray, target_hex: str) -> np.ndarray:
@@ -146,7 +164,7 @@ def recolor_region(arr: np.ndarray, region_mask: np.ndarray, target_hex: str) ->
     target_r, target_g, target_b = hex_to_rgb01(target_hex)
     h, l, s = colorsys.rgb_to_hls(target_r, target_g, target_b)
 
-    deviation = gray - local_baseline
+    deviation = (gray - local_baseline) * DEVIATION_GAIN
     final_l = np.clip(l + deviation, 0.0, 1.0)
     out_rgb = hls_to_rgb_vectorized(h, final_l, s) * 255.0
     out_rgb = np.clip(out_rgb, 0, 255)
@@ -167,7 +185,7 @@ def recolor_image(
     arr = np.array(img).astype(np.float64)
 
     if has_backdrop:
-        g_mask = garment_mask(np.array(img))
+        g_mask, bg_ref, true_bg = garment_mask(np.array(img))
     else:
         # The close-up detail crops (logo/collar-tag/fabric) never have the
         # studio backdrop in frame — it's fabric edge-to-edge. Trying to
@@ -176,6 +194,7 @@ def recolor_image(
         # fabric instead of all of it. There's nothing to protect from
         # recoloring here, so just recolor everything.
         g_mask = np.ones(arr.shape[:2], dtype=np.float64)
+        bg_ref, true_bg = None, None
     gray = arr.mean(axis=2) / 255.0
     if has_ink:
         ink_mask = g_mask * (gray < (INK_LUMINANCE_THRESHOLD / 255.0))
@@ -194,6 +213,19 @@ def recolor_image(
         # much contrast against them — flip to the light cream instead.
         result = recolor_region(result, ink_mask, LIGHT_INK)
     # else (Beige): ink stays as-is, dark navy reads fine on a light base.
+
+    if true_bg is not None and true_bg.any():
+        # Within EDGE_DECLUTTER_PX of the garment, pull the background
+        # side of the blend toward the flat backdrop color instead of the
+        # raw photographed pixel (see EDGE_DECLUTTER_PX comment above).
+        # Farther out, the real backdrop/shadow gradient is left alone.
+        dist_from_bg_to_garment = ndimage.distance_transform_edt(true_bg)
+        band = np.clip(1 - dist_from_bg_to_garment / EDGE_DECLUTTER_PX, 0, 1) * true_bg
+        bg_broadcast = np.asarray(bg_ref).reshape(1, 1, 3)
+        band = band[:, :, None]
+        decluttered_bg = arr * (1 - band) + bg_broadcast * band
+        correction = (1 - g_mask[:, :, None]) * (decluttered_bg - arr)
+        result = result + correction
 
     Image.fromarray(np.clip(result, 0, 255).astype(np.uint8)).save(out_path)
 
