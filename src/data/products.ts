@@ -21,8 +21,8 @@ export type Colorway = {
 
 const COLORWAY_DEFS: { slug: ColorwaySlug; name: string; hex: string }[] = [
   { slug: "blanc", name: "Blanc", hex: "#fefefe" },
-  { slug: "beige", name: "Beige", hex: "#cec6bb" },
-  { slug: "gris", name: "Gris Bleu", hex: "#5f6369" },
+  { slug: "beige", name: "Beige", hex: "#d8d0c4" },
+  { slug: "gris", name: "Gris Bleu", hex: "#60646c" },
   { slug: "noir", name: "Noir", hex: "#151515" },
 ];
 

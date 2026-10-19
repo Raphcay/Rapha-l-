@@ -34,8 +34,8 @@ VIEWS = ["front", "back", "detail-logo", "detail-collar", "detail-shoulder"]
 PRODUCTS = ["basique", "special"]
 
 COLORWAYS = {
-    "beige": "#cec6bb",
-    "gris": "#5f6369",
+    "beige": "#d8d0c4",
+    "gris": "#60646c",
     "noir": "#151515",
 }
 LIGHT_INK = "#f3f1ea"  # matches --ink in globals.css
