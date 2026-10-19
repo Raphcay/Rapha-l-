@@ -43,9 +43,17 @@ function getHotspots(product: Product): Hotspot[] {
   ];
 }
 
-export function ProductVisual({ product, priority }: { product: Product; priority?: boolean }) {
+export function ProductVisual({
+  product,
+  priority,
+  defaultView = "front",
+}: {
+  product: Product;
+  priority?: boolean;
+  defaultView?: "front" | "back";
+}) {
   const [active, setActive] = useState<string | null>(null);
-  const [showBack, setShowBack] = useState(false);
+  const [showBack, setShowBack] = useState(defaultView === "back");
   const shouldReduceMotion = useReducedMotion();
   const hotspots = getHotspots(product);
   const activeHotspot = hotspots.find((h) => h.id === active) ?? null;

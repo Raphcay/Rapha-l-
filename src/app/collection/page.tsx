@@ -58,7 +58,11 @@ export default function CollectionPage() {
       <div className="mx-auto mt-12 grid max-w-3xl gap-x-8 gap-y-12 sm:grid-cols-2">
         {products.map((product, index) => (
           <ScrollReveal key={product.slug} delay={index * 0.08} className="group">
-            <ProductVisual product={product} priority={index === 0} />
+            <ProductVisual
+              product={product}
+              priority={index === 0}
+              defaultView={product.slug === "special" ? "back" : "front"}
+            />
             <div className="mt-3 flex items-start justify-between gap-2">
               <div>
                 <p className="text-sm font-medium">{product.name}</p>

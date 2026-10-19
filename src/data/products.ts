@@ -37,17 +37,6 @@ export type Product = {
 // photos yet.
 export const products: Product[] = [
   {
-    slug: "basique",
-    name: "T-shirt Basique",
-    price: 25,
-    material: "100% coton premium 220g/m²",
-    cut: "Coupe classique",
-    colorName: "Blanc",
-    colorHex: "#fefefe",
-    description: "Logo LRDN brodé poitrine, dos uni, col rond côtelé.",
-    images: buildImageSet("basique"),
-  },
-  {
     slug: "special",
     name: "T-shirt Spécial",
     price: 32,
@@ -58,5 +47,16 @@ export const products: Product[] = [
     description:
       "Logo LRDN brodé poitrine, impression dos « Montagne — Mer — Sud », col rond côtelé.",
     images: buildImageSet("special"),
+  },
+  {
+    slug: "basique",
+    name: "T-shirt Basique",
+    price: 25,
+    material: "100% coton premium 220g/m²",
+    cut: "Coupe classique",
+    colorName: "Blanc",
+    colorHex: "#fefefe",
+    description: "Logo LRDN brodé poitrine, dos uni, col rond côtelé.",
+    images: buildImageSet("basique"),
   },
 ];
