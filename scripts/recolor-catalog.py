@@ -54,16 +54,13 @@ BG_TOLERANCE = 35
 # visible out-of-focus halo around the whole garment on Noir/Gris Bleu,
 # where the fabric-to-backdrop contrast is much higher.
 MASK_FEATHER_PX = 1.0
-# How many pixels of studio backdrop next to the garment silhouette get
-# flattened to the flat backdrop reference color instead of their raw
-# photographed value (see EDGE_DECLUTTER_PX usage in recolor_image). The
-# photo's own anti-aliasing blends those edge pixels toward the *fabric*
-# color (close to white, since Blanc is the source), so on a light
-# colorway they read as background either way — but on Noir/Gris Bleu they
-# stay a stray light sliver forever, since (being classified as
-# background) they're never recolored. Flattening them removes that sliver
-# without having to blur the edge itself to hide it.
-EDGE_DECLUTTER_PX = 8
+# The embroidered logo/print is picked out by a hard luminance threshold,
+# which (unlike the photo's own naturally anti-aliased edges) gives it a
+# pixel-stepped boundary — invisible as navy-on-white, but once flipped to
+# light-on-black on Noir/Gris Bleu it reads as speckled/jagged at this
+# small text size. A touch of feather on the ink mask itself restores a
+# smooth, photographic edge instead.
+INK_FEATHER_PX = 0.7
 
 
 def hex_to_rgb01(hex_color: str):
@@ -212,7 +209,10 @@ def recolor_image(
         bg_ref, true_bg = None, None
     gray = arr.mean(axis=2) / 255.0
     if has_ink:
-        ink_mask = g_mask * (gray < (INK_LUMINANCE_THRESHOLD / 255.0))
+        ink_hard = (gray < (INK_LUMINANCE_THRESHOLD / 255.0)).astype(np.float64)
+        ink_img = Image.fromarray((ink_hard * 255).astype(np.uint8))
+        ink_soft = np.array(ink_img.filter(ImageFilter.GaussianBlur(INK_FEATHER_PX))).astype(np.float64) / 255.0
+        ink_mask = g_mask * ink_soft
     else:
         # The plain-fabric close-up has no embroidery/print at all — only
         # natural shadow in the folds, which can dip under the luminance
@@ -230,16 +230,12 @@ def recolor_image(
     # else (Beige): ink stays as-is, dark navy reads fine on a light base.
 
     if true_bg is not None and true_bg.any():
-        # Within EDGE_DECLUTTER_PX of the garment, pull the background
-        # side of the blend toward the flat backdrop color instead of the
-        # raw photographed pixel (see EDGE_DECLUTTER_PX comment above).
-        # Farther out, the real backdrop/shadow gradient is left alone.
-        dist_from_bg_to_garment = ndimage.distance_transform_edt(true_bg)
-        band = np.clip(1 - dist_from_bg_to_garment / EDGE_DECLUTTER_PX, 0, 1) * true_bg
+        # Flatten the background to one flat backdrop color (see
+        # MASK_FEATHER_PX comment above) instead of leaving the photo's own
+        # drop-shadow gradient in place.
         bg_broadcast = np.asarray(bg_ref).reshape(1, 1, 3)
-        band = band[:, :, None]
-        decluttered_bg = arr * (1 - band) + bg_broadcast * band
-        correction = (1 - g_mask[:, :, None]) * (decluttered_bg - arr)
+        flat_bg = arr * (1 - true_bg[:, :, None]) + bg_broadcast * true_bg[:, :, None]
+        correction = (1 - g_mask[:, :, None]) * (flat_bg - arr)
         result = result + correction
 
     Image.fromarray(np.clip(result, 0, 255).astype(np.uint8)).save(out_path)
