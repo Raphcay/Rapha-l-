@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { TintedProductImage } from "./TintedProductImage";
-import { SIZES, type Product } from "@/data/products";
+import { SIZES, type Colorway, type Product } from "@/data/products";
 
 type Hotspot = {
   id: string;
@@ -14,7 +14,7 @@ type Hotspot = {
   image: string;
 };
 
-function getHotspots(product: Product): Hotspot[] {
+function getHotspots(product: Product, colorway: Colorway): Hotspot[] {
   return [
     {
       id: "coupe",
@@ -22,7 +22,7 @@ function getHotspots(product: Product): Hotspot[] {
       y: 18,
       label: "Coupe",
       text: `${product.cut}. Du ${SIZES[0]} au ${SIZES[SIZES.length - 1]}.`,
-      image: product.images.detailCollar,
+      image: colorway.images.detailCollar,
     },
     {
       id: "mark",
@@ -30,15 +30,15 @@ function getHotspots(product: Product): Hotspot[] {
       y: 40,
       label: "Mark",
       text: "Logo La Rue des Nôtres brodé, finition haut de gamme, résistant au lavage.",
-      image: product.images.detailLogo,
+      image: colorway.images.detailLogo,
     },
     {
       id: "matiere",
       x: 38,
       y: 62,
       label: "Matière",
-      text: `${product.material}, coloris ${product.colorName}.`,
-      image: product.images.detailShoulder,
+      text: `${product.material}, coloris ${colorway.name}.`,
+      image: colorway.images.detailShoulder,
     },
   ];
 }
@@ -47,15 +47,22 @@ export function ProductVisual({
   product,
   priority,
   defaultView = "front",
+  onColorwayChange,
 }: {
   product: Product;
   priority?: boolean;
   defaultView?: "front" | "back";
+  onColorwayChange?: (colorway: Colorway) => void;
 }) {
   const [active, setActive] = useState<string | null>(null);
   const [showBack, setShowBack] = useState(defaultView === "back");
+  const [colorway, setColorwayState] = useState<Colorway>(product.colorways[0]);
+  function setColorway(c: Colorway) {
+    setColorwayState(c);
+    onColorwayChange?.(c);
+  }
   const shouldReduceMotion = useReducedMotion();
-  const hotspots = getHotspots(product);
+  const hotspots = getHotspots(product, colorway);
   const activeHotspot = hotspots.find((h) => h.id === active) ?? null;
 
   function toggle(id: string) {
@@ -81,7 +88,7 @@ export function ProductVisual({
         <AnimatePresence mode="wait">
           {showBack ? (
             <motion.div
-              key="back"
+              key={`back-${colorway.slug}`}
               className="absolute inset-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -89,13 +96,13 @@ export function ProductVisual({
               transition={zoomTransition}
             >
               <TintedProductImage
-                src={product.images.back}
-                alt={`${product.name} — ${product.colorName}, dos`}
+                src={colorway.images.back}
+                alt={`${product.name} — ${colorway.name}, dos`}
               />
             </motion.div>
           ) : (
             <motion.div
-              key="front"
+              key={`front-${colorway.slug}`}
               className="absolute inset-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -103,8 +110,8 @@ export function ProductVisual({
               transition={zoomTransition}
             >
               <TintedProductImage
-                src={product.images.front}
-                alt={`${product.name} — ${product.colorName}`}
+                src={colorway.images.front}
+                alt={`${product.name} — ${colorway.name}`}
                 priority={priority}
               />
             </motion.div>
@@ -200,11 +207,26 @@ export function ProductVisual({
         </AnimatePresence>
       </div>
 
-      <span
-        className="absolute right-3 top-3 z-20 h-3 w-3 rounded-full ring-1 ring-black/20"
-        style={{ backgroundColor: product.colorHex }}
-        aria-hidden="true"
-      />
+      <div className="absolute right-3 top-3 z-20 flex items-center gap-1.5">
+        {product.colorways.map((c) => (
+          <button
+            key={c.slug}
+            type="button"
+            aria-label={c.name}
+            aria-pressed={colorway.slug === c.slug}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setActive(null);
+              setColorway(c);
+            }}
+            className={`h-4 w-4 shrink-0 rounded-full ring-1 ring-black/25 transition-transform ${
+              colorway.slug === c.slug ? "scale-110 ring-2 ring-black" : "hover:scale-110"
+            }`}
+            style={{ backgroundColor: c.hex }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

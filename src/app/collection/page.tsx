@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProductVisual } from "@/components/ProductVisual";
+import { ProductCard } from "@/components/ProductCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { products } from "@/data/products";
 import { SITE_URL } from "@/lib/site";
@@ -58,25 +58,12 @@ export default function CollectionPage() {
       <div className="mx-auto mt-12 grid max-w-3xl gap-x-8 gap-y-12 sm:grid-cols-2">
         {products.map((product, index) => (
           <ScrollReveal key={product.slug} delay={index * 0.08} className="group">
-            <ProductVisual
+            <ProductCard
               product={product}
               priority={index === 0}
               defaultView={product.slug === "special" ? "back" : "front"}
+              showMaterial
             />
-            <div className="mt-3 flex items-start justify-between gap-2">
-              <div>
-                <p className="text-sm font-medium">{product.name}</p>
-                <p className="font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
-                  {product.colorName}
-                </p>
-              </div>
-              <p className="font-mono text-sm tabular-nums">
-                {product.price} €
-              </p>
-            </div>
-            <p className="mt-2 text-xs leading-relaxed text-muted">
-              {product.material}
-            </p>
           </ScrollReveal>
         ))}
       </div>

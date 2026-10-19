@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProductVisual } from "@/components/ProductVisual";
+import { ProductCard } from "@/components/ProductCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { MagneticButton } from "@/components/MagneticButton";
@@ -124,23 +124,11 @@ export default function Home() {
           {products.map((product, index) => (
             <ScrollReveal key={product.slug} delay={index * 0.08}>
               <Link href="/collection" className="group block">
-                <ProductVisual
+                <ProductCard
                   product={product}
                   defaultView={product.slug === "special" ? "back" : "front"}
+                  nameClassName="group-hover:text-accent"
                 />
-                <div className="mt-3 flex items-start justify-between gap-2">
-                  <div>
-                    <p className="text-sm font-medium group-hover:text-accent">
-                      {product.name}
-                    </p>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
-                      {product.colorName}
-                    </p>
-                  </div>
-                  <p className="font-mono text-sm tabular-nums">
-                    {product.price} €
-                  </p>
-                </div>
               </Link>
             </ScrollReveal>
           ))}
