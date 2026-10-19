@@ -10,9 +10,11 @@ import * as THREE from "three";
 import { useWebglSupport } from "./useWebglSupport";
 import { DebugScrubber } from "./DebugScrubber";
 import { MagneticButton } from "@/components/MagneticButton";
+import { patchDomRemovalForThirdPartyDom } from "@/lib/patch-dom-removal";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  patchDomRemovalForThirdPartyDom();
 }
 
 // Code-split + client-only: three.js/WebGL never enters the server bundle
