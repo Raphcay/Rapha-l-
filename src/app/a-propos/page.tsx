@@ -22,7 +22,7 @@ const TIMELINE = [
   {
     year: "À venir",
     title: "Ensuite",
-    body: "D'autres pièces techniques suivront, toujours en petite série. Pas de stock permanent, pas de réassort automatique.",
+    body: "D'autres pièces suivront, toujours en petite série. Pas de stock permanent, pas de réassort automatique.",
   },
 ];
 
@@ -42,7 +42,7 @@ export default function AProposPage() {
               La Rue des Nôtres est née d&apos;une frustration assez simple :
               trop de t-shirts finissaient à la poubelle après quelques mois,
               mal coupés ou mal cousus dès le départ. On a voulu faire
-              l&apos;inverse — des pièces techniques, taillées pour durer,
+              l&apos;inverse — des pièces taillées pour durer,
               produites en petites séries parce qu&apos;on n&apos;a ni
               l&apos;envie ni les moyens de stocker ce qu&apos;on ne vendra
               pas.

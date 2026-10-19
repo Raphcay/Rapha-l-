@@ -34,13 +34,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Vêtements techniques`,
+    default: `${SITE_NAME} — Série limitée`,
     template: `%s — ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
     "La Rue des Nôtres",
-    "vêtements techniques",
+    "vêtements en série limitée",
     "t-shirt oversize coton premium",
     "marque streetwear",
     "série limitée",
@@ -60,13 +60,13 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Vêtements techniques`,
+    title: `${SITE_NAME} — Série limitée`,
     description: SITE_DESCRIPTION,
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Vêtements techniques`,
+    title: `${SITE_NAME} — Série limitée`,
     description: SITE_DESCRIPTION,
     images: ["/opengraph-image"],
   },

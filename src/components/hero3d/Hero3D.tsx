@@ -303,13 +303,13 @@ export function Hero3D({ debug = false }: { debug?: boolean }) {
                 aria-hidden="true"
               />
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                La Rue des Nôtres — Vêtements techniques
+                La Rue des Nôtres — Série limitée
               </p>
               <h1 className="mt-3 max-w-[16ch] text-balance font-display text-4xl leading-[1.05] text-ink sm:text-6xl">
                 Des vêtements qui nous ressemblent.
               </h1>
               <p className="mt-4 max-w-[38ch] text-sm leading-relaxed text-muted sm:text-base">
-                Le vêtement technique pensé pièce par pièce, produit en série limitée.
+                Le vêtement pensé pièce par pièce, produit en série limitée.
               </p>
               <MagneticButton className="pointer-events-auto mt-8">
                 <button
