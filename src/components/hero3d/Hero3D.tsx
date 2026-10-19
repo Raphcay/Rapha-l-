@@ -246,7 +246,33 @@ export function Hero3D({ debug = false }: { debug?: boolean }) {
       }
     );
 
-    return () => mm.revert();
+    // ScrollTrigger's pin wraps pinRef's element in a "pin-spacer" div it
+    // inserts directly into the DOM, outside React's knowledge, and sets it
+    // to position:fixed while pinned. React only finds out this component
+    // is unmounting (e.g. a Link navigation elsewhere in the app) during
+    // its commit phase, and by then it's too late for a useEffect/
+    // useLayoutEffect cleanup to revert the pin first — that cleanup only
+    // runs *after* React has already tried to remove the (now rewrapped)
+    // DOM nodes, which is what caused the removeChild crash this used to
+    // throw. Revert the pin eagerly, synchronously, the moment a real
+    // outgoing link is clicked — before Next's own router (also a click
+    // listener) gets to touch the DOM — so by the time React unmounts this
+    // tree the structure is already back to what it expects.
+    function handleLinkClickCapture(event: MouseEvent) {
+      if (event.defaultPrevented || event.button !== 0) return;
+      const anchor = (event.target as Element | null)?.closest("a");
+      if (!anchor || anchor.target || anchor.hasAttribute("download")) return;
+      const url = new URL(anchor.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname === window.location.pathname) return;
+      mm.revert();
+    }
+    document.addEventListener("click", handleLinkClickCapture, true);
+
+    return () => {
+      document.removeEventListener("click", handleLinkClickCapture, true);
+      mm.revert();
+    };
   }, [useFallback, prefersReducedMotion, garmentReady, debug]);
 
   const initialColor = SETTINGS.colorways[0].hex;
