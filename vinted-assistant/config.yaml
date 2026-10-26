@@ -1,0 +1,120 @@
+# =====================================================================
+#  Vinted Assistant — configuration
+#  Toutes les valeurs ci-dessous sont modifiables. Les clés absentes
+#  reprennent leur valeur par défaut (voir vinted_assistant/config.py).
+# =====================================================================
+
+# Simulation par défaut : l'outil affiche ce qu'il ferait sans rien envoyer.
+# Pour agir pour de vrai : ajouter --live à la commande (confirmation demandée).
+dry_run: true
+
+vinted:
+  base_url: https://www.vinted.fr
+  # Ton identifiant membre (visible dans l'URL de ton profil : /member/12345678-pseudo).
+  # Laisser vide : l'outil le détecte après connexion (cookie de session).
+  user_id: null
+  profile_dir: ./data/browser-profile   # profil Chromium persistant (ta session reste connectée)
+  headless: false                       # fenêtre visible : plus naturel, et tu vois ce qui se passe
+  executable_path: null                 # optionnel : chemin de ton Chrome/Chromium (sinon celui de Playwright)
+  locale: fr-FR
+  timezone: Europe/Paris
+  # Chemins d'API internes utilisés en lecture/écriture. Vinted les modifie parfois :
+  # si un module échoue, ajuste-les ici sans toucher au code.
+  endpoints: {}
+
+# Comportement « humain »
+human:
+  min_delay_s: 3            # délai aléatoire entre deux actions ou lectures…
+  max_delay_s: 12           # … entre 3 et 12 secondes
+  long_pause_every: [5, 9]  # toutes les 5 à 9 actions…
+  long_pause_s: [60, 240]   # … une pause longue de 1 à 4 minutes
+  active_hours: ["07:30", "22:00"]   # le mode `run` n'agit que dans cette plage
+
+# Plafonds quotidiens (remis à zéro à minuit). Comptés séparément en simulation et en réel.
+limits:
+  replies: 40
+  offers: 30
+  republish: 15
+  likes: 10
+  page_reads: 400           # lectures de pages / API Vinted par jour, tous modules confondus
+
+# --------------------------------------------------------------------- 1. Réponses
+replies:
+  max_conversations_per_run: 20
+  poll_minutes: [20, 45]     # en mode run : relève de la messagerie toutes les 20 à 45 min
+  # Catégories auxquelles l'outil répond seul. Les autres (prix, litige, paiement hors
+  # Vinted, suspect, autre) sont TOUJOURS seulement signalées.
+  auto_categories: [disponibilite, envoi, taille_etat]
+
+# --------------------------------------------------------------------- 2. Republication
+republish:
+  min_days_without_sale: 14
+  old_listing_action: delete   # delete (supprimer) | hide (masquer)
+  max_per_run: 1               # republications par lancement manuel de `republish`
+  min_gap_minutes: 30          # écart minimal entre deux republications
+  default_slots:               # utilisés tant que tes propres stats ne suffisent pas
+    - {days: [mon, tue, wed, thu, fri, sat, sun], start: "07:30", end: "09:00"}
+    - {days: [mon, tue, wed, thu, fri, sat, sun], start: "18:00", end: "21:00"}
+  use_my_stats: true           # calcule les meilleurs créneaux à partir des vues/favoris relevés
+  min_stats_days: 14           # jours de relevés nécessaires avant de les utiliser
+  hours_per_day: 3             # nombre d'heures retenues par jour à partir des stats
+  snapshot_every_minutes: 120  # en mode run : relevé vues/favoris de tes annonces
+  exclude_item_ids: []         # annonces à ne jamais republier
+
+# --------------------------------------------------------------------- 3. Offres
+offers:
+  discount_pct: [5, 10]        # remise tirée entre -5 % et -10 %
+  default_floor_pct: 90        # plancher par défaut : 90 % du prix affiché
+  floors: {}                   # planchers par annonce, en € (prioritaires) :
+  #   "4123456789": 18.00
+  period_days: 7               # une seule offre par annonce sur cette période
+  min_favourites: 1
+  fallback_individual: true    # offre individuelle si la fonction native n'existe pas
+
+# --------------------------------------------------------------------- 4. Veille
+scout:
+  keywords: ["veste de ski", "sneakers", "pull oversize"]
+  order: relevance             # relevance | newest_first
+  pages_per_keyword: 1
+  per_page: 48
+  young_days: 21               # une annonce récente qui disparaît = vente probable
+  verify_disappeared_max: 10   # vérifications individuelles max par lancement
+  window_days: 30              # période analysée pour le classement
+  report_top: 30
+  favourite_approved: []       # IDs ou URLs d'annonces que TU as approuvées pour un favori
+
+# --------------------------------------------------------------------- 5. Sourcing DHgate
+sourcing:
+  dhgate_base_url: https://www.dhgate.com
+  fetch_dhgate: true           # lecture seule des résultats de recherche DHgate
+  max_products: 10             # produits du classement analysés
+  results_per_product: 5
+  usd_to_eur: 0.92
+  default_shipping_eur: 4.00   # si le prix de livraison DHgate est inconnu
+  packaging_eur: 0.50
+  # En France le vendeur particulier ne paie pas de frais Vinted : la protection acheteur
+  # est payée par l'acheteur. Elle est affichée (prix total acheteur) mais n'est pas déduite.
+  seller_fee_pct: 0
+  seller_fee_fixed_eur: 0
+  buyer_protection_pct: 5
+  buyer_protection_fixed_eur: 0.70
+  min_margin_eur: 5
+  block_brands: true           # retire les marques des recherches DHgate (risque de contrefaçon)
+  manual_quotes: {}            # prix relevés à la main si la lecture automatique échoue :
+  #   "veste de ski": {price_eur: 22.5, shipping_eur: 5, delivery_days: "10-20", url: "https://..."}
+
+# --------------------------------------------------------------------- Annonces neuves
+new_listing:
+  price_discount_vs_median_pct: 5   # prix conseillé = médiane des prix observés − 5 %
+  shipping_delay: "sous 2 jours"
+
+notifications:
+  desktop: true
+  sound: true
+
+paths:
+  db: ./data/vinted.sqlite
+  logs: ./logs
+  backups: ./backups
+  reports: ./reports
+  drafts: ./data/drafts

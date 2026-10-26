@@ -1,0 +1,47 @@
+# =====================================================================
+#  Modèles de réponse et règles de classement des messages.
+#  Variables disponibles : {titre} {taille} {etat} {prix} {marque} {delai_envoi} {prenom}
+#
+#  Une réponse = salutation + une phrase par catégorie détectée + formule finale.
+#  Exemple (disponibilité seule) :
+#    « Bonjour, oui l'article est toujours disponible ☺️. Je reste à votre
+#      disposition pour tout autre renseignement ou question ! »
+# =====================================================================
+
+variables:
+  delai_envoi: "sous 2 jours"
+
+greeting: "Bonjour,"
+closing: "Je reste à votre disposition pour tout autre renseignement ou question !"
+
+# Une phrase par catégorie (commencer en minuscule : elle suit « Bonjour, »).
+# Plusieurs variantes possibles : l'outil en choisit une au hasard.
+parts:
+  disponibilite:
+    - "oui l'article est toujours disponible ☺️."
+  envoi:
+    - "j'expédie {delai_envoi} après l'achat, avec le mode de livraison que vous choisissez sur Vinted ☺️."
+  taille_etat:
+    - "il s'agit d'une taille {taille}, en état « {etat} », tout est indiqué dans l'annonce et sur les photos ☺️."
+
+# Mots-clés (sans accents, en minuscules ; un mot-clé reconnaît aussi les mots qui
+# commencent par lui : « rembours » reconnaît « remboursement »).
+# Les catégories en tête de liste sont prioritaires.
+keywords:
+  paiement_hors_vinted: [paypal, virement, lydia, wero, "western union", iban, rib, whatsapp,
+    telegram, snapchat, "hors vinted", "en dehors de vinted", "payer directement",
+    "paiement direct", "main propre", especes, cash, "mon numero", "ton numero", "votre numero",
+    "par mail", "mon mail", "adresse mail", email, "e-mail"]
+  suspect: ["code de verification", "code recu", sms, "cliquez sur", "cliquer sur le lien",
+    lien, "carte bancaire", "numero de carte", "agent vinted", "service client vinted"]
+  litige: [rembours, litige, arnaque, "pas recu", "jamais recu", "non conforme", "pas conforme",
+    "colis vide", "est abime", "est casse", "est dechire", "retour", plainte, signal, "avocat"]
+  prix: [prix, baiss, negoci, "dernier prix", "moins cher", reduc, remise, rabais, offre,
+    "lot", "faire a", feriez, accepteriez, "a combien", "pour combien"]
+  envoi: [envoi, envoy, expedi, livraison, livr, colis, "mondial relay", relais, colissimo,
+    chronopost, delai, rapidement, poste]
+  taille_etat: [taille, mesure, longueur, largeur, "tour de", porte, etat, usure, defaut,
+    tache, trou, bouloch, neuf, etiquette, matiere, composition, cm, "taille grand",
+    "taille petit"]
+  disponibilite: [dispo, "toujours en vente", "encore en vente", "toujours la", "encore la",
+    "est-il toujours", "est il toujours", "toujours d'actualite", "il est toujours", "elle est toujours"]
